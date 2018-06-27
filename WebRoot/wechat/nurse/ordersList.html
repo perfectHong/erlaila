@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title></title>    
+    <script src="../js/jquery.min.js"></script>
+    <link href="../css/amazeui.min.css?v=2.4" rel="stylesheet">
+	<link href="../css/global.css?v=2.4" rel="stylesheet">
+	<link href="../css/css.css?v=2.4" rel="stylesheet">
+    <script src="../js/mui.min.js"></script>
+    <link href="../css/mui.min.css" rel="stylesheet"/>  
+    <style>			
+			.title{
+				margin: 20px 15px 10px;
+				color: #6d6d72;
+				font-size: 15px;
+			}	
+			.oa-contact-cell.mui-table .mui-table-cell {
+				padding: 0;
+				vertical-align: middle;
+			}			
+			.oa-contact-cell {
+				position: relative;
+				margin: -11px 0;
+			}	
+			.oa-contact-avatar {
+				width: 75px;
+			}
+			.oa-contact-avatar img {
+				border-radius: 50%;
+			}
+			.oa-contact-content {
+				width: 100%;
+			}
+			.oa-contact-name {
+				margin-right: 20px;
+				color:#6a6a6a;
+			}
+			.oa-contact-name, oa-contact-position {
+				float: left;
+			}
+			.mui-h5, h5{
+				font-size:13px;
+			}
+			.mui-btn{
+				font-size:12px;
+			}
+			.mui-h6, h6{
+				color: #222222;
+			}
+			.mui-table-view-cell {
+				padding: 0px 0px ;
+			}
+			.mui-table-view-cell:after{
+				background-color:#fff;
+			}
+			.backdiv{
+				width:100%;height:18px;background-color:#efeff4;
+			}
+			.orderTitle{width:100%;height:34px;padding:0px 15px;line-height:34px;font-size:14px;color:#000000b5;border-bottom: 1px solid #cbc8c8;}
+			.deleteicon{float:right;font-size:22px;line-height:34px;}
+			.orderstatus{color:#009688c4;float:right;margin-right:10px;}
+			.nametitle  .namevalue{color:#282828;}
+			.oedercenter{padding:0px 15px 15px 15px;}	
+			.iconbox{border-radius:5px;margin:10px 0px;height:75px;color:#fff;font-size:40px;line-height:75px;text-align:center;}
+			.shhlbox{background-color:#4cd964;}
+			.jjphbox{background-color:#41b296;}
+			.jpplbox{background-color:#007aff;}			  
+			.ordermessage{padding-left:10px !important;}
+			.orderbuttom{padding:0px 15px;width:100%;height:34px;line-height:34px;color:#000000b5;border-top: 1px solid #cbc8c8;}
+			.ordermoney{float:right;line-height:34px;font-size:17px;font-weight:bold;}
+			.moneystatus{float:right;line-height:34px;font-size:14px;}
+			.serviceday{float:right;margin-right:10px;font-size:14px;}
+			.mui-bar-nav~.mui-content{padding-top:0px;}	
+			.deleteicon{display:none;}
+		</style>
+</head>
+	<body>
+		<header class="mui-bar mui-bar-nav" style="background-color:#41b296;position: relative;">
+    		<span class="mui-icon mui-icon-back histroyback" style="color:#fff;"></span>			
+			<h1 class="mui-title" style="color:#fff;" >全部订单</h1>
+		</header>	
+			<div class="my-info clearfix  bg-white txt-gray" style="">
+				<div class="am-g">
+					<span class="am-u-sm-4 allorders" style="height: 5rem;width: 25%;">
+						<a style="margin-top: 1rem;" style="margin-top: -15px;" class="allOrders" href="allOrders.html">
+			                <img src="../images/allordersicon.png" id="allordersicon" width="24px"  height="24px" style="margin-bottom: 3px;"><br/>
+			                <span class="my-choose-name" style="color: 8a8a8a;font-size: 13px;">全部订单</span>
+			            </a>
+					</span>
+			    	<span class="am-u-sm-4 myyuye" style="height: 5rem;width: 25%;">
+						<a style="margin-top: 1rem;" style="margin-top: -15px;"  href="allOrder.html">
+			                <img src="../images/myyuyeicon.png" id="myyuyeicon" style="width: 24px;height: 24px;margin-bottom: 3px;"><br/>
+			                <span class="my-choose-name" style="color: 8a8a8a;font-size: 13px;">我的预约</span>
+			            </a>
+					</span> 
+			        <span class="am-u-sm-4 myorders" style="height: 5rem;width: 25%;">
+						<a style="margin-top: 1rem;" style="margin-top: -15px;"  href="allOrder.html">
+			                <img src="../images/myordersicon.png" id="myordersicon" style="width: 24px;height: 24px;margin-bottom: 3px;"><br/>
+			                <span class="my-choose-name" style="color: 8a8a8a;font-size: 13px;">我的排班</span>
+			            </a>
+					</span>
+					<span class="am-u-sm-4 myfinish" style="height: 5rem;width: 25%;">
+						<a style="margin-top: 1rem;" style="margin-top: -15px;"  href="allOrder.html">
+			                <img src="../images/myfinishicon.png" id="myfinishicon" style="width: 24px;height: 24px;margin-bottom: 3px;"><br/>
+			                <span class="my-choose-name" style="color: 8a8a8a;font-size: 13px;">已结束</span>
+			            </a>
+					</span>
+				</div>
+			</div>	 
+		<div  class="mui-content" id="refreshContainer" style="height:auto;">
+			<div id="tabbar" class="mui-control-content mui-active">		
+			<div id="tabbar-with-contact" class="mui-collapse-content">
+			<ul  id="test2" class="mui-table-view mui-table-view-striped mui-table-view-condensed">	
+				<!--
+				<div class="backdiv"></div>
+										
+				<div class="backdiv"></div>
+				<li class="mui-table-view-cell">
+					<div class="orderTitle">
+						<span class="nametitle">客户姓名：</span>
+						<span class="namevalue">术后陪护 </span>   
+						<span class="mui-icon mui-icon-trash deleteicon"></span>
+						<span class="orderstatus">已完成</span>
+					</div>
+					<div class="mui-slider-cell oedercenter">
+						<div class="oa-contact-cell mui-table">
+							<div class="oa-contact-avatar mui-table-cell" >
+								<div class="iconbox jjphbox">
+									居
+								</div>
+							</div>
+							<div class="oa-contact-content mui-table-cell ordermessage">
+								<div class="mui-clearfix">
+									<h5 class="oa-contact-name">服务地点：株洲中心医院骨伤科六楼1...</h5>
+								</div>
+								<div class="mui-clearfix">
+									<h5 class="oa-contact-name">服务起始时间：2018-06-05 09:30:00</h5>
+								</div>
+								<div class="mui-clearfix">
+									<h5 class="oa-contact-name">联系方式：13649598712</h5>
+								</div>
+							</div>						
+						</div>								
+					</div>
+					<div class="orderbuttom">
+						<span class="ordermoney">￥150.00</span>
+						<span class="moneystatus">待收款：</span>
+						<span class="serviceday">共三天</span>
+					</div>
+				</li>
+				
+				
+				<div class="backdiv"></div>
+				<li class="mui-table-view-cell">
+					<div class="orderTitle">
+						<span class="nametitle">客户姓名：</span>
+						<span class="namevalue"></span>   
+						<span class="mui-icon mui-icon-trash deleteicon"></span>
+						<span class="orderstatus"></span>
+					</div>
+					<div class="mui-slider-cell oedercenter">
+						<div class="oa-contact-cell mui-table">
+							<div class="oa-contact-avatar mui-table-cell" >
+								<div class="iconbox" >
+									
+								</div>
+							</div>
+							<div class="oa-contact-content mui-table-cell ordermessage">
+								<div class="mui-clearfix">
+									<h5 class="oa-contact-name">服务地点：<span class="serviceadress"></span></h5>
+								</div>
+								<div class="mui-clearfix">
+									<h5 class="oa-contact-name">服务起始时间：<span class="servicestarttime"></span></h5>
+								</div>
+								<div class="mui-clearfix">
+									<h5 class="oa-contact-name">联系方式：<span class="linkpho"></span></h5>
+								</div>
+							</div>						
+						</div>								
+					</div>
+					<div class="orderbuttom">
+						<span class="ordermoney"></span>
+						<span class="moneystatus">：</span>
+						<span class="serviceday">共</span>
+					</div>
+				</li>
+				-->
+			</ul>			
+		</div>
+	</div>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mui.min.js"></script>  
+<script src="../js/url.js"></script>
+<script>	
+	mui.init();
+	var initType=getUrlParam("initType");
+	$(".histroyback").bind("click",function(){
+	  	window.history.go(-1);
+	});	
+	var  str="<div class=\"backdiv\"></div>\n\t\t\t\t<li class=\"mui-table-view-cell\">\n\t\t\t\t\t<div class=\"orderTitle\">\n\t\t\t\t\t\t<span class=\"nametitle\">\u5BA2\u6237\u59D3\u540D\uFF1A</span>\n\t\t\t\t\t\t<span class=\"namevalue\"></span>   \n\t\t\t\t\t\t<span class=\"mui-icon mui-icon-trash deleteicon\"></span>\n\t\t\t\t\t\t<span class=\"orderstatus\"></span>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"mui-slider-cell oedercenter\">\n\t\t\t\t\t\t<div class=\"oa-contact-cell mui-table\">\n\t\t\t\t\t\t\t<div class=\"oa-contact-avatar mui-table-cell\" >\n\t\t\t\t\t\t\t\t<div class=\"iconbox\" >\n\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t<div class=\"oa-contact-content mui-table-cell ordermessage\">\n\t\t\t\t\t\t\t\t<div class=\"mui-clearfix\">\n\t\t\t\t\t\t\t\t\t<h5 class=\"oa-contact-name\">\u670D\u52A1\u5730\u70B9\uFF1A<span class=\"serviceadress\"></span></h5>\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t<div class=\"mui-clearfix\">\n\t\t\t\t\t\t\t\t\t<h5 class=\"oa-contact-name\">\u670D\u52A1\u8D77\u59CB\u65F6\u95F4\uFF1A<span class=\"servicestarttime\"></span></h5>\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t<div class=\"mui-clearfix\">\n\t\t\t\t\t\t\t\t\t<h5 class=\"oa-contact-name\">\u8054\u7CFB\u65B9\u5F0F\uFF1A<span class=\"linkpho\"></span></h5>\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t</div>\t\t\t\t\t\t\n\t\t\t\t\t\t</div>\t\t\t\t\t\t\t\t\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"orderbuttom\">\n\t\t\t\t\t\t<span class=\"ordermoney\"></span>\n\t\t\t\t\t\t<span class=\"moneystatus\">\uFF1A</span>\n\t\t\t\t\t\t<span class=\"serviceday\">\u5171</span>\n\t\t\t\t\t</div>\n\t\t\t\t</li>";
+	
+	initView();	
+	
+	//	allordersicon   myyuyeicon  myordersicon  myfinishicon
+	function changeBk(){
+		$("#allordersicon").attr("src","../images/allordersicon.png");
+		$("#myyuyeicon").attr("src","../images/myyuyeicon.png");
+		$("#myordersicon").attr("src","../images/myordersicon.png");
+		$("#myfinishicon").attr("src","../images/myfinishicon.png");
+		$(".my-info span").css("color","#8a8a8a");
+	}
+	
+	function initView(){
+		if(initType=="0"){
+			myyuye();//预约
+		}else if(initType=="1"){
+			myorders();//我的订单
+		}else if(initType=="3"){
+			myfinish();//完成的订单
+		}else{
+			allOrders();//全部订单
+		}
+	}
+		
+	function requestDate(reqdate){
+		//护工接单状态 nurseOrdersStatusList 为0待接单 1已接单  2正在服务 3已完成 4已拒接
+		$.ajax({ 
+			url:SERVER_URL+"/nurseOrders/selectOrderByNurseAndStatus.action",  
+			type:"post",  
+			//dataType:"json",  
+			data:reqdate,  
+			success:function(response){				
+				getDate(response);					
+			},  
+			error:function(){  
+				
+			}
+		});
+	}
+	
+	//查看订单详情
+	mui(".mui-content").on('tap', '.mui-table-view-cell', function(){
+		var  orderid=$(this).find(".namevalue").attr("orderid");
+		location="ordersDetail.html?orderid="+orderid;
+	});
+		
+	//护工全部订单   
+	mui(".my-info").on('tap', '.allorders', function(){
+		allOrders();	
+	});
+	
+	
+	//护工预约订单   
+	mui(".my-info").on('tap', '.myyuye', function(){
+		myyuye();
+	});
+	
+	//护工已经接受的订单
+	mui(".my-info").on('tap', '.myorders', function(){
+		myorders();
+	});
+	
+	//护工已经完成的订单
+	mui(".my-info").on('tap', '.myfinish', function(){
+		myfinish();
+	});
+	
+	//查询所有订单	
+	function allOrders(){
+		requestDate("");//#007aff
+		changeBk();
+		$("#allordersicon").attr("src","../images/allordersicon2.png");
+		$("#allordersicon").siblings("span").css("color","#007aff");
+	}
+	
+	//护工预约订单方法，首页进入调用
+	function myyuye(){
+		var nurseOrdersStatusList =[];
+		nurseOrdersStatusList.push(0);
+		var string="nurseOrdersStatusList="+nurseOrdersStatusList
+		requestDate(string);
+		changeBk();
+		$("#myyuyeicon").attr("src","../images/myyuyeicon2.png");
+		$("#myyuyeicon").siblings("span").css("color","#007aff");
+	}
+	
+	//护工已经接受的订单方法，首页进入调用
+	function myorders(){
+		var nurseOrdersStatusList = [];
+		nurseOrdersStatusList.push(1);
+		nurseOrdersStatusList.push(2);
+		var string="nurseOrdersStatusList="+nurseOrdersStatusList
+		requestDate(string);
+		changeBk();
+		$("#myordersicon").attr("src","../images/myordersicon2.png");
+		$("#myordersicon").siblings("span").css("color","#007aff");
+	}
+	
+	//护工完成订单方法，首页进入调用
+	function myfinish(){
+		var nurseOrdersStatusList = [];
+		nurseOrdersStatusList.push(3);
+		var string="nurseOrdersStatusList="+nurseOrdersStatusList
+		requestDate(string);
+		changeBk();
+		$("#myfinishicon").attr("src","../images/myfinishicon2.png");
+		$("#myfinishicon").siblings("span").css("color","#007aff");
+	}
+	
+	//组装数据
+	function getDate(response){
+		$("#test2").empty();
+		$.each(response, function(i, date) {
+			$("#test2").append(str);
+			//客户姓名 namevalue
+			$(".namevalue").eq(i).text(date.linkman.linkmanname);
+			//订单id  强行绑定到namevalue这个标签上
+			var orderid=date.orderid;
+			$(".namevalue").eq(i).attr("orderid",orderid);
+			//订单状态 orderstatus 
+			var status=date.status;//护工接单状态 0为待接单，1为已接单，2为正在服务，3为服务已完成,4为已拒接
+			if(status=="0"){
+				$(".orderstatus").eq(i).text("待接单");
+			}
+			if(status=="1"){
+				$(".orderstatus").eq(i).text("已接单");
+			}
+			if(status=="2"){
+				$(".orderstatus").eq(i).text("正在服务");
+			}
+			if(status=="3"){
+				$(".orderstatus").eq(i).text("已完成");
+			}
+			if(status=="4"){
+				$(".orderstatus").eq(i).text("已拒接");
+			}
+			//服务类型 iconbox
+			var serviceid=date.serviceType.serviceid;
+			if(serviceid=="1"){
+				$(".iconbox").eq(i).text("护");
+				$(".iconbox").eq(i).addClass("shhlbox");
+			}
+			if(serviceid=="2"){
+				$(".iconbox").eq(i).text("居");
+				$(".iconbox").eq(i).addClass("jjphbox");
+			}
+			if(serviceid=="3"){
+				$(".iconbox").eq(i).text("聊");
+				$(".iconbox").eq(i).addClass("jpplbox");
+			}
+			//服务地址 adress
+			$(".serviceadress").eq(i).text(date.linkman.adress);
+			//服务开始事件 servicestarttime
+			var servicestarttime=date.orders.orderStarttime;
+			servicestarttime=timestampToTime(servicestarttime);
+			$(".servicestarttime").eq(i).text(servicestarttime);
+			//联系方式 linkpho
+			$(".linkpho").eq(i).text(date.linkman.linkmantelephone);
+			//订单金额 ordermoney
+			//var  nursegetmoney=date.serviceType.nursegetmoney;//护工订单钱
+			var  servicemu=date.serviceType.servicemu;//服务单位
+			var  orderDuring=date.orders.orderDuring;//服务时长			
+			//var  money=(nursegetmoney*1)*(orderDuring*1);//护工总价值
+			var money=((date.money)*1)/100;
+			money=intToFloat(money);
+			var  moneyStatus=date.moneyStatus;//护工接单价格状态
+			$(".ordermoney").eq(i).text("￥"+money);
+			//订单金额状况 moneystatus
+			if(moneyStatus=="0"){
+				$(".moneystatus").eq(i).text("待收款：");
+			}
+			if(moneyStatus=="1"){
+				$(".moneystatus").eq(i).text("已收款：");
+			}
+			//服务总天数 serviceday
+			$(".serviceday").eq(i).text("共"+orderDuring+servicemu);
+		});
+	}
+	
+	//将数字转为带两位小数的数字类型
+	function intToFloat(val){  
+        return new Number(val).toFixed(2); 
+    }
+    
+    function timestampToTime(timestamp){
+        var date = new Date(timestamp);//时间戳为10位需*1000，时间戳为13位的话不需乘1000
+        Y = date.getFullYear() + '-';
+        M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
+        D = date.getDate() + ' ';
+        h = date.getHours() + ':';
+        m = date.getMinutes() + ':';
+        s = date.getSeconds();
+        return Y+M+D+h+m+s;
+    }
+</script>				
+</body>
+</html> 

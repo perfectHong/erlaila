@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.erlaila.mybatis.mapper.custom.NursedetailMapperCustom" >
+  <resultMap id="BaseResultMap" type="cn.erlaila.mybatis.po.Nursedetail" >
+    <id column="nursedetailId" property="nursedetailid" jdbcType="INTEGER" />
+    <result column="userID" property="userid" jdbcType="INTEGER" />
+    <result column="nurseRealName" property="nurserealname" jdbcType="VARCHAR" />
+    <result column="idCardNo" property="idcardno" jdbcType="VARCHAR" />
+    <result column="adress" property="adress" jdbcType="VARCHAR" />
+    <result column="adressDetail" property="adressdetail" jdbcType="VARCHAR" />
+    <result column="height" property="height" jdbcType="VARCHAR" />
+    <result column="weight" property="weight" jdbcType="VARCHAR" />
+    <result column="blood" property="blood" jdbcType="VARCHAR" />
+    <result column="nation" property="nation" jdbcType="VARCHAR" />
+    <result column="marriage" property="marriage" jdbcType="VARCHAR" />
+    <result column="education" property="education" jdbcType="VARCHAR" />
+    <result column="begoodat" property="begoodat" jdbcType="VARCHAR" />
+    <result column="experience" property="experience" jdbcType="VARCHAR" />
+    <result column="synopsis" property="synopsis" jdbcType="VARCHAR" />
+  </resultMap>
+  
+   <resultMap type="cn.erlaila.mybatis.po.vo.NurseDetailVo" id="nurseDetailResultMap">
+	<!-- 护工详情 -->
+	<association property="nursedetail"  javaType="cn.erlaila.mybatis.po.Nursedetail"> 
+		<id column="nursedetailid" property="nursedetailid" jdbcType="BIT" />
+    	<result column="userid" property="userid" jdbcType="BIT" />   	
+    	<result column="nurserealname" property="nurserealname" jdbcType="VARCHAR" />
+    	<result column="idcardno" property="idcardno" jdbcType="VARCHAR" />
+   		<result column="adress" property="adress" jdbcType="VARCHAR" />
+    	<result column="adressdetail" property="adressdetail" jdbcType="VARCHAR" />
+    	<result column="height" property="height" jdbcType="VARCHAR" />
+    	<result column="weight" property="weight" jdbcType="VARCHAR" />
+    	<result column="blood" property="blood" jdbcType="VARCHAR" />
+    	<result column="nation" property="nation" jdbcType="VARCHAR" />   	
+    	<result column="marriage" property="marriage" jdbcType="VARCHAR" />
+    	<result column="education" property="education" jdbcType="VARCHAR" />
+   		<result column="begoodat" property="begoodat" jdbcType="VARCHAR" />
+    	<result column="experience" property="experience" jdbcType="VARCHAR" />
+    	<result column="synopsis" property="synopsis" jdbcType="VARCHAR" />	
+    </association>
+    	
+    	<!-- 一对一  用户信息 -->	
+    	<association property="user"  javaType="cn.erlaila.mybatis.po.User">  			
+    		<id column="userId" property="userid" jdbcType="INTEGER" />
+    		<result column="openId" property="openid" jdbcType="VARCHAR" />
+  			<result column="nickname" property="nickname" jdbcType="VARCHAR" />
+    		<result column="userIcon" property="usericon" jdbcType="VARCHAR" />
+    		<result column="telephone" property="telephone" jdbcType="VARCHAR" />
+    		<result column="country" property="country" jdbcType="VARCHAR" />
+    		<result column="province" property="province" jdbcType="VARCHAR" />
+    		<result column="city" property="city" jdbcType="VARCHAR" />
+    		<result column="sex" property="sex" jdbcType="BIT" />
+    		<result column="birthday" property="birthday" jdbcType="DATE" />
+    		<result column="userage" property="userage" jdbcType="INTEGER" />
+    		<result column="userType" property="usertype" jdbcType="BIT" />
+    		<result column="userVerify" property="userverify" jdbcType="BIT" />
+    	</association>
+    	
+    	<!-- 一对一  实名认证 -->	
+    	<association property="realNameAuthentication"  javaType="cn.erlaila.mybatis.po.RealNameAuthentication">  			
+    		<id column="id" property="id" jdbcType="INTEGER" />
+    		<result column="userId" property="userid" jdbcType="INTEGER" />
+   		    <result column="face" property="face" jdbcType="VARCHAR" />
+    		<result column="opposite" property="opposite" jdbcType="VARCHAR" />
+    		<result column="papers" property="papers" jdbcType="VARCHAR" />
+    	</association>
+    	
+    	<!-- 一对多  护工服务区域 
+    	<collection property="areaList" ofType="cn.erlaila.mybatis.po.NurseServiceArea">
+			<id column="id" property="id" jdbcType="INTEGER" />
+    		<result column="userId" property="userid" jdbcType="INTEGER" />
+    		<result column="serviceArea_id" property="serviceareaId" jdbcType="INTEGER" />
+		 </collection>
+		 		 		
+		
+    	<collection property="contentList" ofType="cn.erlaila.mybatis.po.NurseServiceContent">
+			<id column="id" property="id" jdbcType="INTEGER" />
+    		<result column="userId" property="userid" jdbcType="INTEGER" />
+    		<result column="servicecontent_id" property="servicecontentId" jdbcType="INTEGER" />
+		 </collection>
+		-->			 
+	</resultMap>
+		
+	  <resultMap type="cn.erlaila.mybatis.po.custom.NurseCustom" id="WaitValidateNurseListResultMap">
+	<!-- 护工详情 -->
+		<id column="nursedetailid" property="nursedetailid" jdbcType="BIT" />
+    	<result column="userid" property="userid" jdbcType="BIT" />   	
+    	<result column="nurserealname" property="nurserealname" jdbcType="VARCHAR" />
+    	<result column="idcardno" property="idcardno" jdbcType="VARCHAR" />
+   		<result column="adress" property="adress" jdbcType="VARCHAR" />
+    	<result column="adressdetail" property="adressdetail" jdbcType="VARCHAR" />
+    	<result column="height" property="height" jdbcType="VARCHAR" />
+    	<result column="weight" property="weight" jdbcType="VARCHAR" />
+    	<result column="blood" property="blood" jdbcType="VARCHAR" />
+    	<result column="nation" property="nation" jdbcType="VARCHAR" />   	
+    	<result column="marriage" property="marriage" jdbcType="VARCHAR" />
+    	<result column="education" property="education" jdbcType="VARCHAR" />
+   		<result column="begoodat" property="begoodat" jdbcType="VARCHAR" />
+    	<result column="experience" property="experience" jdbcType="VARCHAR" />
+    	<result column="synopsis" property="synopsis" jdbcType="VARCHAR" />	
+    	<result column="nickname" property="nickname" jdbcType="VARCHAR" />
+    	<result column="sex" property="sex" jdbcType="BIT" />	
+    	<result column="birthday" property="birthday" jdbcType="DATE" />
+    	<result column="telephone" property="telephone" jdbcType="VARCHAR" />
+    	<result column="userage" property="userage" jdbcType="INTEGER" />
+	</resultMap>
+	
+  <sql id="Base_Column_List" >
+    nursedetailId, userID, nurseRealName, idCardNo, adress, adressDetail, height, weight, 
+    blood, nation, marriage, education, begoodat, experience, synopsis
+  </sql>
+  <select id="selectRealNameByUserId" resultType="java.lang.String" parameterType="java.lang.Integer" >
+    select nurseRealName  from nursedetail where userID = #{userID,jdbcType=INTEGER}
+  </select>
+  
+  
+  <select id="selectNurseDetailByUserId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    * 
+    from nursedetail where userID = #{userID,jdbcType=INTEGER}
+  </select>
+  
+  
+  <select id="selectWaitValidateNurse" resultMap="WaitValidateNurseListResultMap" >
+    select user.*,nursedetail.* from user,nursedetail where user.userid=nursedetail.userid and userType=0
+ </select>
+
+  <select id="selectNurseDetailById" resultMap="nurseDetailResultMap" parameterType="java.lang.Integer" >
+    select
+    	user.*,nursedetail.*,realNameAuthentication.*
+    from
+     	user,nursedetail,realNameAuthentication
+	where  user.userid=nursedetail.userid 
+		and user.userid=realNameAuthentication.userid
+		and user.userid=#{userid}         
+  </select>
+	<!-- 
+	select user.*,nursedetail.*,NurseServiceArea.*,NurseServiceContent.*,realNameAuthentication.*
+    	servicecontent.serviceContentIName,servicearea.serviceAreaname
+    from user,nursedetail,NurseServiceArea,nurseservicecontent,realNameAuthentication,
+    	servicecontent,servicearea
+	where user.userid=nursedetail.userid 
+		and user.userid=NurseServiceArea.userId 
+		and user.userid=realNameAuthentication.userid
+	 	AND user.userid=realNameAuthentication.userid 
+		and user.userid=NurseServiceContent.userId 
+		and NurseServiceContent.serviceContent_id=servicecontent.serviceContentId
+		and NurseServiceArea.serviceArea_id=ServiceArea.serviceAreaid
+		and user.userid=#{userid}  
+	
+	 -->
+	 
+	<select id="selectNurseBaseInfoById" resultMap="nurseDetailResultMap" parameterType="java.lang.Integer" >
+   		select
+    		user.*,nursedetail.*
+    	from
+     		user,nursedetail
+		where  
+			user.userid = #{userid} 
+        and nursedetail.userID = #{userid}       
+  	</select>
+  	
+  	 <update id="updateByUserIdSelective" parameterType="cn.erlaila.mybatis.po.Nursedetail" >
+    update nursedetail
+    <set >
+      <if test="userid != null" >
+        userID = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="nurserealname != null" >
+        nurseRealName = #{nurserealname,jdbcType=VARCHAR},
+      </if>
+      <if test="idcardno != null" >
+        idCardNo = #{idcardno,jdbcType=VARCHAR},
+      </if>
+      <if test="adress != null" >
+        adress = #{adress,jdbcType=VARCHAR},
+      </if>
+      <if test="adressdetail != null" >
+        adressDetail = #{adressdetail,jdbcType=VARCHAR},
+      </if>
+      <if test="height != null" >
+        height = #{height,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null" >
+        weight = #{weight,jdbcType=VARCHAR},
+      </if>
+      <if test="blood != null" >
+        blood = #{blood,jdbcType=VARCHAR},
+      </if>
+      <if test="nation != null" >
+        nation = #{nation,jdbcType=VARCHAR},
+      </if>
+      <if test="marriage != null" >
+        marriage = #{marriage,jdbcType=VARCHAR},
+      </if>
+      <if test="education != null" >
+        education = #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="begoodat != null" >
+        begoodat = #{begoodat,jdbcType=VARCHAR},
+      </if>
+      <if test="experience != null" >
+        experience = #{experience,jdbcType=VARCHAR},
+      </if>
+      <if test="synopsis != null" >
+        synopsis = #{synopsis,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where userID = #{userid,jdbcType=INTEGER}
+  </update>
+</mapper>

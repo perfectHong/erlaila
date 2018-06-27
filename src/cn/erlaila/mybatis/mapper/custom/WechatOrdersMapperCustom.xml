@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.erlaila.mybatis.mapper.custom.WechatOrdersMapperCustom" >
+  
+  <sql id="query_wechatorder_where">
+		<if test="wechatId!=null">
+			and wechat_id = #{wechatId}
+		</if>
+		
+		<!-- 护工接单状态    nurseStatus -->	
+		<if test="nurseStatus!=null">
+			and nurseStatus = #{nurseStatus}
+		</if>
+		
+		
+		<!-- 系统订单编号    orderid 根据订单编号去查询微信用户订单 -->	
+		<if test="orderid!=null">
+			and orderId = #{orderid}
+		</if>
+		
+		<!-- 支付状态    paystatusList -->	
+		<if test="paystatusList !=null">
+			<foreach collection="paystatusList" item="paystatus" open="AND (" close=")" separator="or">
+				<!-- 每个遍历需要拼接的串 -->
+				paystatus=#{paystatus}
+			</foreach>		
+		</if>		
+		<!-- 服务状态    servicestatusList -->	
+		<if test="servicestatusList !=null">
+			<foreach collection="servicestatusList" item="servicestatus" open="AND (" close=")" separator="or">
+				<!-- 每个遍历需要拼接的串 -->
+				servicestatus=#{servicestatus}
+			</foreach>		
+		</if>
+		order by id desc
+  </sql>
+	
+  <select id="selectByWechat" resultType="cn.erlaila.mybatis.po.WechatOrders" parameterType="cn.erlaila.mybatis.po.vo.WechatOrdersVo" >
+    select  *  from wechatorders
+  		 <where>
+			<include refid="query_wechatorder_where"></include>
+		 </where>
+  </select>
+
+
+	<update id="updateByorderIdSelective" parameterType="cn.erlaila.mybatis.po.WechatOrders" >
+    	update wechatorders
+  <set >
+      <if test="orderid != null" >
+        orderId = #{orderid,jdbcType=INTEGER},
+      </if>
+      <if test="wechatId != null" >
+        wechat_id = #{wechatId,jdbcType=INTEGER},
+      </if>
+      <if test="money != null" >
+        money = #{money,jdbcType=INTEGER},
+      </if>
+      <if test="moneypay != null" >
+        moneypay = #{moneypay,jdbcType=INTEGER},
+      </if>
+      <if test="paystatus != null" >
+        paystatus = #{paystatus,jdbcType=INTEGER},
+      </if>
+      <if test="nursestatus != null" >
+        nurseStatus = #{nursestatus,jdbcType=INTEGER},
+      </if>
+      <if test="servicestatus != null" >
+        servicestatus = #{servicestatus,jdbcType=INTEGER},
+      </if>
+      <if test="delestatus != null" >
+        deleStatus = #{delestatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    where orderId = #{orderid,jdbcType=INTEGER}
+  </update>
+
+</mapper>

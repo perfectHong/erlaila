@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.erlaila.mybatis.mapper.LinkmanMapper" >
+  <resultMap id="BaseResultMap" type="cn.erlaila.mybatis.po.Linkman" >
+    <id column="linkmanID" property="linkmanid" jdbcType="INTEGER" />
+    <result column="userID" property="userid" jdbcType="INTEGER" />
+    <result column="linkmanName" property="linkmanname" jdbcType="VARCHAR" />
+    <result column="linkmanAge" property="linkmanage" jdbcType="VARCHAR" />
+    <result column="linkmanTelephone" property="linkmantelephone" jdbcType="VARCHAR" />
+    <result column="linkmanSex" property="linkmansex" jdbcType="BIT" />
+    <result column="adress" property="adress" jdbcType="VARCHAR" />
+    <result column="adressDetail" property="adressdetail" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    linkmanID, userID, linkmanName, linkmanAge, linkmanTelephone, linkmanSex, adress, 
+    adressDetail, status
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from linkman
+    where linkmanID = #{linkmanid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from linkman
+    where linkmanID = #{linkmanid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.erlaila.mybatis.po.Linkman" >
+    insert into linkman (linkmanID, userID, linkmanName, 
+      linkmanAge, linkmanTelephone, linkmanSex, 
+      adress, adressDetail, status
+      )
+    values (#{linkmanid,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{linkmanname,jdbcType=VARCHAR}, 
+      #{linkmanage,jdbcType=VARCHAR}, #{linkmantelephone,jdbcType=VARCHAR}, #{linkmansex,jdbcType=BIT}, 
+      #{adress,jdbcType=VARCHAR}, #{adressdetail,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.erlaila.mybatis.po.Linkman" >
+    insert into linkman
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="linkmanid != null" >
+        linkmanID,
+      </if>
+      <if test="userid != null" >
+        userID,
+      </if>
+      <if test="linkmanname != null" >
+        linkmanName,
+      </if>
+      <if test="linkmanage != null" >
+        linkmanAge,
+      </if>
+      <if test="linkmantelephone != null" >
+        linkmanTelephone,
+      </if>
+      <if test="linkmansex != null" >
+        linkmanSex,
+      </if>
+      <if test="adress != null" >
+        adress,
+      </if>
+      <if test="adressdetail != null" >
+        adressDetail,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="linkmanid != null" >
+        #{linkmanid,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="linkmanname != null" >
+        #{linkmanname,jdbcType=VARCHAR},
+      </if>
+      <if test="linkmanage != null" >
+        #{linkmanage,jdbcType=VARCHAR},
+      </if>
+      <if test="linkmantelephone != null" >
+        #{linkmantelephone,jdbcType=VARCHAR},
+      </if>
+      <if test="linkmansex != null" >
+        #{linkmansex,jdbcType=BIT},
+      </if>
+      <if test="adress != null" >
+        #{adress,jdbcType=VARCHAR},
+      </if>
+      <if test="adressdetail != null" >
+        #{adressdetail,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.erlaila.mybatis.po.Linkman" >
+    update linkman
+    <set >
+      <if test="userid != null" >
+        userID = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="linkmanname != null" >
+        linkmanName = #{linkmanname,jdbcType=VARCHAR},
+      </if>
+      <if test="linkmanage != null" >
+        linkmanAge = #{linkmanage,jdbcType=VARCHAR},
+      </if>
+      <if test="linkmantelephone != null" >
+        linkmanTelephone = #{linkmantelephone,jdbcType=VARCHAR},
+      </if>
+      <if test="linkmansex != null" >
+        linkmanSex = #{linkmansex,jdbcType=BIT},
+      </if>
+      <if test="adress != null" >
+        adress = #{adress,jdbcType=VARCHAR},
+      </if>
+      <if test="adressdetail != null" >
+        adressDetail = #{adressdetail,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+    </set>
+    where linkmanID = #{linkmanid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.erlaila.mybatis.po.Linkman" >
+    update linkman
+    set userID = #{userid,jdbcType=INTEGER},
+      linkmanName = #{linkmanname,jdbcType=VARCHAR},
+      linkmanAge = #{linkmanage,jdbcType=VARCHAR},
+      linkmanTelephone = #{linkmantelephone,jdbcType=VARCHAR},
+      linkmanSex = #{linkmansex,jdbcType=BIT},
+      adress = #{adress,jdbcType=VARCHAR},
+      adressDetail = #{adressdetail,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER}
+    where linkmanID = #{linkmanid,jdbcType=INTEGER}
+  </update>
+</mapper>

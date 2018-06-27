@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.erlaila.mybatis.mapper.custom.LinkmanMapperCustom" >
+  <resultMap id="BaseResultMap" type="cn.erlaila.mybatis.po.Linkman" >
+    <id column="linkmanID" property="linkmanid" jdbcType="INTEGER" />
+    <result column="userID" property="userid" jdbcType="INTEGER" />
+    <result column="linkmanName" property="linkmanname" jdbcType="VARCHAR" />
+    <result column="linkmanAge" property="linkmanage" jdbcType="VARCHAR" />
+    <result column="linkmanTelephone" property="linkmantelephone" jdbcType="VARCHAR" />
+    <result column="linkmanSex" property="linkmansex" jdbcType="BIT" />
+    <result column="adress" property="adress" jdbcType="VARCHAR" />
+    <result column="adressDetail" property="adressdetail" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    linkmanID, userID, linkmanName, linkmanAge, linkmanTelephone, linkmanSex, adress, 
+    adressDetail, status
+  </sql>
+  <select id="selectAll" resultMap="BaseResultMap" parameterType="java.lang.Integer"  >
+    select 
+    <include refid="Base_Column_List" />
+    from linkman where userID=#{userid} and status in (0,1)
+  </select>
+  
+  
+  
+   <select id="selectLinkManByStatus" resultMap="BaseResultMap" parameterType="java.lang.Integer"  >
+    select 
+    <include refid="Base_Column_List" />
+    from linkman where userID=#{userid} and status=1
+  </select>
+  
+</mapper>

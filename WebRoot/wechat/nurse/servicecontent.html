@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>服务内容</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+    	<link href="../css/mui.min.css" rel="stylesheet"/> 
+		<style>
+			.title{
+				margin: 20px 15px 10px;
+				color: #6d6d72;
+				font-size: 15px;
+			}
+			.item{		
+				line-height: 50px;
+				border-bottom: solid 1px #bbb;
+			}
+			.mui-input-row{
+				height:47px;
+			}
+			.mui-input-row label{
+				padding: 15px 15px;
+			}
+			.mui-input-row input{
+				height:47px;
+			}
+			.mui-input-row select{
+				height:47px;
+			}
+			.mui-content{
+				background-color:#fff;
+				padding:0px 0px 25px 0px;
+			}
+			.sureBtn{
+				font-size:17px;
+				width:90%;
+				margin:20px 5%;
+				background-color:#549ff1;
+				border:1px solid #549ff1;
+				border-radius:25px;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<div class="mui-content" style="margin-bottom: 50px;">
+			
+			<header class="mui-bar mui-bar-nav" style="color:white;background-color: #549ff1;">
+				<span class="mui-icon mui-icon-back histroyback"></span>
+				<h1 class="mui-title" style="color:white;">服务内容</h1>
+			</header>
+		
+			<div id="tabbar" class="mui-control-content mui-active" style="background-color:#fff;padding:25px 0px;margin-top:40px;">		
+		
+			<form id="form1">
+			<div class="mui-input-row mui-checkbox mui-left">
+				<label>术后陪护</label>
+				<input name="contentList[0].servicecontentId" class="checkbox" value="1" type="checkbox">
+			</div>
+			
+			<div class="mui-input-row mui-checkbox mui-left">
+				<label>居家陪护</label>
+				<input name="contentList[1].servicecontentId" class="checkbox" value="2" type="checkbox">
+			</div>
+			
+			<div class="mui-input-row mui-checkbox mui-left">
+				<label>金牌陪聊</label>
+				<input name="contentList[2].servicecontentId" class="checkbox" value="3" type="checkbox">
+				
+			</div>
+			</form>
+		
+			</div>
+			<button type="button" class="mui-btn mui-btn-primary mui-btn-block sureBtn" style="background-color:#549ff1">确定</button>
+		</div>
+</body>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/url.js"></script>	
+<script src="../js/mui.min.js"></script>
+<script>
+  	mui.init();
+  	var infoFg=getUrlParam("info");
+  	mui(".mui-content").on('tap', '.sureBtn', function() {
+  		var numFg=0;
+  		$("input.checkbox").each(function(){	
+  			var fg=$(this).is(':checked');
+   			if(fg){
+   				$(this).attr("name","contentList["+numFg+"].servicecontentId");
+   				numFg++;
+   			}
+  		});
+  	 	 $.ajax({ 
+				url:SERVER_URL+"/nurse/insertNurseContent.action",  
+				type:"post",  
+				//dataType:"json",  
+				data:$("#form1").serialize(),  
+				success:function(response){
+					if(response=="1"){
+						if(infoFg==null){
+							location.href = "editInfo_2.html";
+						}else{
+							location.href = "index.html";
+						}							
+					}
+				},  
+				error:function(){  
+				
+				}
+			});
+		});
+</script>
+</html>

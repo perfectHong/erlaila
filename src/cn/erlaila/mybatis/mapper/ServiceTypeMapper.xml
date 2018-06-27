@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.erlaila.mybatis.mapper.ServiceTypeMapper" >
+  <resultMap id="BaseResultMap" type="cn.erlaila.mybatis.po.ServiceType" >
+    <id column="serviceId" property="serviceid" jdbcType="INTEGER" />
+    <result column="serviceName" property="servicename" jdbcType="VARCHAR" />
+    <result column="serviceMu" property="servicemu" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="INTEGER" />
+    <result column="nursegetmoney" property="nursegetmoney" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    serviceId, serviceName, serviceMu, price, nursegetmoney
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from servicetype
+    where serviceId = #{serviceid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from servicetype
+    where serviceId = #{serviceid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.erlaila.mybatis.po.ServiceType" >
+    insert into servicetype (serviceId, serviceName, serviceMu, 
+      price, nursegetmoney)
+    values (#{serviceid,jdbcType=INTEGER}, #{servicename,jdbcType=VARCHAR}, #{servicemu,jdbcType=VARCHAR}, 
+      #{price,jdbcType=INTEGER}, #{nursegetmoney,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.erlaila.mybatis.po.ServiceType" >
+    insert into servicetype
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="serviceid != null" >
+        serviceId,
+      </if>
+      <if test="servicename != null" >
+        serviceName,
+      </if>
+      <if test="servicemu != null" >
+        serviceMu,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="nursegetmoney != null" >
+        nursegetmoney,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="serviceid != null" >
+        #{serviceid,jdbcType=INTEGER},
+      </if>
+      <if test="servicename != null" >
+        #{servicename,jdbcType=VARCHAR},
+      </if>
+      <if test="servicemu != null" >
+        #{servicemu,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=INTEGER},
+      </if>
+      <if test="nursegetmoney != null" >
+        #{nursegetmoney,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.erlaila.mybatis.po.ServiceType" >
+    update servicetype
+    <set >
+      <if test="servicename != null" >
+        serviceName = #{servicename,jdbcType=VARCHAR},
+      </if>
+      <if test="servicemu != null" >
+        serviceMu = #{servicemu,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=INTEGER},
+      </if>
+      <if test="nursegetmoney != null" >
+        nursegetmoney = #{nursegetmoney,jdbcType=INTEGER},
+      </if>
+    </set>
+    where serviceId = #{serviceid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.erlaila.mybatis.po.ServiceType" >
+    update servicetype
+    set serviceName = #{servicename,jdbcType=VARCHAR},
+      serviceMu = #{servicemu,jdbcType=VARCHAR},
+      price = #{price,jdbcType=INTEGER},
+      nursegetmoney = #{nursegetmoney,jdbcType=INTEGER}
+    where serviceId = #{serviceid,jdbcType=INTEGER}
+  </update>
+</mapper>

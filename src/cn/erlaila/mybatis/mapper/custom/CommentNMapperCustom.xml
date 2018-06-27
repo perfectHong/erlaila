@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.erlaila.mybatis.mapper.custom.CommentNMapperCustom" >
+
+  
+  <select id="selectAllByNurse" resultType="cn.erlaila.mybatis.po.CommentN" parameterType="java.lang.Integer" >
+    select 
+   	*
+    from commentn
+    where nurseid = #{nurseid,jdbcType=INTEGER}
+    and status=1 
+    ORDER BY commentId desc
+  </select>
+  
+</mapper>

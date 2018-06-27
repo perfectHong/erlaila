@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.erlaila.mybatis.mapper.custom.NurseServiceAreaMapperCustom" >
+  <resultMap id="BaseResultMap" type="cn.erlaila.mybatis.po.NurseServiceArea" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="userId" property="userid" jdbcType="INTEGER" />
+    <result column="serviceArea_id" property="serviceareaId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, userId, serviceArea_id
+  </sql>
+  <select id="selectByUserid" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from nurseservicearea
+    where userId = #{userId,jdbcType=INTEGER}
+  </select>
+</mapper>

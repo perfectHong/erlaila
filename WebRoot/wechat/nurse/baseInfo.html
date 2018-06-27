@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>修改信息</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+    	<link href="../css/mui.min.css" rel="stylesheet"/> 
+		<style>
+			.title{
+				margin: 20px 15px 10px;
+				color: #6d6d72;
+				font-size: 15px;
+			}
+			.item{		
+				line-height: 50px;
+				border-bottom: solid 1px #bbb;
+			}
+			.mui-input-row{
+				height:47px;
+			}
+			.mui-input-row label{
+				padding: 15px 25px;
+			}
+			.mui-input-row input{
+				height:47px;
+			}
+			.mui-input-row select{
+				height:47px;
+				direction: rtl;
+				padding-right:25px;
+			}
+			.histroyback{
+				float:left;
+				padding-left:10px;
+			}
+			.mui-input-row input{
+				text-align:right;
+				padding-right:25px;
+			}
+			.mui-table-view{
+				margin-top:15px;
+			}
+			.nextBtn{
+				font-size:17px;
+				width:90%;
+				margin:20px 5%;
+				background-color:#549ff1;
+				border:1px solid #549ff1;
+				border-radius:25px;
+			}
+			.submitSpan{
+				color:#fff;
+				float:right;
+				margin-right: -10px;
+				margin-left: -10px;
+				padding-right: 10px;
+				padding-left: 10px;
+				padding-top: 10px;
+				padding-bottom: 10px;
+				font-size:16px;
+			}
+		</style>
+	</head>
+	<body>	
+		
+		<header class="mui-bar mui-bar-nav" style="color:white;background-color: #549ff1;">
+			<span class="mui-icon mui-icon-back histroyback"></span>
+			<h1 class="mui-title" style="color:white;">修改信息</h1>
+			<span class="submitSpan" style="">提交</span>
+		</header>
+		
+		<div class="mui-content">			
+			<div id="tabbar" class="mui-control-content mui-active">	
+				<form id="nurseDetailVo">
+				<ul class="mui-table-view">
+					<div class="mui-input-row item" style="height:72px;">
+						<label style="line-height:42px; width:65%;">头像(本人实照)</label>
+						<span style="line-height:72px;float:right;margin-left:10px;margin-right:15px;" class="mui-icon mui-icon-forward getImg"></span>			
+						<input name="user.usericon" id="usericonBtn" type="hidden" value="" />
+						<image id="usericon" class="getImg" style="border-radius: 50%;width:60px;height:60px;margin:6px 0;float:right;" src="../images/default.png" /> 		
+					</div>
+				</ul>
+				
+				<ul class="mui-table-view">
+					<div class="mui-input-row item">
+						<label>姓名</label>
+						<input name="nursedetail.nurserealname" id="nurserealname" type="text" placeholder="请输入姓名">
+					</div>
+				</ul>
+			
+				<ul class="mui-table-view">
+					<div class="mui-input-row item">
+						<label style="width:45%;">婚姻状况</label>
+						<select style="width:55%;" name="nursedetail.marriage" id="marriage">
+							<option value="已婚">已婚</option>
+							<option value="未婚">未婚</option>
+						</select>
+					</div>
+				</ul>
+			
+		
+				<ul class="mui-table-view">
+					<div class="mui-input-row item">
+						<label>身高</label>
+						<input value="cm" disabled="true" type="text" style="width:16%;">
+						<input name="nursedetail.height" id="height" type="text" style="width:49%;padding-right:0px;">	
+					</div>
+				</ul>
+			
+		
+				<ul class="mui-table-view">
+					<div class="mui-input-row item">
+						<label>体重</label>
+						<input value="kg" disabled="true" type="text" style="width:16%;">
+						<input name="nursedetail.weight"  id="weight" type="text" style="width:49%;padding-right:0px;" />
+					</div>
+				</ul>
+			
+				<ul class="mui-table-view">
+					<div class="mui-input-row item">
+						<label style="width:45%;">所在城市</label>
+						<input style="width:55%;" name="user.city" type="text" id="city" value="" />
+					</div>
+				</ul>	
+				
+				<ul class="mui-table-view">
+					<div class="mui-input-row item">
+						<label style="width:45%;">文化程度</label>
+						<select style="width:55%;" name="nursedetail.education" id="education" >
+							<option value="小学">小学</option>
+							<option value="初中">初中</option>
+							<option value="高中">高中</option>
+							<option value="专科">专科</option>
+							<option value="本科">本科</option>
+						</select>
+					</div>
+				</ul>
+
+				<ul class="mui-table-view">
+					<div class="mui-input-row item">
+						<label>地址</label>
+						<input name="nursedetail.adress" id="adress" type="text" placeholder="请选择您所在小区或大厦">
+					</div>
+				</ul>
+
+				<ul class="mui-table-view">
+					<div class="mui-input-row item">
+						<label style="width:45%;">详细地址</label>
+						<input style="width:55%;" name="nursedetail.adressdetail" id="adressdetail" type="text" placeholder="请填写详细地址">
+					</div>
+				</ul>
+
+			<ul class="mui-table-view">
+				<div class="mui-input-row item">
+					<label style="width:45%;">从业经验</label>
+					<select style="width:55%;" name="nursedetail.experience" id="experience">
+							<option value="1年">1年</option>
+							<option value="2年">2年</option>
+							<option value="3年及以上">3年及以上</option>
+					</select>
+				</div>
+			</ul>
+			
+			<ul class="mui-table-view" style="height:100px;">
+				<div class="mui-input-row item" style="height:100px;">
+					<label style="width:35%;padding:14px 0px 14px 25px;">工作擅长</label>
+					<textarea style="width:65%;height:100px;padding:5px 25px 0px 0px;" name="nursedetail.begoodat"  id="begoodat" type="text" placeholder="请填写您擅长什么服务"></textarea>
+				</div>
+			</ul>
+			
+			<ul class="mui-table-view" style="height:100px;">
+				<div class="mui-input-row item" style="height:100px;">
+					<label style="width:35%;padding:14px 0px 14px 25px;">自我简介</label>
+					<textarea style="width:65%;height:100px;padding:5px 25px 0px 0px;" name="nursedetail.synopsis"  id="synopsis" type="text" placeholder="请填写您的简介"></textarea>
+				</div>
+			</ul>
+			
+		</form>	    
+		</div>
+	</div>
+</body>
+<script src="../js/jquery.min.js"></script>	
+<script src="../js/mui.min.js"></script>
+<script src="../js/url.js"></script>
+<!--JSSDK 引入js-->
+<script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+<script>
+  	mui.init(); //mui初始化
+	initView();//页面初始化
+	initWxConfig();//微信JSSDK初始化
+	
+	//ajax上传服务器session数据
+	mui(".mui-bar").on('tap', '.submitSpan', function() {
+		$(".submitSpan").attr("disabled", true);
+		setTimeout(function(){
+			$(".submitSpan").attr("disabled", false);
+		}, 2000);
+		//开启数据校验	
+		//真实姓名
+		var nurserealname=$("#nurserealname").val().trim();
+		if(nurserealname==""){
+			mui.toast('请输入您的姓名!',{duration:'long',type:'div'});
+			return false;
+		}
+		//身高 height
+		var height=$("#height").val().trim();
+		if(height==""){
+			mui.toast('请输入您的身高!',{duration:'long',type:'div'});
+			return false;
+		}
+		//体重 weight
+		var weight=$("#weight").val().trim();
+		if(weight==""){
+			mui.toast('请输入您的身高!',{duration:'long',type:'div'});
+			return false;
+		}
+		//城市 city
+		var city=$("#city").val().trim();
+		if(city==""){
+			mui.toast('请输入您所在城市!',{duration:'long',type:'div'});
+			return false;
+		}
+
+		//地址 adress
+		var adress=$("#adress").val().trim();
+		if(adress==""){
+			mui.toast('请输入您的住址!',{duration:'long',type:'div'});
+			return false;
+		}
+		//擅长 begoodat
+		var begoodat=$("#begoodat").val().trim();
+		if(begoodat==""){
+			mui.toast('请输入您擅长的事项!',{duration:'long',type:'div'});
+			return false;
+		}
+		//个人简介 synopsis
+		var synopsis=$("#synopsis").val().trim();
+		if(synopsis==""){
+			mui.toast('请输入您的简介!',{duration:'long',type:'div'});
+			return false;
+		}
+		$.ajax({ 
+			url:SERVER_URL+"/nurse/uodateNurseInfo.action",  
+			type:"post",  
+			//dataType:"json",  
+			data:$("#nurseDetailVo").serialize(),  
+			success:function(response){
+				mui.toast('个人信息修改成功!',{duration:'long',type:'div'});
+				setTimeout(function(){
+					location="index.html";
+				}, 1200);			
+			},  
+			error:function(){  
+			
+			}
+		});
+	});		
+	
+	//初始化页面 获取用户的基本参数
+	function initView(){
+		$.ajax({ 
+			url:SERVER_URL+"/nurse/getNurseBaseInfo.action",  
+			type:"post",  
+			//dataType:"json",  
+			data:"",  
+			success:function(response){	
+				var usericon=response.user.usericon;
+				var usericonfg=usericon=="";
+				if(!usericonfg){
+					$("#usericon").attr("src",response.user.usericon);//头像	
+					$("#usericonBtn").val(usericon);
+				}				
+				$("#nurserealname").val(response.nursedetail.nurserealname);//真实姓名		
+				$("#height").val(response.nursedetail.height);//身高
+				$("#weight").val(response.nursedetail.weight);//体重 weight
+				$("#city").val(response.user.city);	//城市  city
+				$("#adress").val(response.nursedetail.adress);//地址 adress
+				$("#adressdetail").val(response.nursedetail.adressdetail);//详细地址 adressdetail
+				$("#begoodat").val(response.nursedetail.begoodat);//擅长 begoodat
+				$("#synopsis").val(response.nursedetail.synopsis);//简介  synopsis
+				var marriage=response.nursedetail.marriage;
+				$("#marriage option[value='"+marriage+"']").attr("selected", "selected");//婚姻状态
+				var education=response.nursedetail.education; 
+				$("#education option[value='"+education+"']").attr("selected", "selected");//教育程度
+				var experience=response.nursedetail.experience;//经验
+				$("#experience option[value='"+experience+"']").attr("selected", "selected");//教育程度
+			},  
+			error:function(){  
+				
+			}
+		});
+	}
+					
+		//开始微信调用手机摄像头以及图片库接口  注入接口调用权限
+		function initWxConfig(){
+		var windowHref = window.location.href;
+			$.ajax({ 
+				url:SERVER_URL+"/wechat/wxConfig.action",  
+				type:"post",  
+				//dataType:"json",  
+				data:"windowHref="+windowHref,  
+				success:function(response){
+					wx.config({
+    					debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+    					appId: response.appId, // 必填，公众号的唯一标识
+    					timestamp: response.timestamp, // 必填，生成签名的时间戳
+    					nonceStr: response.noncestr, // 必填，生成签名的随机串
+    					signature: response.signature,// 必填，签名
+   						jsApiList: ['chooseImage', 'uploadImage','downloadImage'] // 必填，需要使用的JS接口列表
+					});
+				},  
+				error:function(){  
+				
+				}
+			});
+		}
+		
+		//调用微信接口 获取摄像以及图片库访问功能
+		$(".getImg").click(function(){
+			 wx.chooseImage({  
+    			count: 1, // 默认9  
+    			sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有  
+   				sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有  
+    			success: function (res) {  
+       			 	var localIds = res.localIds; //返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片 ，这里只会返回一个 
+       			 	//更换为本地服务器图片
+       			 	//$("#usericon").attr("src",localIds);
+       			 	uploadImage(localIds); 	
+   				 }  
+ 			});				
+		});
+		
+		//上传图片到微信服务器
+		function uploadImage(localIds){
+			wx.uploadImage({
+				localId: localIds.toString(), // 需要上传的图片的本地ID，由chooseImage接口获得
+				isShowProgressTips: 1, // 默认为1，显示进度提示
+				success: function (res) {
+					var serverId = res.serverId; // 返回图片的服务器端ID					
+					downloadImgFromWx(serverId);	
+				},  
+				error:function(){  
+				
+				}
+			});
+		}		
+		//下载图片到本地服务器
+		function downloadImgFromWx(serverId){
+			$.ajax({ 
+				url:SERVER_URL+"/wechat/downloadImgFromWx.action",  
+				type:"post",  
+				//dataType:"json",  
+				data:"mediaId="+serverId,  
+				success:function(response){
+					$("#usericon").attr("src",response);
+					$("#usericonBtn").val(response);				
+				},  
+				error:function(){  
+				
+				}
+			});
+		}	
+</script>
+</html>

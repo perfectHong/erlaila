@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>订单填写</title>  	
+    <link href="../css/mui.min.css" rel="stylesheet"/> 
+    <link href="../css/mui.picker.min.css" rel="stylesheet"/>   
+    <style>			
+			.title{
+				margin: 20px 15px 10px;
+				color: #6d6d72;
+				font-size: 15px;
+			}
+			
+			.oa-contact-cell.mui-table .mui-table-cell {
+				padding: 11px 0;
+				vertical-align: middle;
+			}
+			
+			.oa-contact-cell {
+				position: relative;
+				margin: -11px 0;
+			}
+	
+			.oa-contact-avatar {
+				width: 75px;
+			}
+			.oa-contact-avatar img {
+				border-radius: 50%;
+			}
+			.oa-contact-content {
+				width: 100%;
+			}
+			.oa-contact-name {
+				margin-right: 20px;
+			}
+			.oa-contact-name, oa-contact-position {
+				float: left;
+			}
+			.box5 {
+				background-color:#ffffff;
+				overflow: hidden;
+				width: 100%;
+				position: fixed;
+				bottom: 0px;
+				z-index: 999;
+			}
+			.box4 {
+				height:50px;
+				width:100%;
+				z-index: 99;
+			}
+			#sureyuyue{
+				float:right;
+				float: right;
+    			height: 49px;
+    			width: 120px;
+    			font-size: 17px;
+    			border-radius:0px;
+			}
+			.mui-btn-blue, .mui-btn-primary, input[type=submit] {
+   			 	color: #fff;
+    			border: 1px solid #04DD98;
+    			background-color: #04DD98;
+			}
+	.zi1{margin-top: 11px;font-size: 20px;font-family: "微软雅黑";color: #333;line-height: 33px;margin-left: 10px;float: left;font-weight: bold;}
+	.zi2{margin-top: 11px;font-size: 16px;font-family: "微软雅黑";color: #666;line-height: 33px;margin-left: 10px;float: left}
+	.box5 img{margin-top: 17px;margin-left: 10px;float: left;height: 20px;width: 1px;}
+	.mui-input-clear{text-align:right;}
+	.servicescopeitem{
+		background-color: white;
+   		padding: 4px 3px 3px 3px !important;
+   		font-size: 13px;
+    	margin: 6px;
+    	color: #4cd964;
+    	width: 18% !important;
+    	border: 1px solid #4cd964;
+    }
+    .mui-input-row label{
+    	 color:#333;
+    	 font-size: 16px;
+   		 padding:19px 15px;
+    }
+    .mui-input-group .mui-input-row{
+    	height:53px;
+    	
+    }
+    .mui-input-row label~input, .mui-input-row label~select, .mui-input-row label~textarea{
+		font-size:16px;
+    	height:53px;
+    	line-height:53px;
+		color:#504d4d;
+    }
+     input{font-size: 17px;color:#504d4d;}
+    .paystyle .active{background-color:#4cd964;color:#fff;}
+    .mui-input-group:after{background-color: #fff;}
+    .mui-input-group .changeafter:after {background-color:#fff;}
+	.linkbox1{padding:0px 0px 15px 0px;}
+	.linkbox2{width:100%;height:60px;margin:0px;padding:0px 15px;}
+	.linkbox3{width:80%;float:left;}
+	.linkbox4{width:20%;float:right;text-align:right;line-height:55px;}
+	.linkManAdress,.linkManName{line-height:20px;font-size:16px;color:#4a4a4a;color:#ff9d4f;}
+</style>
+</head>
+<body>
+    	<header class="mui-bar mui-bar-nav" style="background-color:#41b296;">
+    		<span class="mui-icon mui-icon-back histroyback" style="color:#fff;"></span>			
+			<h1 class="mui-title" style="color:#fff;" >确认订单</h1>
+			<span class="mui-icon mui-icon-home gohome" style="color:#fff;float:right;"></span>
+		</header>
+		<div class="mui-content" style="background-color: #fff;margin-bottom: 50px;">
+			<!--区域-->
+			<div id="tabbar" class="mui-control-content mui-active">	
+				<form class="mui-input-group" id="orderForm">				
+					<div class="mui-input-row changeafter" style="border-bottom:1px solid #c8c7cc;">
+						<input type="hidden" id="userid" name="nurseId" value="" />
+						<label>服务项目</label>
+						<input type="text" class="mui-input-clear" style="padding-right:25px;" disabled="true" value="金牌陪聊" id="serviceName" value="">
+					</div>
+					<div class="mui-input-row"  style="display:none;">
+						<label>护理员</label>
+						<input type="text" class="mui-input-clear" id="nurseInp"  disabled="true"  style="padding-right:25px;" value="">
+					</div>
+					<div class="mui-input-row changeafter" style="border-bottom:1px solid #c8c7cc;">
+						<label style="width: 50%;">服务开始时间</label>
+						<input type="text" name="orderStarttime" class="mui-input-clear" style="padding-right:25px;width: 50%;" id="starttime" placeholder="点击选择">
+					</div>
+					<div class="mui-input-row servicelong changeafter" style="">
+						<input type="hidden" id="orderDuring" name="orderDuring" value="1" />
+						<label>服务<span id="servicemu"></span></label>
+						<button type="button" id="timereduce" class="mui-btn"  style="border-radius:0px;width:25px;height:24px;margin-top:14px;margin-right:25px;padding:0px 0px;">+</button>						
+						<button type="button" id="timevalue" class="mui-btn" disabled="true" style="border-left:0px;border-right:0px;border-radius:0px;width:35px;height:24px;margin-top:14px;padding:0px 0px;color:#4cd964;">1</button>						
+						<button type="button" id="timeadd" class="mui-btn" style="border-radius:0px;width:25px;height:24px;margin-top:14px;padding:0px 0px;">-</button>
+					</div>
+					
+					<div style="background-color:#efeff4;width:100%;height:10px;"></div>
+					
+					<div class="linkbox1" id="linkbox1">
+						<input type="hidden" id="linkmanId" value="0" name="linkmanId" />
+						<img src="../images/tiaowen.png" width="100%" height="5px">
+						<div class="linkbox2">
+							<div class="linkbox3" id="linkbox3">								
+								<!--
+								<h5 class="linkManAdress">陪护地址：湖南长沙玉华以区</h5>
+								<h5 class="linkManName">被陪护人员：张覅</h5>
+								-->
+							</div>
+							<div class="linkbox4">
+								<span class="mui-icon mui-icon-forward" style="color:#ff9d4f;"></span>
+							</div>
+						</div>	
+						<img src="../images/tiaowen.png" style="float:left;" width="100%" height="5px" />	
+					</div>
+					
+					<div style="background-color:#efeff4;width:100%;height:10px;"></div>
+					
+					<div class="mui-input-row changeafter" style="border-bottom:1px solid #c8c7cc;">
+						<label>联系人</label>
+						<input type="text" class=""  id="createordername" name="createordername" style="padding-right:25px;direction: rtl;" value="" placeholder="请填写联系人">
+					</div>
+					<!--
+					<div class="mui-input-row changeafter" >
+						<label>联系电话</label>
+						<input type="text" class="mui-input-clear" disabled="true" id="telePhone" style="padding-right:25px;" value="">
+					</div>
+					-->
+					<div class="mui-input-row changeafter" style="border-bottom:1px solid #c8c7cc;">
+						<label>订单金额</label>
+						<input type="hidden" id="orderMoney"  value="" />
+						<input type="text" id="pricetotal" name="" disabled="true" class="mui-input-clear" style="color:#ff9d4f;padding-right:25px;" value="">
+					</div>
+				
+					<div class="mui-input-row changeafter" style="border-bottom:1px solid #c8c7cc;">
+						<label>优惠劵</label>
+						<input type="hidden" id="favourableid" name="favourableid" value="0" />
+						<select id="favourableselect" name="linkmansex" style="padding-right:25px;direction: rtl;">	       					              
+						</select>
+					
+					</div>
+					
+					<div class="mui-input-row changeafter" style="display:none;">
+						<input id="payStatus" name="payStatus" value="1" type="hidden" />
+						<input id="orderMoneypay" value="0" type="hidden" />
+						<label>支付方式</label>
+						    <div class="paystyle" style="padding-right:20px;margin-top:10px;">
+							<!--<div class="mui-btn mui-btn-primary servicescopeitem playstyle" payStyle="0">
+								享后支付
+							</div>-->
+							<div class="mui-btn mui-btn-primary servicescopeitem playstyle active" payStyle="1">
+								全款支付
+							</div>
+							</div>
+					</div>
+					<div class="mui-input-row" style="height:100px;display:none;">
+						<label >备注</label>
+						<textarea id="textarea" name="orderComment" style="padding-right:25px;" rows="4" placeholder="请添加本次服务备注" class="mui-input-speech mui-input-clear"></textarea>
+					</div>								
+				</form>		
+			</div>
+			
+			<div style="background-color:#efeff4;width:100%;height:15px;"></div>
+			<!--
+			<div class="box4">
+			</div>
+			-->
+			<div class="box5">
+				<span class="mui-icon-extra mui-icon-extra-cart"></span>
+				<a class="zi1"><span style="color:#ff9d4f">￥</span><span id="price" style="color:#ff9d4f"></span></a>
+				<img src="../images/fenge.png" />		
+				<a class="zi2">已优惠<span id="price2" style="color:#ff9d4f">0.00</span>元</a>
+				<button type="button" class="mui-btn mui-btn-success yuyuebtn" id="sureyuyue">确认订单</button>
+			</div>
+		</div>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/url.js"></script>
+<script src="../js/mui.min.js"></script>
+<script src="../js/mui.picker.min.js"></script>
+<script src="../js/wechatPay.js"></script>
+<script type="text/javascript" charset="utf-8">
+	var price=0;
+	var userid=getUrlParam("userid");//护工id  user表编号
+	$("#userid").val(userid); 	
+	mui.init();
+	initView();	
+	getUserFavourable();
+    getLinkManByStatus();
+	
+	//创建联系人 linkbox2
+	mui(".mui-content").on('tap','.linkbox2',function(){ 
+		location="linkManList.html";
+	})
+	
+	//选择联系人
+	function getLinkManByStatus(){
+		$.ajax({ 
+			url:SERVER_URL+"/linkMan/selectLinkManByStatus.action",  
+			type:"post",  
+			//dataType:"json",  
+			data:"",  
+			success:function(response){
+				if(response!=""){
+					var str1="<h5 class=\"linkManAdress\">\u966A\u62A4\u5730\u5740\uFF1A";
+					var str2="</h5>\n\t\t\t\t\t\t\t\t<h5 class=\"linkManName\">\u88AB\u966A\u62A4\u4EBA\u5458\uFF1A";
+					var str3="</h5>";
+					$("#linkmanId").val(response.linkmanid);
+					var adress=response.adress;
+					var linkmanname=response.linkmanname;
+					var string=str1+adress+str2+linkmanname+str3;
+					$("#linkbox3").empty();
+					$("#linkbox3").append(string);					
+				}else{
+					var string="<h5 style=\"line-height:48px;font-size:16px;color:#ff7305;\">\n <span class=\"mui-icon mui-icon-plusempty\"></span>\u70B9\u51FB\u6DFB\u52A0\u670D\u52A1\u5BF9\u8C61\u4FE1\u606F</h5>";
+					
+					$("#linkbox3").empty();
+					$("#linkbox3").append(string);
+				}				
+			},  
+			error:function(){  
+				
+			}
+		});	
+	}
+	
+	//页面初始化
+	function initView(){		
+		var _date="userid=0";
+		
+		if(userid!=null){
+			_date="userid="+userid;
+		}
+		
+		$.ajax({ 
+			url:SERVER_URL+"/wechatuser/initOrder.action",  
+			type:"post",  
+			//dataType:"json",  
+			data:_date,  
+			success:function(response){
+				$("#nurseInp").val(response.realName);
+				$("#servicemu").text(response.serviceType.servicemu);
+				$("#serviceName").val(response.serviceType.servicename);
+				//$("#telePhone").val(response.user.telephone);//联系电话屏蔽
+				price=(response.serviceType.price)*1/100;		
+				price=intToFloat(price);
+	 			$("#pricetotal").val("￥"+price);//订单金额
+	 			$("#price").text(price);//订单实付价格	
+				$("#orderMoney").val(price);//隐藏的订单价格				
+			},  
+			error:function(){  
+				
+			}
+		});	
+	}
+	
+	//选择优惠卷
+  	$("#favourableselect").change(function(){
+		var favourableid=$(this).val();
+		$("#favourableid").val(favourableid);
+  		var pricetotal = $("#orderMoney").val();
+		//获取优惠价格
+	 	var moneyd=$('#favourableselect option:selected').attr("money");//当前优惠卷价格
+		moneyd=moneyd*1;
+		if(moneyd!=0){
+			var nowmoney=pricetotal-moneyd*1;
+			nowmoney=intToFloat(nowmoney);
+			$("#price").text(nowmoney);
+			moneyd=intToFloat(moneyd);
+			$("#price2").text(moneyd); 
+			//选中全款支付
+			$(".playstyle").each(function(){
+				$(this).removeClass("active");
+				var payStyle=$(this).attr("payStyle");
+				if(payStyle=="1"){
+					$(this).addClass("active");
+				}
+			});
+		}		
+	});
+  
+ 	//选择支付方式
+ 	$(".playstyle").click(function(){
+ 		$(".playstyle").each(function(){
+  			$(this).removeClass("active");
+ 		});
+ 		$(this).addClass("active");
+		var paystyle=$(this).attr("payStyle");
+		$("#payStatus").val(paystyle);
+		if(paystyle=="0"){//选择享后支付 将无法享受首单减免
+			mui.toast('选择享后支付，您将无法享受减免服务！',{ duration:'long', type:'div' });
+			//退选优惠劵
+			$.each($('#favourableselect option'), function(i, n) {
+				if ($(n).val() == "1") {//首单减免优惠id为1
+					$(n).attr("selected", false);
+				}
+				if ($(n).val() == "0") {
+					$(n).attr("selected", true);
+				}
+			}); 				
+			var pricetotal = $("#orderMoney").val();		
+			pricetotal=intToFloat(pricetotal);
+			$("#price").text(pricetotal);
+			$("#price2").text("0.00");
+		}
+		if(paystyle=="1"){
+			var pricetotal = $("#orderMoney").val();
+			//获取优惠价格
+			var moneyd=$('#favourableselect option:selected').attr("money");//当前优惠卷价格
+			var nowmoney=pricetotal-moneyd*1;
+			nowmoney=intToFloat(nowmoney);
+			$("#price").text(nowmoney);
+			moneyd=intToFloat(moneyd);
+			$("#price2").text(moneyd); 	
+		}
+ 	});
+ 	var mask = mui.createMask(callback);//callback为用户点击蒙版时自动执行的回调；
+	function callback(){
+	}
+	//提交支付
+	mui(".mui-content").on('tap','#sureyuyue',function(){
+		$("#sureyuyue").attr("disabled", true);
+		mui.toast('正在发起支付，请稍后',{duration:'long',type:'div'});		
+		mask.show();//显示遮罩		
+		setTimeout(function(){
+			mask.close();//关闭遮罩
+			$("#sureyuyue").attr("disabled", false);
+		}, 3000);
+		
+		//数据校验
+		var starttime=$("#starttime").val();	
+		if (starttime=="") { 
+			mui.toast('请选择服务开始时间！',{ duration:'long', type:'div' }); 
+			return false; 
+		}		
+		var createordername=$("#createordername").val();	
+		if (createordername=="") { 
+			mui.toast('请输入您的姓名！',{ duration:'long', type:'div' });
+			$("#createordername").focus(); 
+			return false; 
+		}
+		var linkmanId=$("#linkmanId").val();
+		if (linkmanId=="0") { 
+			mui.toast('请选择被服务对象！',{ duration:'long', type:'div' });
+			return false; 
+		}
+		
+		//生成系统订单
+		$.ajax({  
+			url:SERVER_URL+"/orders/insertOrder.action",  
+			type:"post",   
+			data:$("#orderForm").serialize(),
+			success:function(response){
+				if((response*1)>0){
+					var orderid=response;				
+					//location="orderSure.html?orderid="+response+"&=userid"+userid;
+					//判断是否需要支付  服务后支付就不需要支付  全额或者定金支付就需要支付
+					var payStatus =	$("#payStatus").val();					
+					if(payStatus=="1"){
+						getPay(orderid);
+					}else{
+						//alert("未支付订单"); //前往订单页面
+						location="myOrders.html?initUser=0";
+					}
+				}				
+			},  
+			error:function(){  
+				
+			}
+		});		
+	})
+	
+	//绑定服务时长点击事件
+	 $("#timereduce").bind("click",function(){	 
+	 	var timevalue=$("#timevalue").text();
+	 	var num=(timevalue*1)+1;
+	 	$("#timevalue").text(num);
+	 	$("#orderDuring").val(num);		 	
+	 	var pricetotal=num*price;
+	 	pricetotal=intToFloat(pricetotal);
+	 	$("#pricetotal").val("￥"+pricetotal);
+		$("#orderMoney").val(pricetotal);
+	 	//获取优惠价格
+	 	var moneyd=($('#favourableselect option:selected').attr("money"))*1;
+	 	var nowmoney=pricetotal-moneyd*1;
+	 	nowmoney=intToFloat(nowmoney);
+	 	$("#price").text(nowmoney);
+	 	moneyd=intToFloat(moneyd);
+	 	$("#price2").text(moneyd); 		
+	 });
+	 
+	 $("#timeadd").bind("click",function(){	 
+	 	var timevalue=$("#timevalue").text();
+	 	var num=(timevalue*1);
+	 	if(num>1){
+	 		num=num-1;
+	 		$("#timevalue").text(num);
+	 		$("#orderDuring").val(num);	 		
+	 		var pricetotal=num*price;
+	 		pricetotal=intToFloat(pricetotal);
+	 		$("#pricetotal").text(pricetotal);
+	 		$("#orderMoney").val(pricetotal);
+	 		$("#pricetotal").val("￥"+pricetotal);	
+	 		//获取优惠价格
+	 		var moneyd=$('#favourableselect option:selected').attr("money");
+	 		var nowmoney=pricetotal-moneyd*1;
+	 		nowmoney=intToFloat(nowmoney);
+	 		$("#price").text(nowmoney);
+	 		moneyd=intToFloat(moneyd);
+	 		$("#price2").text(moneyd);
+	 	}	
+	 });
+	   
+	//将数字转为带两位小数的数字类型
+	function intToFloat(val){  
+        return new Number(val).toFixed(2); 
+    }
+    
+	$(".gohome").bind("click",function(){
+  		location="index.html";
+	});	
+	
+	//获取用户可用优惠卷
+	function getUserFavourable(){	
+		$.ajax({  
+			url:SERVER_URL+"/userfavourable/getUserFavourable.action",  
+			type:"post",   
+			data:"",  
+			success:function(response){
+				var optionstr="<option money=\"0\" value=\"0\">\u70B9\u51FB\u9009\u62E9\u4F18\u60E0\u5377</option> ";
+				$(response).each(function (index,date){	
+					var selectmoney=(date.favourablemoney*1)/100;
+					selectmoney=intToFloat(selectmoney);
+					optionstr=optionstr+"<option money=\""+selectmoney+"\" value=\""+date.favourableid+"\">"+date.favourablename+"</option>";
+				});
+				if(response==""){
+					optionstr="<option money=\"0\" value=\"0\">\u6682\u65E0\u4F18\u60E0\u5377</option> ";
+				}
+				$("#favourableselect").append(optionstr);
+			},  
+			error:function(){  
+		
+			}
+		});	
+	}
+	
+	//返回上一步
+	 $(".histroyback").bind("click",function(){
+	  	window.history.go(-1);
+	 });
+	 
+	//初始化时间控件
+	/*
+	var dtPicker = new mui.DtPicker(); 
+	var inpPick = document.getElementById('starttime');  
+	//单击inpick                    
+	inpPick.addEventListener('tap', function(event) {   
+		dtPicker.show(function (selectItems){   
+			$(inpPick).val(selectItems)
+		})           
+	})
+	*/
+	var dtpickerDate=new Date();
+	var year=dtpickerDate.getFullYear();//年
+	var month=dtpickerDate.getMonth();//月
+	var day=dtpickerDate.getDate();//日
+	var hours=dtpickerDate.getHours();//小时
+	var monthend=month+2;
+	var dtpicker = new mui.DtPicker({
+		type: "hour",//设置日历初始视图模式 
+		beginDate: new Date(year, month, day),//设置开始日期 
+		endDate: new Date(year, monthend, day),//设置结束日期 
+		labels: ['年', '月', '日', '时', '分'],//设置默认标签区域提示语 
+		customData:{
+			"date":[ 
+				{value:"",text:""}
+			] 
+		}//时间/日期别名 
+	}) 
+	
+	mui(".mui-content").on('tap','#starttime',function(){
+		dtpicker.show(function(e) {
+			e=e+"";
+			var arr = e.split('-');
+			var arr2 = arr[2].split(' ');;
+			var chooseday=(arr2[0])*1;
+			var choosehours = (arr2[1])*1;
+			var canhours=hours*1+2;
+			if(choosehours <= canhours && chooseday==day ){
+				$("#starttime").val("");
+				mui.toast('请提前三小时下单，或者联系客服!',{duration:'long',type:'div'});
+			}else{
+				$("#starttime").val(e);
+			}	
+		})
+	})
+</script>
+</body>
+</html>

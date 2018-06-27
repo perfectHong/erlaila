@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.erlaila.mybatis.mapper.UserMapper" >
+  <resultMap id="BaseResultMap" type="cn.erlaila.mybatis.po.User" >
+    <id column="userId" property="userid" jdbcType="INTEGER" />
+    <result column="openId" property="openid" jdbcType="VARCHAR" />
+    <result column="nickname" property="nickname" jdbcType="VARCHAR" />
+    <result column="userIcon" property="usericon" jdbcType="VARCHAR" />
+    <result column="telephone" property="telephone" jdbcType="VARCHAR" />
+    <result column="country" property="country" jdbcType="VARCHAR" />
+    <result column="province" property="province" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="BIT" />
+    <result column="birthday" property="birthday" jdbcType="DATE" />
+    <result column="userage" property="userage" jdbcType="INTEGER" />
+    <result column="userType" property="usertype" jdbcType="BIT" />
+    <result column="userVerify" property="userverify" jdbcType="BIT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    userId, openId, nickname, userIcon, telephone, country, province, city, sex, birthday, 
+    userage, userType, userVerify
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where userId = #{userid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from user
+    where userId = #{userid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.erlaila.mybatis.po.User" >
+    insert into user (userId, openId, nickname, 
+      userIcon, telephone, country, 
+      province, city, sex, birthday, 
+      userage, userType, userVerify
+      )
+    values (#{userid,jdbcType=INTEGER}, #{openid,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, 
+      #{usericon,jdbcType=VARCHAR}, #{telephone,jdbcType=VARCHAR}, #{country,jdbcType=VARCHAR}, 
+      #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, #{sex,jdbcType=BIT}, #{birthday,jdbcType=DATE}, 
+      #{userage,jdbcType=INTEGER}, #{usertype,jdbcType=BIT}, #{userverify,jdbcType=BIT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.erlaila.mybatis.po.User" >
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        userId,
+      </if>
+      <if test="openid != null" >
+        openId,
+      </if>
+      <if test="nickname != null" >
+        nickname,
+      </if>
+      <if test="usericon != null" >
+        userIcon,
+      </if>
+      <if test="telephone != null" >
+        telephone,
+      </if>
+      <if test="country != null" >
+        country,
+      </if>
+      <if test="province != null" >
+        province,
+      </if>
+      <if test="city != null" >
+        city,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="birthday != null" >
+        birthday,
+      </if>
+      <if test="userage != null" >
+        userage,
+      </if>
+      <if test="usertype != null" >
+        userType,
+      </if>
+      <if test="userverify != null" >
+        userVerify,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="openid != null" >
+        #{openid,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null" >
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="usericon != null" >
+        #{usericon,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null" >
+        #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="country != null" >
+        #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=BIT},
+      </if>
+      <if test="birthday != null" >
+        #{birthday,jdbcType=DATE},
+      </if>
+      <if test="userage != null" >
+        #{userage,jdbcType=INTEGER},
+      </if>
+      <if test="usertype != null" >
+        #{usertype,jdbcType=BIT},
+      </if>
+      <if test="userverify != null" >
+        #{userverify,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.erlaila.mybatis.po.User" >
+    update user
+    <set >
+      <if test="openid != null" >
+        openId = #{openid,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null" >
+        nickname = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="usericon != null" >
+        userIcon = #{usericon,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null" >
+        telephone = #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="country != null" >
+        country = #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=BIT},
+      </if>
+      <if test="birthday != null" >
+        birthday = #{birthday,jdbcType=DATE},
+      </if>
+      <if test="userage != null" >
+        userage = #{userage,jdbcType=INTEGER},
+      </if>
+      <if test="usertype != null" >
+        userType = #{usertype,jdbcType=BIT},
+      </if>
+      <if test="userverify != null" >
+        userVerify = #{userverify,jdbcType=BIT},
+      </if>
+    </set>
+    where userId = #{userid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.erlaila.mybatis.po.User" >
+    update user
+    set openId = #{openid,jdbcType=VARCHAR},
+      nickname = #{nickname,jdbcType=VARCHAR},
+      userIcon = #{usericon,jdbcType=VARCHAR},
+      telephone = #{telephone,jdbcType=VARCHAR},
+      country = #{country,jdbcType=VARCHAR},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=BIT},
+      birthday = #{birthday,jdbcType=DATE},
+      userage = #{userage,jdbcType=INTEGER},
+      userType = #{usertype,jdbcType=BIT},
+      userVerify = #{userverify,jdbcType=BIT}
+    where userId = #{userid,jdbcType=INTEGER}
+  </update>
+</mapper>

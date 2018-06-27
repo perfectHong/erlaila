@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.erlaila.mybatis.mapper.ExceptionsMapper" >
+  <resultMap id="BaseResultMap" type="cn.erlaila.mybatis.po.Exceptions" >
+    <id column="exceptionId" property="exceptionid" jdbcType="INTEGER" />
+    <result column="userId" property="userid" jdbcType="INTEGER" />
+    <result column="className" property="classname" jdbcType="VARCHAR" />
+    <result column="exceptioNname" property="exceptionname" jdbcType="VARCHAR" />
+    <result column="timeHap" property="timehap" jdbcType="TIMESTAMP" />
+    <result column="exceptionIp" property="exceptionip" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    exceptionId, userId, className, exceptioNname, timeHap, exceptionIp
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from exceptions
+    where exceptionId = #{exceptionid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from exceptions
+    where exceptionId = #{exceptionid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.erlaila.mybatis.po.Exceptions" >
+    insert into exceptions (exceptionId, userId, className, 
+      exceptioNname, timeHap, exceptionIp
+      )
+    values (#{exceptionid,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{classname,jdbcType=VARCHAR}, 
+      #{exceptionname,jdbcType=VARCHAR}, #{timehap,jdbcType=TIMESTAMP}, #{exceptionip,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.erlaila.mybatis.po.Exceptions" >
+    insert into exceptions
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="exceptionid != null" >
+        exceptionId,
+      </if>
+      <if test="userid != null" >
+        userId,
+      </if>
+      <if test="classname != null" >
+        className,
+      </if>
+      <if test="exceptionname != null" >
+        exceptioNname,
+      </if>
+      <if test="timehap != null" >
+        timeHap,
+      </if>
+      <if test="exceptionip != null" >
+        exceptionIp,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="exceptionid != null" >
+        #{exceptionid,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="classname != null" >
+        #{classname,jdbcType=VARCHAR},
+      </if>
+      <if test="exceptionname != null" >
+        #{exceptionname,jdbcType=VARCHAR},
+      </if>
+      <if test="timehap != null" >
+        #{timehap,jdbcType=TIMESTAMP},
+      </if>
+      <if test="exceptionip != null" >
+        #{exceptionip,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.erlaila.mybatis.po.Exceptions" >
+    update exceptions
+    <set >
+      <if test="userid != null" >
+        userId = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="classname != null" >
+        className = #{classname,jdbcType=VARCHAR},
+      </if>
+      <if test="exceptionname != null" >
+        exceptioNname = #{exceptionname,jdbcType=VARCHAR},
+      </if>
+      <if test="timehap != null" >
+        timeHap = #{timehap,jdbcType=TIMESTAMP},
+      </if>
+      <if test="exceptionip != null" >
+        exceptionIp = #{exceptionip,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where exceptionId = #{exceptionid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.erlaila.mybatis.po.Exceptions" >
+    update exceptions
+    set userId = #{userid,jdbcType=INTEGER},
+      className = #{classname,jdbcType=VARCHAR},
+      exceptioNname = #{exceptionname,jdbcType=VARCHAR},
+      timeHap = #{timehap,jdbcType=TIMESTAMP},
+      exceptionIp = #{exceptionip,jdbcType=VARCHAR}
+    where exceptionId = #{exceptionid,jdbcType=INTEGER}
+  </update>
+</mapper>

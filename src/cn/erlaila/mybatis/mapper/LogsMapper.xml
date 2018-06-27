@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.erlaila.mybatis.mapper.LogsMapper" >
+  <resultMap id="BaseResultMap" type="cn.erlaila.mybatis.po.Logs" >
+    <id column="logsId" property="logsid" jdbcType="INTEGER" />
+    <result column="userId" property="userid" jdbcType="INTEGER" />
+    <result column="operationname" property="operationname" jdbcType="VARCHAR" />
+    <result column="className" property="classname" jdbcType="VARCHAR" />
+    <result column="method" property="method" jdbcType="VARCHAR" />
+    <result column="operationTime" property="operationtime" jdbcType="TIMESTAMP" />
+    <result column="operationIp" property="operationip" jdbcType="VARCHAR" />
+    <result column="isWechatUser" property="iswechatuser" jdbcType="BIT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    logsId, userId, operationname, className, method, operationTime, operationIp, isWechatUser
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from logs
+    where logsId = #{logsid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from logs
+    where logsId = #{logsid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.erlaila.mybatis.po.Logs" >
+    insert into logs (logsId, userId, operationname, 
+      className, method, operationTime, 
+      operationIp, isWechatUser)
+    values (#{logsid,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{operationname,jdbcType=VARCHAR}, 
+      #{classname,jdbcType=VARCHAR}, #{method,jdbcType=VARCHAR}, #{operationtime,jdbcType=TIMESTAMP}, 
+      #{operationip,jdbcType=VARCHAR}, #{iswechatuser,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.erlaila.mybatis.po.Logs" >
+    insert into logs
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="logsid != null" >
+        logsId,
+      </if>
+      <if test="userid != null" >
+        userId,
+      </if>
+      <if test="operationname != null" >
+        operationname,
+      </if>
+      <if test="classname != null" >
+        className,
+      </if>
+      <if test="method != null" >
+        method,
+      </if>
+      <if test="operationtime != null" >
+        operationTime,
+      </if>
+      <if test="operationip != null" >
+        operationIp,
+      </if>
+      <if test="iswechatuser != null" >
+        isWechatUser,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="logsid != null" >
+        #{logsid,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="operationname != null" >
+        #{operationname,jdbcType=VARCHAR},
+      </if>
+      <if test="classname != null" >
+        #{classname,jdbcType=VARCHAR},
+      </if>
+      <if test="method != null" >
+        #{method,jdbcType=VARCHAR},
+      </if>
+      <if test="operationtime != null" >
+        #{operationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operationip != null" >
+        #{operationip,jdbcType=VARCHAR},
+      </if>
+      <if test="iswechatuser != null" >
+        #{iswechatuser,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.erlaila.mybatis.po.Logs" >
+    update logs
+    <set >
+      <if test="userid != null" >
+        userId = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="operationname != null" >
+        operationname = #{operationname,jdbcType=VARCHAR},
+      </if>
+      <if test="classname != null" >
+        className = #{classname,jdbcType=VARCHAR},
+      </if>
+      <if test="method != null" >
+        method = #{method,jdbcType=VARCHAR},
+      </if>
+      <if test="operationtime != null" >
+        operationTime = #{operationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operationip != null" >
+        operationIp = #{operationip,jdbcType=VARCHAR},
+      </if>
+      <if test="iswechatuser != null" >
+        isWechatUser = #{iswechatuser,jdbcType=BIT},
+      </if>
+    </set>
+    where logsId = #{logsid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.erlaila.mybatis.po.Logs" >
+    update logs
+    set userId = #{userid,jdbcType=INTEGER},
+      operationname = #{operationname,jdbcType=VARCHAR},
+      className = #{classname,jdbcType=VARCHAR},
+      method = #{method,jdbcType=VARCHAR},
+      operationTime = #{operationtime,jdbcType=TIMESTAMP},
+      operationIp = #{operationip,jdbcType=VARCHAR},
+      isWechatUser = #{iswechatuser,jdbcType=BIT}
+    where logsId = #{logsid,jdbcType=INTEGER}
+  </update>
+</mapper>

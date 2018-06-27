@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>table模块快速使用</title>
+  <link rel="stylesheet" href="../../layui2/css/layui.css" media="all" />
+</head>
+<body>
+	<blockquote class="layui-elem-quote news_search">
+		<div class="layui-inline">
+		    <div class="layui-input-inline">
+		    	<input type="text" value="" placeholder="请输入关键字" class="layui-input search_input">
+		    </div>
+		    <a class="layui-btn search_btn">查询</a>
+		</div>
+		<div class="layui-inline">
+			<a class="layui-btn layui-btn-normal usersAdd_btn">添加用户</a>
+		</div>
+		<div class="layui-inline">
+			<a class="layui-btn layui-btn-danger batchDel">批量删除</a>
+		</div>
+		<div class="layui-inline">
+			<div class="layui-form-mid layui-word-aux">　本页面刷新后除新添加的文章外所有操作无效，关闭页面所有数据重置</div>
+		</div>
+	</blockquote>
+		<div id="pTable" style="width: 100%;">  
+             <table class="layui-table" id="layui_table_id" lay-filter="test"> 
+
+             </table>  
+             <div id="laypage" style="float:right;"></div>  
+        </div>  
+        <script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../layui2/layui.js"></script>
+<script>
+	
+
+	var limitcount = 10;  
+    var curnum =1;  
+    var cp=30;
+    
+					
+    //列表查询方法  
+    function productsearch(productGroupId,start,limitsize) { 
+        layui.use(['table','laypage','laydate'], function(){  
+            var table = layui.table,  
+                laydate=layui.laydate,  
+                laypage = layui.laypage;  
+				table.render({  
+                elem: '#layui_table_id'  
+                , url: 'http://127.0.0.1:8080/erlaila/admins/findAllAdmin.action?pIds='+productGroupId+'&pageNum='+start+'&limitcount='+limitsize
+                /*, where:{pagename:start,pagelimit:limitsize} //传参*/  
+                , cols: [[ //表头
+                
+                  {field: 'check', title: '选择', fixed: 'left' }
+     			 ,{field: 'servicecontentid', title: 'ID',  sort: true}
+      			 ,{field: 'servicecontentiname', title: '服务类型名称', }
+     			 ,{field: 'sex', title: '计量单位', sort: true}
+     			 ,{field: 'realname', title: '价格', }     			 
+     			 ,{field: 'down', title: '操作',width:220}
+     			  
+   				 ]]
+                , page: false  
+                , height:420  
+                ,done: function(res, curr, count){
+         				count=cp;	
+                    //如果是异步请求数据方式，res即为你接口返回的信息。  
+                    //如果是直接赋值的方式，res即为：{data: [], count: 11} data为当前页数据、count为数据总长度  
+                    laypage.render({  
+                        elem:'laypage'  
+                        ,count:count  
+                        ,curr:curnum  
+                        ,limit:limitcount  
+                        ,layout: ['prev', 'page', 'next', 'skip','count','limit']  
+                        ,jump:function (obj,first) {  
+                            if(!first){  
+                                curnum = obj.curr;
+                                // curnum=curnum*1-1;
+                                limitcount = obj.limit;
+                                productsearch(productGroupId,curnum,limitcount);  
+                            }  
+                        }  
+                    })  
+                }  
+            })  
+   
+            //监听工具条  
+            table.on('tool(test)', function(obj){ //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"  
+                var data = obj.data //获得当前行数据  
+                    ,layEvent = obj.event; //获得 lay-event 对应的值  
+                if(layEvent === 'detail'){  
+                    viewLableInfo(data.attrId);  
+                    layer.msg(data.attrId);  
+                } else if(layEvent === 'del'){  
+                    layer.msg('删除');  
+                } else if(layEvent === 'edit'){  
+                    layer.msg('编辑操作');  
+                }  
+            });  
+            //常规用法  
+            laydate.render({  
+                elem: '#createDate'  
+            });  
+            //常规用法  
+            laydate.render({  
+                elem: '#processingTime'  
+            });  
+   
+        });  
+    }  
+      	var pId ='0';  
+		productsearch(pId, curnum, limitcount); 
+		
+		
+		//操作
+		$("body").on("click",".users_edit",function(){  //编辑
+			layer.alert('您点击了编辑按钮',{icon:6, title:'文章编辑'});
+		})
+		$("body").on("click",".users_del",function(){  //删除
+			//var _this = $(this);
+			layer.confirm('确定删除此用户100000？',{icon:3, title:'提示信息'},function(index){
+				//_this.parents("tr").remove();
+				//获取到tr  _this.parents("tr")
+				var id=$(this).parents("tr").children("td:eq(1)").children(".laytable-cell-1-adminid").val();
+				//var id=$(this).parents("tr").children().eq(1).children(".laytable-cell-1-adminid").val();
+				
+				alert(id);
+				
+				
+				//z找到包含adminid的td
+				
+				//获取adminid
+				
+				//
+				
+				for(var i=0;i<usersData.length;i++){
+					if(usersData[i].usersId == _this.attr("data-id")){
+						usersData.splice(i,1);
+						usersList(usersData);
+					}
+				}
+				layer.close(index);
+			});
+		})
+		
+		//添加管理员（copy于alluser.js）
+		$(".usersAdd_btn").click(function(){
+			var index = layui.layer.open({
+				title : "添加会员",
+				type : 2,
+				content : "addUser.html",
+				success : function(layero, index){
+					layui.layer.tips('点击此处返回文章列表', '.layui-layer-setwin .layui-layer-close', {
+						tips: 3
+					});
+				}
+			})
+			//改变窗口大小时，重置弹窗的高度，防止超出可视区域（如F12调出debug的操作）
+			$(window).resize(function(){
+				layui.layer.full(index);
+			})
+			layui.layer.full(index);
+		})
+		
+		
+</script>
+</body>
+</html>

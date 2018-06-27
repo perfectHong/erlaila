@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>建议与反馈</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<style>
+			.title{
+				margin: 20px 15px 7px;
+				color: #6d6d72;
+				font-size: 15px;
+			}
+			.mui-content{
+				margin-top:20px;
+				background-color:#fff;
+				padding:20px 0px;
+				padding-bottom:80px;
+			}
+			h4{
+				padding:10px 15px;
+			}
+			p{
+				font-size:15px;
+				padding:10px 15px;
+				text-indent:2em;
+				color:#333;
+			}
+			textarea{
+			autofocus:autofocus;
+				cols:6;
+				vertical-align:top;
+				width:90%;
+				height:200px;
+				margin: 0 5%;
+				border:1px solid #8d8d8d;
+			}
+			.submit{
+				font-size:18px;
+				width:90%;
+				height:50px;
+				margin:20px 5%;
+			}
+		</style>
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">建议与反馈--儿来啦</h1>
+		</header>
+		<div class="mui-content">
+			<p>感谢您使用“儿来啦”平台，在使用过程中您对我们平台有什么建议与意见都可以在此留言，我们会根据您的留言优化我们的平台，为您与其他客户提供更加优质的服务。</p>			
+			<textarea id="coment"></textarea>			
+			<button type="button" class="mui-btn mui-btn-success submit">提交</button>
+		</div>
+	</body>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mui.min.js"></script>
+ <script src="../js/url.js"></script>
+<script>
+	mui.init({
+		swipeBack:true //启用右滑关闭功能
+	});
+		
+	
+	mui(".mui-content").on('tap', '.submit', function(){
+		var coment=$("#coment").val().trim();
+		if (coment=="") {
+			mui.toast('请输入您的建议或意见!',{duration:'long',type:'div'});
+			return;
+		}	
+		$.ajax({
+			url:SERVER_URL+"/opinion/insertOpinion.action",  
+			type:"post",   
+			data:"coment="+coment,  
+			success:function(response){			
+				if(response=="1"){
+					mui.toast('提交成功，感谢您的宝贵意见!',{duration:'long',type:'div'});
+					$("#coment").val("");
+				}	
+			},  
+			error:function(){  
+				
+			}
+		});	
+	});
+	</script>
+</html>

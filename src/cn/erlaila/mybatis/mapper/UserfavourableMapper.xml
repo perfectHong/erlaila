@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.erlaila.mybatis.mapper.UserfavourableMapper" >
+  <resultMap id="BaseResultMap" type="cn.erlaila.mybatis.po.Userfavourable" >
+    <id column="ufID" property="ufid" jdbcType="INTEGER" />
+    <result column="userid" property="userid" jdbcType="INTEGER" />
+    <result column="favourableId" property="favourableid" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="getstartTime" property="getstarttime" jdbcType="DATE" />
+    <result column="useTime" property="usetime" jdbcType="DATE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ufID, userid, favourableId, status, getstartTime, useTime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from userfavourable
+    where ufID = #{ufid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from userfavourable
+    where ufID = #{ufid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.erlaila.mybatis.po.Userfavourable" >
+    insert into userfavourable (ufID, userid, favourableId, 
+      status, getstartTime, useTime
+      )
+    values (#{ufid,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{favourableid,jdbcType=INTEGER}, 
+      #{status,jdbcType=INTEGER}, #{getstarttime,jdbcType=DATE}, #{usetime,jdbcType=DATE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.erlaila.mybatis.po.Userfavourable" >
+    insert into userfavourable
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ufid != null" >
+        ufID,
+      </if>
+      <if test="userid != null" >
+        userid,
+      </if>
+      <if test="favourableid != null" >
+        favourableId,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="getstarttime != null" >
+        getstartTime,
+      </if>
+      <if test="usetime != null" >
+        useTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ufid != null" >
+        #{ufid,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="favourableid != null" >
+        #{favourableid,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="getstarttime != null" >
+        #{getstarttime,jdbcType=DATE},
+      </if>
+      <if test="usetime != null" >
+        #{usetime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.erlaila.mybatis.po.Userfavourable" >
+    update userfavourable
+    <set >
+      <if test="userid != null" >
+        userid = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="favourableid != null" >
+        favourableId = #{favourableid,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="getstarttime != null" >
+        getstartTime = #{getstarttime,jdbcType=DATE},
+      </if>
+      <if test="usetime != null" >
+        useTime = #{usetime,jdbcType=DATE},
+      </if>
+    </set>
+    where ufID = #{ufid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.erlaila.mybatis.po.Userfavourable" >
+    update userfavourable
+    set userid = #{userid,jdbcType=INTEGER},
+      favourableId = #{favourableid,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      getstartTime = #{getstarttime,jdbcType=DATE},
+      useTime = #{usetime,jdbcType=DATE}
+    where ufID = #{ufid,jdbcType=INTEGER}
+  </update>
+</mapper>

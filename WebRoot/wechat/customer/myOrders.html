@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>订单列表</title>    
+    <link href="../css/amazeui.min.css?v=2.4" rel="stylesheet">
+	<link href="../css/global.css?v=2.4" rel="stylesheet">
+	<link href="../css/css.css?v=2.4" rel="stylesheet">
+    <link href="../css/mui.min.css" rel="stylesheet"/> 
+    <link href="../css/mui.min.css" rel="stylesheet"/>
+    <style>			
+			.title{
+				margin: 20px 15px 10px;
+				color: #6d6d72;
+				font-size: 15px;
+			}	
+			.oa-contact-cell.mui-table .mui-table-cell {
+				padding: 0;
+				vertical-align: middle;
+			}			
+			.oa-contact-cell {
+				position: relative;
+				margin: -11px 0;
+			}	
+			.oa-contact-avatar {
+				width: 75px;
+			}
+			.oa-contact-avatar img {
+				border-radius: 50%;
+			}
+			.oa-contact-content {
+				width: 100%;
+			}
+			.oa-contact-name {
+				margin-right: 20px;
+				color:#6a6a6a;
+			}
+			.oa-contact-name, oa-contact-position {
+				float: left;
+			}
+			.mui-h5, h5{
+				font-size:13px;
+			}
+			.mui-btn{
+				font-size:12px;
+			}
+			.mui-h6, h6{
+				color: #222222;
+			}
+			.mui-table-view-cell {
+				padding: 0px 0px ;
+			}
+			.mui-table-view-cell:after{
+				background-color:#fff;
+			}
+			.backdiv{
+				width:100%;height:18px;background-color:#efeff4;
+			}
+			.orderTitle{width:100%;height:34px;padding:0px 15px;line-height:34px;font-size:14px;color:#000000b5;}
+			.deleteicon{float:right;font-size:22px;line-height:34px;display:none;}
+			.orderstatus{color:#009688c4;float:right;margin-right:10px;}
+			.nametitle  .namevalue{color:#282828;}
+			.oedercenter{padding:0px 15px 15px 15px;background: #fafafa;}	
+			.iconbox{border-radius:5px;margin:10px 0px;height:75px;color:#fff;font-size:40px;line-height:75px;text-align:center;}
+			.shhlbox{background-color:#4cd964;}
+			.jjphbox{background-color:#41b296;}
+			.jpplbox{background-color:#007aff;}			  
+			.ordermessage{padding-left:10px !important;}
+			.orderbuttom{padding:0px 15px;width:100%;height:34px;line-height:34px;color:#000000b5;}
+			.ordermoney{float:right;line-height:34px;font-size:17px;font-weight:bold;}
+			.moneystatus{float:right;line-height:34px;font-size:14px;}
+			.serviceday{float:right;margin-right:10px;font-size:14px;}
+			.gopay2{display:none;margin-left:15px;border-radius:15px;border:1px solid #4cd964;width:90px;height:26px;margin-top:7px;float:right;color:#4cd964;font-size:15px;text-align:center;line-height:26px;}			
+			.quxiaoBtn{display:none;margin-left:15px;border-radius:15px;border:1px solid #4cd964;width:90px;height:26px;margin-top:7px;float:right;color:#4cd964;font-size:15px;text-align:center;line-height:26px;}	
+			.comment{display:none;border-radius:15px;border:1px solid #4cd964;width:90px;height:26px;margin-top:7px;float:right;color:#4cd964;font-size:15px;text-align:center;line-height:26px;}			
+			.orderbuttompay{display:none;border-top: 1px solid #cbc8c8;height:40px;padding:0px 15px;width:100%;line-height:34px;color:#000000b5;}
+			.mui-table-view-cell.mui-active{background-color:#fff;}
+		</style>
+</head>
+	<body>
+		<header class="mui-bar mui-bar-nav" style="background-color:#41b296;">			
+			<h1 class="mui-title" style="color:#fff;" >全部订单</h1>
+		</header>		
+		<div  class="mui-content" id="refreshContainer" style="height:auto;margin-bottom: 50px;">
+		<nav class="mui-bar mui-bar-tab">
+			<a class="mui-tab-item" target="_self" href="index.html">
+				<span class="mui-icon mui-icon-home"></span>
+				<span class="mui-tab-label">首页</span>
+			</a>
+			<a class="mui-tab-item mui-active" target="_self" href="javascript:void(0);">
+				<span class="mui-icon mui-icon-paperplane"></span>
+				<span class="mui-tab-label">订单</span>
+			</a>					
+			<a class="mui-tab-item" target="_self" href="info.html?initUser=0">
+				<span class="mui-icon mui-icon-person"></span>
+				<span class="mui-tab-label">我的</span>
+			</a>
+		</nav>
+			<div id="tabbar" class="mui-control-content mui-active">
+				<div class="my-info clearfix  bg-white txt-gray">
+				<div class="am-g">
+					<span class="am-u-sm-4 allOrder" style="height: 5rem;width: 25%;">
+						<a style="margin-top: 1rem;" style="margin-top: -15px;" href="allOrder.html">
+			                <img src="../images/wddnone.png" id="allorderimg" style="width: 24px;height: 24px;margin-bottom: 3px;"><br/>
+			                <span class="my-choose-name" style="color: black;font-size: 13px;">全部订单</span>
+			            </a>
+					</span>
+			    	<span class="am-u-sm-4 waitService" style="height: 5rem;width: 25%;">
+						<a style="margin-top: 1rem;" style="margin-top: -15px;"  href="allOrder.html">
+			                <img src="../images/wdfwnone.png" id="dfwimg" style="width: 24px;height: 24px;margin-bottom: 3px;"><br/>
+			                <span class="my-choose-name" style="color: black;font-size: 13px;">待服务</span>
+			            </a>
+					</span>
+			        <span class="am-u-sm-4 onService" style="height: 5rem;width: 25%;">
+						<a style="margin-top: 1rem;" style="margin-top: -15px;"  href="allOrder.html">
+			                <img src="../images/wzffwnone.png" id="zzfwimg" style="width: 24px;height: 24px;margin-bottom: 3px;"><br/>
+			                <span class="my-choose-name" style="color: black;font-size: 13px;">正在服务</span>
+						</a>
+					</span>
+					<span class="am-u-sm-4 waitComment" style="height: 5rem;width: 25%;">
+						<a style="margin-top: 1rem;" style="margin-top: -15px;"  href="allOrder.html">
+			                <img src="../images/wdpjnone.png" id="dpjimg" style="width: 24px;height: 24px;margin-bottom: 3px;"><br/>
+			                <span class="my-choose-name" style="color: black;font-size: 13px;">待评价</span>
+			            </a>
+					</span>
+				</div>
+			</div>
+			<div id="tabbar-with-contact" class="mui-collapse-content">
+			<ul id="test2" class="mui-table-view mui-table-view-striped mui-table-view-condensed">	
+				<!--
+				<div class="backdiv"></div>
+				<li class="mui-table-view-cell">
+					<div class="orderTitle">
+						<span class="nametitle">护理人姓名：</span>
+						<span class="namevalue">张小田</span>   
+						<span class="mui-icon mui-icon-trash deleteicon"></span>
+						<span class="orderstatus">正在等待服务</span>
+					</div>
+					<div class="mui-slider-cell oedercenter">
+						<div class="oa-contact-cell mui-table gopay">
+							<div class="oa-contact-avatar mui-table-cell" >
+								<div class="iconbox shhlbox">
+									护
+								</div>
+							</div>
+							<div class="oa-contact-content mui-table-cell ordermessage">
+								<div class="mui-clearfix">
+									<h5 class="oa-contact-name">服务地点：株洲中心医院骨伤科六楼1...</h5>
+								</div>
+								<div class="mui-clearfix">
+									<h5 class="oa-contact-name">服务起始时间：2018-06-05 09:30:00</h5>
+								</div>
+								<div class="mui-clearfix">
+									<h5 class="oa-contact-name">联系方式：13649598712</h5>
+								</div>
+							</div>						
+						</div>								
+					</div>
+					<div class="orderbuttom">
+						<span class="ordermoney">￥150.00</span>
+						<span class="moneystatus">待付款：</span>
+						<span class="serviceday">共三天</span>
+					</div>
+					<div class="orderbuttompay" style="display:block;">						
+						<div class="gopay2">去支付</div>
+						<div class="quxiaoBtn">取消</div>
+						<div class="comment">评论</div>						
+					</div>
+				</li>
+				-->
+			</ul>			
+		</div>
+		<div id="info"></div>
+	</div>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mui.min.js"></script>  
+<script src="../js/url.js"></script>
+<script src="../js/wechatPay.js"></script>
+<script>
+	mui.init();
+	var initUser=getUrlParam("initUser");
+	//订单页面初始化，查询微信用户的所有订单
+	if(initUser!= "0"){
+		initUser2();	
+	}else{
+		initView();
+	}
+		
+	$(".histroyback").bind("click",function(){
+	  	window.history.go(-1);
+	});
+	
+	mui(".mui-bar-tab").on('tap', '.mui-tab-item', function() {
+		var href = this.getAttribute("href");
+		location.href = href;
+	});
+	
+	var boxStr="\t\t\t<div class=\"backdiv\"></div>\n\t\t\t\t<li class=\"mui-table-view-cell\">\n\t\t\t\t\t<div class=\"orderTitle\">\n\t\t\t\t\t\t<span class=\"nametitle\">\u62A4\u7406\u4EBA\u59D3\u540D\uFF1A</span>\n\t\t\t\t\t\t<span class=\"namevalue\"></span>   \n\t\t\t\t\t\t<span class=\"mui-icon mui-icon-trash deleteicon\"></span>\n\t\t\t\t\t\t<span class=\"orderstatus\"></span>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"mui-slider-cell oedercenter\">\n\t\t\t\t\t\t<div class=\"oa-contact-cell mui-table gopay\">\n\t\t\t\t\t\t\t<div class=\"oa-contact-avatar mui-table-cell\" >\n\t\t\t\t\t\t\t\t<div class=\"iconbox\">\n\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t<div class=\"oa-contact-content mui-table-cell ordermessage\">\n\t\t\t\t\t\t\t\t<div class=\"mui-clearfix\">\n\t\t\t\t\t\t\t\t\t<h5 class=\"oa-contact-name\">\u670D\u52A1\u5730\u70B9\uFF1A<span class=\"adress\"></span></h5>\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t<div class=\"mui-clearfix\">\n\t\t\t\t\t\t\t\t\t<h5 class=\"oa-contact-name\">\u670D\u52A1\u8D77\u59CB\u65F6\u95F4\uFF1A<span class=\"starttime\"></span></h5>\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t<div class=\"mui-clearfix\">\n\t\t\t\t\t\t\t\t\t<h5 class=\"oa-contact-name\">\u670D\u52A1\u5BF9\u8C61\uFF1A<span class=\"linkmanname\"></span></h5>\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t</div>\t\t\t\t\t\t\n\t\t\t\t\t\t</div>\t\t\t\t\t\t\t\t\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"orderbuttom\">\n\t\t\t\t\t\t<span class=\"ordermoney\"></span>\n\t\t\t\t\t\t<span class=\"moneystatus\"></span>\n\t\t\t\t\t\t<span class=\"serviceday\"></span>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"orderbuttompay\"><div class=\"gopay2\" orderid=\"\">\u53BB\u652F\u4ED8</div><div class=\"quxiaoBtn\">\u53D6\u6D88\u8BA2\u5355</div><div class=\"comment\">\u8BC4\u8BBA</div>\t\n\t\t\t\t\t</div>\n\t\t\t\t</li>";
+	//$("#test2").append(boxStr);
+	//初始化订单页面方法
+	function getWechatDate(requestDate){
+		$.ajax({
+			url:SERVER_URL+"/wechatOrders/getOrdersByWechat.action",  
+			type:"post",   
+			data:requestDate,  
+			success:function(response){			
+				eachDate(response);	
+			},  
+			error:function(){  
+				
+			}
+		});
+	}
+	
+	function initView(){
+		getWechatDate("");
+		changeBk();
+		$("#allorderimg").attr("src","../images/wddcolor.png");
+		$("#allorderimg").siblings("span").css("color","#007aff");
+	}
+	
+	//查看订单详情
+	mui(".mui-content").on('tap', '.oedercenter', function(){
+		var  orderid=$(this).find(".gopay").attr("orderid");
+		location="ordersDetail.html?orderid="+orderid;
+	});
+	
+	//微信用户全部订单 
+	mui(".mui-control-content").on('tap', '.allOrder', function(){	
+		initView();
+	});
+	 
+	//微信用户等待服务订单 
+	mui(".mui-control-content").on('tap', '.waitService', function(){
+		//等待服务状态 servicestatusList 为0
+		var servicestatusList = [];
+		servicestatusList.push(0);
+		var requestDate="servicestatusList="+servicestatusList;
+		getWechatDate(requestDate);
+		changeBk();
+		$("#dfwimg").attr("src","../images/wdfwcolor.png");
+		$("#dfwimg").siblings("span").css("color","#007aff");
+	});
+	  
+	//微信用户正在服务订单
+	mui(".mui-control-content").on('tap', '.onService', function(){
+		//等待服务状态 servicestatusList 为1
+		var servicestatusList = [];
+		servicestatusList.push(1);
+		var requestDate="servicestatusList="+servicestatusList;
+		getWechatDate(requestDate);
+		changeBk();
+		$("#zzfwimg").attr("src","../images/wzffwcolor.png");
+		$("#zzfwimg").siblings("span").css("color","#007aff");
+	});
+	
+	//微信用户待评价订单
+	mui(".mui-control-content").on('tap', '.waitComment', function(){		
+		//等待评价状态 服务已经完成 servicestatusList 为2
+		var servicestatusList = [];
+		servicestatusList.push(2);
+		var requestDate="servicestatusList="+servicestatusList;
+		getWechatDate(requestDate);
+		changeBk();
+		$("#dpjimg").attr("src","../images/wdpjcolor.png");
+		$("#dpjimg").siblings("span").css("color","#007aff");
+	});
+	
+	//支付为完成的支付
+	mui(".mui-control-content").on('tap', '.gopay2', function(){	
+		var orderid=$(this).attr("orderid");
+		var payfg=$(this).hasClass("comment");
+		if(!payfg){//需要支付
+			getPay(orderid);
+		}else{//前往评论
+		
+			location="comment.html?orderid="+orderid;
+		}		
+	});
+	
+	//前往评论
+	mui(".mui-control-content").on('tap', '.comment', function(){		
+		var index = $(".comment").index(this);
+		var orderid=$(".gopay").eq(index).attr("orderid");
+		alert("orderid:"+orderid);
+		location="comment.html?orderid="+orderid;		
+	});
+	
+	//取消未支付的订单
+	mui(".mui-control-content").on('tap', '.quxiaoBtn', function(){	
+		var _this=$(this);
+		var info = document.getElementById("info");
+ 		var btnArray = ['否', '是'];
+   		mui.confirm('订单已生成，您确定要取消该订单吗？','儿来啦',btnArray,function(e){
+			if (e.index == 1){
+				var orderid=$(_this).parent(".orderbuttompay").find(".gopay2").attr("orderid");		
+				var nurseStatus=$(_this).parent(".orderbuttompay").find(".gopay2").attr("nurseStatus");//订单当前状态
+				if(nurseStatus=="0"){
+					$.ajax({  
+						url:SERVER_URL+"/wechatOrders/finishWechatOrder.action",  
+						type:"post",   
+						data:"orderid="+orderid+"&servicestatus=3",
+						success:function(response){
+							if(response=="1"){
+								location.reload();
+							}				
+						},  
+						error:function(){  
+				
+						}
+					});
+				}else{
+					mui.toast('陪护人员已接单，请联系客服取消订单',{ duration:'long', type:'div'});
+				}
+			}
+		});
+	});
+	
+	function eachDate(response){
+		$("#test2").empty();
+		if(response==""){//无返回
+			var strNoDate="<li class=\"mui-table-view-cell\" style=\"padding:15px;text-align:center;\">\u6682\u65E0\u8BA2\u5355</li>";
+			$("#test2").append(strNoDate);
+		}	
+		$.each(response, function(i, date) {			
+					$("#test2").append(boxStr);
+					//订单编号
+					var orderid=date.orders.orderid;
+					$(".gopay").eq(i).attr("orderid",orderid);
+					$(".gopay2").eq(i).attr("orderid",orderid);									
+					//服务状态 servicestatus
+					var servicestatus=(date.wechatOrders.servicestatus)*1;
+					//护工接单状态 nurseStatus
+					var nurseStatus=date.wechatOrders.nursestatus;
+					$(".gopay2").eq(i).attr("nurseStatus",nurseStatus);						
+					//订单金额
+					var orderMoney=date.orders.orderMoney;
+					var orderMoneypay=(date.orders.orderMoneypay)/100;
+					var moneycj=(orderMoney-orderMoneypay)/100;
+					moneycj=intToFloat(moneycj);
+					orderMoney=intToFloat(orderMoney/100);
+					//订单支付状态
+					var paystatus=date.wechatOrders.paystatus;									
+					//护工姓名
+					var nursename=date.nursedetail.nurserealname;
+					$(".namevalue").eq(i).text(nursename);
+					//服务地点
+					var adress=date.linkman.adress;
+					$(".adress").eq(i).text(adress);
+					//服务开始时间
+					var starttime=date.orders.orderStarttime;
+					starttime=timestampToTime(starttime);
+					$(".starttime").eq(i).text(starttime);
+					//服务对象
+					var linkmanname=date.linkman.linkmanname;
+					$(".linkmanname").eq(i).text(linkmanname);					
+					//服务时长
+					var orderDuring=date.orders.orderDuring;
+					//服务单位				
+					var servicemu=date.serviceType.servicemu;		
+					$(".serviceday").eq(i).text("共"+orderDuring+servicemu);
+					//服务类型 1为术后陪护  2为居家陪护  3为金牌陪聊
+					var serviceid=date.serviceType.serviceid;
+					if(serviceid=="1"){
+						$(".iconbox").eq(i).text("护");
+						$(".iconbox").eq(i).addClass("shhlbox");
+					}
+					if(serviceid=="2"){
+						$(".iconbox").eq(i).text("居");
+						$(".iconbox").eq(i).addClass("jjphbox");
+					}
+					if(serviceid=="3"){
+						$(".iconbox").eq(i).text("聊");
+						$(".iconbox").eq(i).addClass("jpplbox");
+					}					
+					if(nurseStatus=="0"){//等待接单
+						$(".orderstatus").eq(i).text("等待接单");
+						$(".comment").eq(i).css("display","none");//不可以评论
+					}
+					if(nurseStatus=="1"){//等待服务
+						$(".orderstatus").eq(i).text("等待服务");						
+					}
+									
+					if(servicestatus==0){//未服务状态
+						if(paystatus=="0"){//完全未支付						
+							$(".moneystatus").eq(i).text("待付款：");						
+							$(".ordermoney").eq(i).text("￥"+moneycj);	
+							$(".orderbuttompay").eq(i).css("display","block");//将支付盒子显示出来
+							$(".gopay2").eq(i).css("display","block");//将支付功能显示出来
+							$(".quxiaoBtn").eq(i).css("display","block");//将取消功能显示出来								
+						}					
+						if(paystatus=="2"){
+							$(".moneystatus").eq(i).text("已付款：");
+							$(".ordermoney").eq(i).text("￥"+orderMoney);
+							$(".orderbuttompay").eq(i).css("display","block");//将支付盒子显示出来	
+							$(".quxiaoBtn").eq(i).css("display","block");//将取消功能显示出来				
+						}
+					}					
+					if(servicestatus==1){//正在服务
+						$(".orderstatus").eq(i).text("正在服务");
+						if(paystatus=="0"){//完全未支付						
+							$(".moneystatus").eq(i).text("待付款：");						
+							$(".ordermoney").eq(i).text("￥"+moneycj);	
+							$(".orderbuttompay").eq(i).css("display","block");//将支付盒子显示出来
+							$(".gopay2").eq(i).css("display","block");//将支付功能显示出来						
+						}					
+						if(paystatus=="2"){
+							$(".moneystatus").eq(i).text("已付款：");
+							$(".ordermoney").eq(i).text("￥"+orderMoney);			
+						}							
+					}					
+					if(servicestatus==2){//服务已完成
+						$(".orderstatus").eq(i).text("服务已完成");								
+						if(paystatus=="0"){//完全未支付						
+							$(".moneystatus").eq(i).text("待付款：");						
+							$(".ordermoney").eq(i).text("￥"+moneycj);	
+							$(".orderbuttompay").eq(i).css("display","block");//将支付盒子显示出来
+							$(".gopay2").eq(i).css("display","block");//将支付功能显示出来														
+						}					
+						if(paystatus=="2"){
+							$(".moneystatus").eq(i).text("已付款：");
+							$(".ordermoney").eq(i).text("￥"+orderMoney);
+							$(".comment").eq(i).css("display","block");//可以评论
+							$(".deleteicon").eq(i).css("display","block");//可以删除
+							$(".quxiaoBtn").eq(i).css("display","none");//不可取消
+							$(".orderbuttompay").eq(i).css("display","block");			
+						}	
+					}				
+					if(servicestatus==3){//服务已取消
+						$(".orderstatus").eq(i).text("服务已取消");
+						$(".deleteicon").eq(i).css("display","block");//可以删除
+						$(".orderbuttompay").eq(i).css("display","none");//不可做任何操作					
+					}
+					if(servicestatus==5){//服务评论
+						$(".orderstatus").eq(i).text("服务已评价");
+						$(".deleteicon").eq(i).css("display","block");//可以删除
+						$(".orderbuttompay").eq(i).css("display","none");//不可做任何操作					
+					}					
+				});	
+	}
+	
+	//将数字转为带两位小数的数字类型
+	function intToFloat(val){  
+        return new Number(val).toFixed(2); 
+    }
+	
+	//订单状态调试
+	function changeBk(){ 
+		$("#allorderimg").attr("src","../images/wddnone.png");
+		$("#dfwimg").attr("src","../images/wdfwnone.png");
+		$("#zzfwimg").attr("src","../images/wzffwnone.png");
+		$("#dpjimg").attr("src","../images/wdpjnone.png");
+		$(".my-info span").css("color","#515151");
+	}
+	
+	function initUser2(){
+		$.ajax({  
+			url:SERVER_URL+"/wechat/userinit.action",  
+			type:"get",  
+			dataType:"",  
+			data:"",  
+			success:function(response){
+				if(response=="1"){//陪护人员
+					location="../nurse/ordersList.html";
+				}else{
+					initView();
+				}
+			},  
+			error:function() {  
+				//mui.toast('登陆失败',{ duration:'long', type:'div' }) 
+			}  
+		});	
+	}
+
+	//删除订单
+	mui(".mui-control-content").on('tap','.deleteicon',function(){
+		var info = document.getElementById("info");
+ 		var btnArray = ['否', '是'];
+   		mui.confirm('您确定要删除该订单吗？','儿来啦',btnArray,function(e){
+			if (e.index == 1){
+				var index = $(".deleteicon").index(this);
+				var orderid=$(".gopay").eq(index).attr("orderid");
+				$.ajax({  
+					url:SERVER_URL+"/wechatOrders/deleWechatOrder.action",  
+					type:"post",   
+					data:"orderid="+orderid,
+					success:function(response){
+						if(response=="1"){
+							location.reload();
+						}				
+					},  
+					error:function(){  
+				
+					}
+				});
+			}
+		});
+	});
+	
+	function timestampToTime(timestamp){
+        var date = new Date(timestamp);//时间戳为10位需*1000，时间戳为13位的话不需乘1000
+        Y = date.getFullYear() + '-';
+        M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
+        D = date.getDate() + ' ';
+        h = date.getHours() + ':';
+        m = date.getMinutes() + ':';
+        s = date.getSeconds();
+        return Y+M+D+h+m+s;
+    }	
+</script>				
+</body>
+</html>

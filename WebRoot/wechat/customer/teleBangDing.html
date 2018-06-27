@@ -1,0 +1,146 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>手机绑定  - 儿来啦</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=no">
+<link rel="stylesheet" type="text/css" href="../css/teleBangDing.css">
+<link href="../css/mui.min.css" rel="stylesheet"/> 
+</head>
+<body>
+	<div id="box"></div>
+	<div class="cent-box register-box" style="padding-top: 3rem;">
+		<div class="cent-box-header">
+			<h1 class="main-title hide">儿来啦</h1>
+				<!--	<h3 class="main-title2">
+				儿来啦
+				</h3>
+				-->
+				<h2 class="sub-title">爱老及老，用心服务</h2>
+		</div>
+		<div class="cont-main clearfix">
+			<div class="login form">
+				<div class="group">
+					<div class="group-ipt email">
+						<input style="margin-bottom:0px;" type="tel" name="phone" id="telePhone" class="ipt"
+							placeholder="手机号码" required>
+					</div>
+					<div class="group-ipt verify">
+						<input style="margin-bottom:0px;" type="text" name="checkcode" id="checkcode" class="ipt"
+							placeholder="输入验证码" required>
+						<button  type="button" class="code" id="codebtn">获取验证码</button>
+					</div>
+				</div>
+			</div>
+			<div class="button">
+				<button style="padding:0px;" type="button" class="login-btn register-btn" id="button">绑定</button>
+			</div>
+		</div>
+		<div class="remember clearfix" style="text-align: center;">
+			点击绑定即代表您同意 <a href="user_server_item.html">《儿来啦绑定协议》</a> </label>
+		</div>
+	</div>	 
+</body>
+ <script src="../js/jquery.min.js"></script>
+ <script src="../js/mui.min.js"></script>  
+ <script src="../js/url.js"></script>
+<script>
+	var userid=getUrlParam("userid");
+	var returnType=getUrlParam("returnType");//returnType  1:前往订单   2：前往护工注册   3：通过手机验证，前往info.html 5:护工完成信息验证
+	var miao = 60; //获取验证码等待30s后可再用,值会变
+	var Maxtime = 60;
+	//获取验证码
+ 	$("#codebtn").bind("click",function(){	
+ 	 	var telePhone=$("#telePhone").val();
+		var reg = /^[1][3,4,5,7,8][0-9]{9}$/;
+		if(telePhone==""){
+			mui.toast('抱歉，请输入手机号!',{duration:'long',type:'div'})
+			return;
+		}
+		if(!reg.test(telePhone)) {
+			mui.toast('抱歉，请输入正确的手机号!',{duration:'long',type:'div'})
+			return;
+		}
+		
+		$("#codebtn").attr("disabled", true);
+		$("#codebtn").css("backgroundColor", "gray");
+		time = setInterval(function(){
+			$("#codebtn").html(miao + "s");
+			miao = miao - 1;
+			if (miao == 0) {
+				$("#codebtn").attr("disabled", false);
+				$("#codebtn").text("获取验证码");
+				$("#codebtn").css("backgroundColor", "");
+				miao = Maxtime;
+				clearTimeout(time);
+			}
+		}, 1000);
+		
+  		$.ajax({  
+			url:SERVER_URL+"/wechatuser/sendTeleCode.action?telePhone="+telePhone,  
+			type:"post",  
+			//dataType:"json",  
+			data:"",  
+			success:function(response){
+				if(response=="1"){
+					
+				}
+				
+			},  
+			error:function(){  
+			
+			}  
+		});
+	});
+	
+	//验证验证码是否正确，假如不正确则需要用户重新输入验证码，验证码正确则进入订单生成页面
+	$("#button").bind("click",function(){
+		var telePhone=$("#telePhone").val();
+		var reg = /^(13[0-9]|15[012356789]|17[0-9]|18[0-9]|14[57])[0-9]{8}$/;
+		if (telePhone=="") {
+			mui.toast('请输入手机号!',{duration:'long',type:'div'});
+			return;
+		}
+		if (!reg.test(telePhone)) {
+			mui.toast('请输入正确的手机号!',{duration:'long',type:'div'});
+			return;
+		}
+	
+		var code=$("#checkcode").val().trim();
+		if(code==""){
+			mui.toast('请输入验证码!',{duration:'long',type:'div'});
+			return;
+		}
+		var codeLength=$("#checkcode").val().trim().length;
+		if(codeLength!=6){
+			mui.toast('请输入6位数的验证码!',{duration:'long',type:'div'});
+			return;
+		}
+					
+		$.ajax({  
+			url:SERVER_URL+"/wechatuser/regestTele.action?code="+code,  
+			type:"post",  
+			//dataType:"json",  
+			data:"",  
+			success:function(response){
+				if(response=="1"){
+					if(returnType=="1"){
+						location="orderFamily.html?userid="+userid;
+					}else if(returnType=="2"){
+						location="../nurse/editInfo_1.html";
+					}else if(returnType=="5"){
+						location="../nurse/wrteValidate.html";
+					}else{
+						location="info.html";
+					}							
+				}else{
+					mui.toast('验证码不正确!',{duration:'long',type:'div'});
+				}	
+			},  
+			error:function(){  
+			
+			}  
+		});
+	});
+</script>
+</html>

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>我创建的服务对象</title>     
+    <link href="../css/mui.min.css" rel="stylesheet"/>
+    <style>			
+			.title{
+				margin: 20px 15px 10px;
+				color: #6d6d72;
+				font-size: 15px;
+			}	
+			.oa-contact-cell.mui-table .mui-table-cell {
+				padding: 0;
+				vertical-align: middle;
+			}			
+			.oa-contact-cell {
+				position: relative;
+				margin: -11px 0;
+			}	
+			.oa-contact-avatar {
+				width: 75px;
+			}
+			.oa-contact-avatar img {
+				border-radius: 50%;
+			}
+			.oa-contact-content {
+				width: 100%;
+			}
+			.oa-contact-name {
+				margin-right: 20px;
+				color:#6a6a6a;
+			}
+			.oa-contact-name, oa-contact-position {
+				float: left;
+			}
+			.mui-btn{
+				font-size:12px;
+			}
+			h1, h2, h3, h4, h5, h6 {
+				margin-top:0px;
+				margin-bottom:0px;
+			}
+			.mui-h6, h6{
+				color: #222222;
+			}
+			.mui-h5, h5 {
+				line-height:25px;
+				color: #333;
+			}
+			.mui-table-view-cell {
+				padding: 0px 0px ;
+			}
+			.mui-table-view-cell:after{
+				background-color:#fff;
+			}
+			.box5 {
+				background-color:#fff;
+				overflow: hidden;
+				width: 100%;
+				position: fixed;
+				bottom: 0px;
+				height:50px;
+				z-index: 999;
+				text-align:center;
+			}
+			.topbox{
+				background-color:#fff;
+				height:70px;
+				padding:15px 15px 0px 15px;
+				border-bottom:1px solid #e2e2e2;
+			}
+			.topleft{
+				width:70%;
+				float:left;
+			}
+			.topright{
+				width:30%;
+				float:left;
+				text-align:right;
+				padding:12px 0px;
+			}
+			.bottombox{
+				background-color:#fff;
+				padding:10px 15px;
+				font-size:15px;
+				margin-bottom:15px;
+			}
+			.topbox img,.bottombox img{
+				width:20px;
+				height:20px;
+			}
+			.toprightimg{
+				margin-right:20px;
+			}
+			.submitSpan{
+				color:#fff;
+				float:right;
+				margin-right: -10px;
+				margin-left: -10px;
+				padding-right: 10px;
+				padding-left: 10px;
+				padding-top: 10px;
+				padding-bottom: 10px;
+				font-size:16px;
+			}			
+		</style>
+</head>
+	<body>
+		<header class="mui-bar mui-bar-nav" style="background-color:#41b296;">
+    		<span class="mui-icon mui-icon-back histroyback" style="color:#fff;"></span>			
+			<h1 class="mui-title" style="color:#fff;">我创建的服务对象</h1>
+			<span class="submitSpan" style="">确定</span>
+		</header>		
+		<div  class="mui-content" id="refreshContainer" style="height:auto;margin-bottom: 50px;">
+			<div id="tabbar" class="mui-control-content mui-active">				
+				<div id="tabbar-with-contact" class="mui-collapse-content">
+					<!--
+					<div class="topbox">
+						<div class="topleft">
+							<h5><span class="adress"></span></h5>
+							<h5><span class="name" id=""></span></h5>
+						</div>
+						<div  class="topright">
+							<img class="editLinkMan toprightimg" src="../images/editLinkMan.png" />
+							<img class="deleLinkMan" src="../images/deleLinkMan.png" />
+						</div>
+					</div>
+					<div class="bottombox">
+						<img class="status" src="../images/choosenone.png" />
+						设为默认地址
+					</div>
+					-->
+					
+					<div class="box5">
+						<span class="mui-icon mui-icon-plusempty" style="font-size:18px;line-height:50px;">新建服务对象</span>
+					</div>
+				</div>					
+			</div>
+		</div>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mui.min.js"></script>  
+<script src="../js/url.js"></script>
+<script src="../js/wechatPay.js"></script>
+<script>
+	
+	mui.init();	
+	var str="<div class=\"topbox\">\n\t\t\t\t\t\t<div class=\"topleft\">\n\t\t\t\t\t\t\t<h5><span class=\"adress\"></span></h5>\n\t\t\t\t\t\t\t<h5><span class=\"name\"></span></h5>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t\t<div  class=\"topright\">\n\t\t\t\t\t\t\t<img class=\"editLinkMan toprightimg\" src=\"../images/editLinkMan.png\" />\n\t\t\t\t\t\t\t<img class=\"deleLinkMan\" src=\"../images/deleLinkMan.png\" />\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"bottombox\">\n\t\t\t\t\t\t<img class=\"status\" src=\"../images/choosenone.png\" />\n\t\t\t\t\t\t\u8BBE\u4E3A\u9ED8\u8BA4\u5730\u5740\n\t\t\t\t\t</div>";	
+	initView();
+	var info=getUrlParam("info");//判断是否来自个人中心
+	//确定
+	mui(".mui-bar").on('tap','.submitSpan',function(){
+		if(info==null){
+			location="orderFamily.html";	
+		}else{
+			location="info.html?initUser=0";	
+		}	
+	})
+	
+	//创建联系人
+	mui(".mui-content").on('tap','.box5',function(){
+		if(info==null){
+			location="linkMan.html";
+		}else{
+			location="linkMan.html?info=1";
+		}	
+	});	
+	
+	//查看详情
+	mui(".mui-content").on('tap','.topleft',function(){
+		var index = $(".topleft").index(this);
+		var linkmanid=$(".name").eq(index).attr("linkmanid");
+		if(info==null){
+			location="linkMan.html?linkmanid="+linkmanid+"&status=0";
+		}else{
+			location="linkMan.html?linkmanid="+linkmanid+"&status=0"+"&info=1";
+		}			
+	});	
+	//进入编辑
+	mui(".mui-content").on('tap','.editLinkMan',function(){ 
+		var index = $(".editLinkMan").index(this);
+		var linkmanid=$(".name").eq(index).attr("linkmanid");
+		if(info==null){
+			location="linkMan.html?linkmanid="+linkmanid+"&status=1";
+		}else{
+			location="linkMan.html?linkmanid="+linkmanid+"&status=1"+"&info=1";
+		}		
+	});	
+	//删除
+	mui(".mui-content").on('tap','.deleLinkMan',function(){
+		var index = $(".deleLinkMan").index(this);
+		var linkmanid=$(".name").eq(index).attr("linkmanid");
+		$.ajax({  
+	 		url:SERVER_URL+"/linkMan/deleteById.action",  
+			type:"get",  
+			dataType:"",  
+			data:"linkManID="+linkmanid,  
+			success:function(response){
+				if(response=="4"){
+					mui.toast('当前联系人无法删除，请删除该联系人的订单后在删除该联系人',{ duration:'long', type:'div' });
+				}
+				setTimeout(function(){
+					location.reload();
+				}, 1000);
+				
+			},  
+			error:function(){  
+				//mui.toast('登陆失败',{ duration:'long', type:'div' }) 
+			}  
+		});	
+	});
+	
+	//设为默认地址
+	mui(".mui-content").on('tap','.bottombox',function(){
+		var index = $(".bottombox").index(this);
+		var linkmanid=$(".name").eq(index).attr("linkmanid");
+		$.ajax({  
+	 		url:SERVER_URL+"/linkMan/updateStatusByUserId.action",  
+			type:"get",  
+			dataType:"",  
+			data:"linkManID="+linkmanid,  
+			success:function(response){
+				if(response=="1"){
+					$(".status").each(function(){
+						$(this).attr("src","../images/choosenone.png");
+					});	
+					$(".status").eq(index).attr("src","../images/chooseadress.png");
+					if(info==null){
+						location="orderFamily.html";	
+					}					
+				}
+			},  
+			error:function(){  
+				//mui.toast('登陆失败',{ duration:'long', type:'div' }) 
+			}  
+		});	
+	});
+	
+	
+	function initView(){
+		$.ajax({  
+	 		url:SERVER_URL+"/linkMan/seleteAll.action",  
+			type:"get",  
+			dataType:"",  
+			data:"",  
+			success:function(response){
+				$.each(response, function(i, date) {
+					$("#tabbar-with-contact").append(str);
+					$(".adress").eq(i).text(date.adress);
+					$(".name").eq(i).text(date.linkmanname);
+					$(".name").eq(i).attr("linkmanid",date.linkmanid);
+					var status=date.status;
+					if(status=="1"){
+						$(".status").eq(i).attr("src","../images/chooseadress.png");
+					}
+				});
+			},  
+			error:function(){  
+				//mui.toast('登陆失败',{ duration:'long', type:'div' }) 
+			}  
+		});	
+	}
+</script>				
+</body>
+</html>

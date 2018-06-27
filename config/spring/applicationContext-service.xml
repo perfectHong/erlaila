@@ -1,0 +1,35 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-3.2.xsd 
+		http://www.springframework.org/schema/mvc 
+		http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd 
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-3.2.xsd 
+		http://www.springframework.org/schema/aop 
+		http://www.springframework.org/schema/aop/spring-aop-3.2.xsd 
+		http://www.springframework.org/schema/tx 
+		http://www.springframework.org/schema/tx/spring-tx-3.2.xsd ">
+		
+		<!--  <bean id="userService" class="cn.erlaile.mybatis.service.impl.UserServiceImpl"/>
+		-->
+		<bean id="adminsService" class="cn.erlaila.mybatis.service.impl.AdminsServiceImpl"/>
+		<bean id="userService" class="cn.erlaila.mybatis.service.impl.UserServiceImpl"/>
+		<bean id="logsService" class="cn.erlaila.mybatis.service.impl.LogsServiceImpl"/>
+		<bean id="ordersService" class="cn.erlaila.mybatis.service.impl.OrdersServiceImp"/>
+		<bean id="linkeManService" class="cn.erlaila.mybatis.service.impl.LinkeManServiceImp"/>
+		<bean id="nurseDetailService" class="cn.erlaila.mybatis.service.impl.NurseDetailServiceImpl"/>
+		<bean id="serviceAreaService" class="cn.erlaila.mybatis.service.impl.ServiceAreaServiceImpl"/>
+		<bean id="nurseOrdersService" class="cn.erlaila.mybatis.service.impl.NurseOrdersServiceImpl"/>
+		<bean id="serviceType" class="cn.erlaila.mybatis.service.impl.ServiceTypeServiceImpl"/>
+		<bean id="favourableService" class="cn.erlaila.mybatis.service.impl.FavourableServiceImpl"/>
+		<bean id="userfavourableService" class="cn.erlaila.mybatis.service.impl.UserfavourableIServicempl"/>
+		<bean id="wechatOrdersService" class="cn.erlaila.mybatis.service.impl.WechatOrdersServiceImpl"/>
+		<bean id="opinionService" class="cn.erlaila.mybatis.service.impl.OpinionServiceImpl"/>
+		<bean id="nurseServiceContentService" class="cn.erlaila.mybatis.service.impl.NurseServiceContentServiceImpl"/>
+		<bean id="realNameAuthenticationService" class="cn.erlaila.mybatis.service.impl.RealNameAuthenticationServiceImpl"/>
+		<bean id="commentNService" class="cn.erlaila.mybatis.service.impl.CommentNServiceImpl"/>
+	
+</beans>

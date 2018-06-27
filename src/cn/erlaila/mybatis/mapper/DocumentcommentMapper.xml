@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.erlaila.mybatis.mapper.DocumentcommentMapper" >
+  <resultMap id="BaseResultMap" type="cn.erlaila.mybatis.po.Documentcomment" >
+    <id column="commentId" property="commentid" jdbcType="INTEGER" />
+    <result column="documentId" property="documentid" jdbcType="VARCHAR" />
+    <result column="anonymous" property="anonymous" jdbcType="BIT" />
+    <result column="commentValue" property="commentvalue" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="BIT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    commentId, documentId, anonymous, commentValue, status
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from documentcomment
+    where commentId = #{commentid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from documentcomment
+    where commentId = #{commentid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.erlaila.mybatis.po.Documentcomment" >
+    insert into documentcomment (commentId, documentId, anonymous, 
+      commentValue, status)
+    values (#{commentid,jdbcType=INTEGER}, #{documentid,jdbcType=VARCHAR}, #{anonymous,jdbcType=BIT}, 
+      #{commentvalue,jdbcType=TIMESTAMP}, #{status,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.erlaila.mybatis.po.Documentcomment" >
+    insert into documentcomment
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="commentid != null" >
+        commentId,
+      </if>
+      <if test="documentid != null" >
+        documentId,
+      </if>
+      <if test="anonymous != null" >
+        anonymous,
+      </if>
+      <if test="commentvalue != null" >
+        commentValue,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="commentid != null" >
+        #{commentid,jdbcType=INTEGER},
+      </if>
+      <if test="documentid != null" >
+        #{documentid,jdbcType=VARCHAR},
+      </if>
+      <if test="anonymous != null" >
+        #{anonymous,jdbcType=BIT},
+      </if>
+      <if test="commentvalue != null" >
+        #{commentvalue,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.erlaila.mybatis.po.Documentcomment" >
+    update documentcomment
+    <set >
+      <if test="documentid != null" >
+        documentId = #{documentid,jdbcType=VARCHAR},
+      </if>
+      <if test="anonymous != null" >
+        anonymous = #{anonymous,jdbcType=BIT},
+      </if>
+      <if test="commentvalue != null" >
+        commentValue = #{commentvalue,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=BIT},
+      </if>
+    </set>
+    where commentId = #{commentid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.erlaila.mybatis.po.Documentcomment" >
+    update documentcomment
+    set documentId = #{documentid,jdbcType=VARCHAR},
+      anonymous = #{anonymous,jdbcType=BIT},
+      commentValue = #{commentvalue,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=BIT}
+    where commentId = #{commentid,jdbcType=INTEGER}
+  </update>
+</mapper>

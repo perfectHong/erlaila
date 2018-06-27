@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.erlaila.mybatis.mapper.NursedetailMapper" >
+  <resultMap id="BaseResultMap" type="cn.erlaila.mybatis.po.Nursedetail" >
+    <id column="nursedetailId" property="nursedetailid" jdbcType="INTEGER" />
+    <result column="userID" property="userid" jdbcType="INTEGER" />
+    <result column="nurseRealName" property="nurserealname" jdbcType="VARCHAR" />
+    <result column="idCardNo" property="idcardno" jdbcType="VARCHAR" />
+    <result column="adress" property="adress" jdbcType="VARCHAR" />
+    <result column="adressDetail" property="adressdetail" jdbcType="VARCHAR" />
+    <result column="height" property="height" jdbcType="VARCHAR" />
+    <result column="weight" property="weight" jdbcType="VARCHAR" />
+    <result column="blood" property="blood" jdbcType="VARCHAR" />
+    <result column="nation" property="nation" jdbcType="VARCHAR" />
+    <result column="marriage" property="marriage" jdbcType="VARCHAR" />
+    <result column="education" property="education" jdbcType="VARCHAR" />
+    <result column="begoodat" property="begoodat" jdbcType="VARCHAR" />
+    <result column="experience" property="experience" jdbcType="VARCHAR" />
+    <result column="synopsis" property="synopsis" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    nursedetailId, userID, nurseRealName, idCardNo, adress, adressDetail, height, weight, 
+    blood, nation, marriage, education, begoodat, experience, synopsis
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from nursedetail
+    where nursedetailId = #{nursedetailid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from nursedetail
+    where nursedetailId = #{nursedetailid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.erlaila.mybatis.po.Nursedetail" >
+    insert into nursedetail (nursedetailId, userID, nurseRealName, 
+      idCardNo, adress, adressDetail, 
+      height, weight, blood, 
+      nation, marriage, education, 
+      begoodat, experience, synopsis
+      )
+    values (#{nursedetailid,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{nurserealname,jdbcType=VARCHAR}, 
+      #{idcardno,jdbcType=VARCHAR}, #{adress,jdbcType=VARCHAR}, #{adressdetail,jdbcType=VARCHAR}, 
+      #{height,jdbcType=VARCHAR}, #{weight,jdbcType=VARCHAR}, #{blood,jdbcType=VARCHAR}, 
+      #{nation,jdbcType=VARCHAR}, #{marriage,jdbcType=VARCHAR}, #{education,jdbcType=VARCHAR}, 
+      #{begoodat,jdbcType=VARCHAR}, #{experience,jdbcType=VARCHAR}, #{synopsis,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.erlaila.mybatis.po.Nursedetail" >
+    insert into nursedetail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="nursedetailid != null" >
+        nursedetailId,
+      </if>
+      <if test="userid != null" >
+        userID,
+      </if>
+      <if test="nurserealname != null" >
+        nurseRealName,
+      </if>
+      <if test="idcardno != null" >
+        idCardNo,
+      </if>
+      <if test="adress != null" >
+        adress,
+      </if>
+      <if test="adressdetail != null" >
+        adressDetail,
+      </if>
+      <if test="height != null" >
+        height,
+      </if>
+      <if test="weight != null" >
+        weight,
+      </if>
+      <if test="blood != null" >
+        blood,
+      </if>
+      <if test="nation != null" >
+        nation,
+      </if>
+      <if test="marriage != null" >
+        marriage,
+      </if>
+      <if test="education != null" >
+        education,
+      </if>
+      <if test="begoodat != null" >
+        begoodat,
+      </if>
+      <if test="experience != null" >
+        experience,
+      </if>
+      <if test="synopsis != null" >
+        synopsis,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="nursedetailid != null" >
+        #{nursedetailid,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="nurserealname != null" >
+        #{nurserealname,jdbcType=VARCHAR},
+      </if>
+      <if test="idcardno != null" >
+        #{idcardno,jdbcType=VARCHAR},
+      </if>
+      <if test="adress != null" >
+        #{adress,jdbcType=VARCHAR},
+      </if>
+      <if test="adressdetail != null" >
+        #{adressdetail,jdbcType=VARCHAR},
+      </if>
+      <if test="height != null" >
+        #{height,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null" >
+        #{weight,jdbcType=VARCHAR},
+      </if>
+      <if test="blood != null" >
+        #{blood,jdbcType=VARCHAR},
+      </if>
+      <if test="nation != null" >
+        #{nation,jdbcType=VARCHAR},
+      </if>
+      <if test="marriage != null" >
+        #{marriage,jdbcType=VARCHAR},
+      </if>
+      <if test="education != null" >
+        #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="begoodat != null" >
+        #{begoodat,jdbcType=VARCHAR},
+      </if>
+      <if test="experience != null" >
+        #{experience,jdbcType=VARCHAR},
+      </if>
+      <if test="synopsis != null" >
+        #{synopsis,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.erlaila.mybatis.po.Nursedetail" >
+    update nursedetail
+    <set >
+      <if test="userid != null" >
+        userID = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="nurserealname != null" >
+        nurseRealName = #{nurserealname,jdbcType=VARCHAR},
+      </if>
+      <if test="idcardno != null" >
+        idCardNo = #{idcardno,jdbcType=VARCHAR},
+      </if>
+      <if test="adress != null" >
+        adress = #{adress,jdbcType=VARCHAR},
+      </if>
+      <if test="adressdetail != null" >
+        adressDetail = #{adressdetail,jdbcType=VARCHAR},
+      </if>
+      <if test="height != null" >
+        height = #{height,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null" >
+        weight = #{weight,jdbcType=VARCHAR},
+      </if>
+      <if test="blood != null" >
+        blood = #{blood,jdbcType=VARCHAR},
+      </if>
+      <if test="nation != null" >
+        nation = #{nation,jdbcType=VARCHAR},
+      </if>
+      <if test="marriage != null" >
+        marriage = #{marriage,jdbcType=VARCHAR},
+      </if>
+      <if test="education != null" >
+        education = #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="begoodat != null" >
+        begoodat = #{begoodat,jdbcType=VARCHAR},
+      </if>
+      <if test="experience != null" >
+        experience = #{experience,jdbcType=VARCHAR},
+      </if>
+      <if test="synopsis != null" >
+        synopsis = #{synopsis,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where nursedetailId = #{nursedetailid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.erlaila.mybatis.po.Nursedetail" >
+    update nursedetail
+    set userID = #{userid,jdbcType=INTEGER},
+      nurseRealName = #{nurserealname,jdbcType=VARCHAR},
+      idCardNo = #{idcardno,jdbcType=VARCHAR},
+      adress = #{adress,jdbcType=VARCHAR},
+      adressDetail = #{adressdetail,jdbcType=VARCHAR},
+      height = #{height,jdbcType=VARCHAR},
+      weight = #{weight,jdbcType=VARCHAR},
+      blood = #{blood,jdbcType=VARCHAR},
+      nation = #{nation,jdbcType=VARCHAR},
+      marriage = #{marriage,jdbcType=VARCHAR},
+      education = #{education,jdbcType=VARCHAR},
+      begoodat = #{begoodat,jdbcType=VARCHAR},
+      experience = #{experience,jdbcType=VARCHAR},
+      synopsis = #{synopsis,jdbcType=VARCHAR}
+    where nursedetailId = #{nursedetailid,jdbcType=INTEGER}
+  </update>
+</mapper>

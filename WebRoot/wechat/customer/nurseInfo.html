@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>陪护人员详细信息</title>  		
+    <link href="../css/mui.min.css" rel="stylesheet"/>
+    <style>			
+			.title{
+				margin: 20px 15px 10px;
+				color: #6d6d72;
+				font-size: 15px;
+			}
+			
+			.oa-contact-cell.mui-table .mui-table-cell {
+				padding: 11px 0;
+				vertical-align: middle;
+			}
+			
+			.oa-contact-cell {
+				position: relative;
+				margin: -11px 0;
+			}
+	
+			.oa-contact-avatar {
+				width: 75px;
+			}
+			.oa-contact-avatar img {
+				border-radius: 50%;
+			}
+			.oa-contact-content {
+				width: 100%;
+			}
+			.oa-contact-name, oa-contact-position {
+				float: left;
+			}
+			.mui-h5, h5{
+				font-size:13px;
+			}
+			.mui-btn{
+				font-size:12px;
+			}
+			
+			/*自定义样式*/
+			.baseinfo span{font-size:14px;line-height:30px;}
+			.usernameh5{color:#333;font-weight:bold;}
+			.sexh5{float: left;padding-right:9px;}
+			.ageh5{float: left;padding:0 9px;border-left: 1px solid #cdc6c6;border-right: 1px solid #cdc6c6;}
+			.cityh5{float: left;padding:0 9px;}
+			.begoodatp{line-height: 25px;}
+			.servicescope{margin-top: 10px;padding-top: 10px;}
+			.servicescopeh5{color:black;margin-top:7px;}
+			.servicescopeitem{background-color:white;padding:4px;font-size:13px;color: #4cd964;border: 1px solid #4cd964;}
+			.servicescopemore{float:right;}
+			.servicescopemore a{font-size: 13px;color: black;}
+			.servicescopemore span{color: black;font-size: 13px;}
+			.loader{text-align:center;height:42px;font-size:13px;color:#007aff;line-height:42px;}
+			.ortheritems{margin-top:5px;margin-left:72px;display:none;}
+			.begoodat{font-size:13px;line-height:13px;}
+			.synopsis{font-size:13px;line-height:13px;}
+			.baseinfotop{background-color:#36bc9b;}
+			.box5 {
+				background-color:#fff;
+				overflow: hidden;
+				padding-left: 10px;
+				width: 100%;
+				position: fixed;
+				bottom: 0px;
+				z-index: 999;
+				height: 50px;
+				font-size:20px;
+			}
+			.yuyuebtn{float: right;
+				height: 49px;
+				width: 120px;
+				font-size: 17px;
+				border-radius: 0px;
+			}
+			.comtenttel{color:#333;}
+			.comtent{color:#333;line-height:20px;}
+			.topbox{color:#fff;}
+			.topbox span{color:#fff;padding:0px 10px;display:block;}
+			.topbox h5,h6{float:left;}
+			.topbox img{margin:0 7px;}
+			.age{border-left:1px solid #fff;border-right:1px solid #fff;}
+			.afterclear:after{background-color:transparent;}
+			.mui-h6, h6{font-size:13px;}
+		</style>
+</head>
+	<body>
+		
+		<header class="mui-bar mui-bar-nav" style="">
+			<span class="mui-icon mui-icon-back histroyback" style="color:#4cd964;"></span>									
+			<h1 class="mui-title" style="" id="nurseDetailId">详情</h1>
+			<span class="mui-icon mui-icon-home gohome" style="color:#4cd964;float:right;"></span>
+		</header>
+		<div  class="mui-content"  style="margin-bottom:50px;">	
+			<div id="tabbar-with-contact" class="mui-collapse-content">
+				<ul class="mui-table-view mui-table-view-striped mui-table-view-condensed">
+					
+					<li class="mui-table-view-cell baseinfotop afterclear">	
+						<div class="oa-contact-cell mui-table">
+							<div class="oa-contact-avatar mui-table-cell">
+								<input type="hidden" value="" class="userid" />
+								<img src="" class="usericon" width="75px" height="75px" />
+							</div>
+							<div class="oa-contact-content mui-table-cell">
+								<div class="mui-clearfix topbox" style="padding-left: 30px;">
+									<h5 class="oa-contact-position mui-h5"><span class="username" id="realname" style="font-size: 18px;color:#fff;"></span></h5>
+									<h5 class="oa-contact-name" style="border:1px solid #fff;margin-left:10px;border-radius:5px;;font-size:10px;padding:4px 8px 2px 8px;color:#fff;">已实名</h5>
+									<h5 class="oa-contact-name" style="border:1px solid #fff;margin-left:10px;border-radius:5px;;font-size:10px;padding:4px 8px 2px 8px;color:#fff;">推荐</h5>				
+									<!--
+									<img src="../images/renzhengblock.png" width="20px" height="20px" />
+									<img src="../images/tuijianblock.png" width="22px" height="22px" />
+									-->
+								</div>
+								<div class="mui-clearfix topbox" style="padding:10px 0px 0px 30px;">
+									<h6 class="oa-contact-position mui-h6"><span class="sex"></span></h6>
+									<h6 class="oa-contact-position mui-h6"><span class="age"></span></h6>
+									<h6 class="oa-contact-position mui-h6"><span class="city"></span></h6>										
+								</div>
+							</div>							
+						</div>	
+					</li>
+					
+					<li class="mui-table-view-cell">
+					<div class="mui-slider-cell">
+						<div class="oa-contact-cell mui-table">
+							<div class="oa-contact-avatar mui-table-cell">
+								<h5 class="oa-contact-name usernameh5">基本信息</h5>
+							</div>	
+							<div class="oa-contact-content mui-table-cell baseinfo">
+								<span>身高：<span id="height"></span>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;体重：<span id="weight"></span></span><br>
+								<span>民族：<span id="nation"></span>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;学历：<span id="education"></span></span><br>
+								<span>婚姻状况：<span id="marriage"></span>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;行业经验：<span id="experience"></span></span><br>
+							</div>											
+						</div>	
+					</div>
+					</li>
+					
+					<li class="mui-table-view-cell">
+					<div class="mui-slider-cell">
+						<div class="oa-contact-cell mui-table">
+							<div class="oa-contact-avatar mui-table-cell">
+								<h5 class="oa-contact-name usernameh5">服务范围</h5>
+							</div>
+							<div class="oa-contact-content mui-table-cell baseinfo">
+								<div class="mui-clearfix" id="serviceContent">
+								
+								</div>
+							</div>							
+						</div>	
+					</div>
+					</li>
+					
+					<!--
+					<li class="mui-table-view-cell">
+					<div class="mui-slider-cell">
+						<div class="oa-contact-cell mui-table">
+							<div class="oa-contact-avatar mui-table-cell">
+								<h5 class="oa-contact-name usernameh5">擅长</h5>
+							</div>
+							<div class="oa-contact-content mui-table-cell">
+								<div class="mui-clearfix">
+									<span id="begoodat" class="begoodat">
+									</span>
+								</div>
+							</div>							
+						</div>	
+					</div>
+					</li>
+					-->
+					
+					<li class="mui-table-view-cell afterclear">
+					<div class="mui-slider-cell">
+						<div class="oa-contact-cell mui-table">
+							<div class="oa-contact-avatar mui-table-cell">
+								<h5 class="oa-contact-name usernameh5">自我简介</h5>
+							</div>
+							<div class="oa-contact-content mui-table-cell">
+								<div class="mui-clearfix">
+									<span id="synopsis" class="synopsis">
+										设计的覅圣诞节覅多少积分的时机放电时间飞鸟时代覅哦对司法的身份
+									</span>
+								</div>
+							</div>							
+						</div>	
+					</div>
+					</li>
+							
+					<li class="mui-table-view-cell afterclear" style="background-color:#efeff4;padding:6px 15px;">
+					<div class="mui-slider-cell">
+						<div class="oa-contact-cell mui-table">
+							<div class="oa-contact-avatar mui-table-cell">
+								<h5 class="oa-contact-name usernameh5">平台评价</h5>
+							</div>
+							<div class="oa-contact-content mui-table-cell baseinfo">
+								<div class="servicescopemore" style="">
+									<a class="copeitemmore">更多<span class="mui-icon mui-icon-arrowright"></span></a>
+								</div>							
+							</div>							
+						</div>		
+					</div>
+					</li>
+					
+					<div id="commentid">
+					<!--
+					<li class="mui-table-view-cell">
+					<div class="mui-slider-cell">
+						<div class="oa-contact-cell mui-table">							
+							<div class="mui-clearfix">
+								<h5 class="oa-contact-name "><span class="comtenttel">13647096349</span></h5>
+								<h5 class="oa-contact-name " style="float:right;"><span class="comtentdate">2018.04.13 10:05:42</span></h5>
+								<h5 class="oa-contact-name "><span class="comtent">用心服务，热爱老人家，很细心，让老人家很满意</span></h5>
+							</div>														
+						</div>	
+					</div>
+					</li>-->
+					</div>
+						
+	
+				</ul>			
+			<div class="box5">
+				<span style="float:left;line-height:50px;font-size:17px;color:#36bc9b;font-weight:bold;"><span id="nurseNameValue">护理员：</span><span class="nursename" style="color:#333;font-weight:400;"></span></span>
+				<button type="button" class="mui-btn mui-btn-success yuyuebtn" style="border-radius:0px;">确认预约</button>
+			</div>
+		</div>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mui.min.js"></script>  
+<script src="../js/url.js"></script>	
+<script>
+	mui.init();
+	getMessDate();
+	getCommentByNId();		
+	//返回上一页
+	$(".histroyback").bind("click",function(){
+  		window.history.go(-1);
+	});
+	//获取评论
+	function getCommentByNId(){
+		//获取护工的id 
+		var userid=getUrlParam("userid");
+		var commentStr="<li class=\"mui-table-view-cell\">\n\t<div class=\"mui-slider-cell\">\n\t\t<div class=\"oa-contact-cell mui-table\">\t\t\t\t\t\t\t\n\t\t\t<div class=\"mui-clearfix\">\n\t\t\t\t<h5 class=\"oa-contact-name \"><span class=\"comtenttel\"></span></h5>\n\t\t\t\t<h5 class=\"oa-contact-name \" style=\"float:right;display:block;;\"><span class=\"comtentdate\"></span></h5></br>\n\t\t\t\t<h5 class=\"oa-contact-name \"><span class=\"comtent\"></span></h5>\n\t\t\t</div>\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t</div>\t\n\t</div>\n</li>";		
+		$.ajax({  
+	 		url:SERVER_URL+"/commentN/selectCommentNByNurse.action?nurseId="+userid,  
+			type:"post",  
+			//dataType:"json",  
+			data:"",  
+			success:function(response){
+				$(response).each(function (index,data){				
+					if(index<2){	
+						$("#commentid").append(commentStr);
+						$(".comtenttel").eq(index).text(data.comtenttel);
+						$(".comtentdate").eq(index).text(data.comtentdate);
+						$(".comtent").eq(index).text(data.commentvalue);
+					}
+				})													          
+			},  
+			error:function(){  
+		
+			}  
+		});
+	}
+	 
+	function getMessDate(){
+	   var servicetype="";
+		$.ajax({  
+	 		url:SERVER_URL+"/nurse/getTypeId.action",  
+			type:"post",  
+			//dataType:"json",  
+			data:"",  
+			success:function(response){
+				servicetype=response;
+				if(response=="1"){
+					$("#nurseDetailId").text("医院陪护师（护工）详情");
+					$("#nurseNameValue").text("医院陪护师:");		
+				}else if(response=="2"){
+					$("#nurseDetailId").text("居家护理师详情");
+					$("#nurseNameValue").text("居家护理师:");
+				}else{
+					$("#nurseDetailId").text("金牌陪聊师详情");
+					$("#nurseNameValue").text("金牌陪聊师:");
+				}
+			},  
+			error:function(){  
+		
+			}  
+		});
+			
+		//获取护工的id 
+		var userid=getUrlParam("userid");
+		$.ajax({  
+	 		url:SERVER_URL+"/wechatuser/seleteuserByUserid.action?userId="+userid,  
+			type:"post",  
+			//dataType:"json",  
+			data:"",  
+			success:function(response){
+				$(response).each(function (index,data){	
+						var userid=data.userid;
+						var nurserealname=data.nursedetail.nurserealname;
+						var experience=data.nursedetail.experience;
+						//var begoodat=data.nursedetail.begoodat;
+						var height=data.nursedetail.height;
+						var weight=data.nursedetail.weight;
+						var nation=data.nursedetail.nation;
+						var marriage=data.nursedetail.marriage;
+						var education=data.nursedetail.education;
+						var sex=data.sex;
+						if(sex){
+							sex="男";
+						}else{
+							sex="女";
+						}
+						var age=data.userage;
+						var city=data.city;
+						var synopsis=data.nursedetail.synopsis;
+						var usericon=data.usericon;						
+						$(".nursename").text(nurserealname);
+						$("#height").text(height+"cm");
+						$("#weight").text(weight+"kg");
+						$("#nation").text(nation);
+						$("#education").text(education);
+						$("#marriage").text(marriage);
+						$("#experience").text(experience);
+						$("#realname").text(nurserealname);
+						$(".usericon").attr("src",usericon);
+						//$("#begoodat").text(begoodat);
+						$("#synopsis").text(synopsis);
+						$(".age").text(age+"岁");
+						$(".city").text(city);
+						$(".sex").text(sex);
+						var items=data.contentList;
+						var item="";	
+						$.each(items, function(i, info){
+							if(servicetype==info.serviceid){
+								item=item+'<div  class=\"mui-btn mui-btn-primary servicescopeitem\"  style=\"margin-left: 5px; \">'+info.servicename+'</div>'				
+								//alert((i+1)%3==0)
+								//if((i+1)%3==0){item=item+'</br>';}
+							}
+						}) 
+						$("#serviceContent").append(item);							
+				});					          
+			},  
+			error:function(){  
+		
+			}  
+		});
+	}
+	
+	mui(".mui-content").on('tap','.servicescopemore',function(){ 
+		//获取护工的id 
+		var userid=getUrlParam("userid");
+		location="commentDetail.html?nurseId="+userid;		
+	})
+	
+	mui(".mui-content").on('tap','.yuyuebtn',function(){ 
+		//获取护工的id 
+		var userid=getUrlParam("userid");
+		//首先判断用户是否通过电话验证
+		 $.ajax({  
+	 		url:SERVER_URL+"/wechatuser/validateTel.action?userId="+userid,  
+			type:"post",  
+			//dataType:"json",  
+			data:"",  
+			success:function(response){
+				if(response=="false"){
+					mui.toast('未通过短信验证！',{ duration:'long', type:'div' }); 
+					location="teleBangDing.html?userid="+userid+"&returnType=1";
+				}else{
+					location="orderFamily.html?userid="+userid;		
+				}
+			},  
+			error:function(){  
+	
+			}  
+		});
+	})
+	
+	$(".gohome").bind("click",function(){
+  		location="index.html";
+	});
+</script>		
+</body>
+</html>

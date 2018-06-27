@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>申请资料填写(2/3)</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="../css/app.css"/>
+		<style>
+			.title{
+				margin: 20px 15px 10px;
+				color: #6d6d72;
+				font-size: 15px;
+			}
+			.item{	
+				line-height: 50px;
+				border-bottom: solid 1px #bbb;
+			}
+			.mui-input-row{
+				height:47px;
+			}
+			.mui-input-row label~input, .mui-input-row label~textarea{
+				height:47px;
+				padding: 9px 25px;
+				text-align:right;
+				font-size: 15px;
+				color: #9c9996;
+			}
+			.mui-input-row label{
+				padding: 14px 25px;
+			}
+			.mui-table-view{
+				margin-top:15px;
+			}
+			.mui-input-row select{
+				height:47px;
+				direction: rtl;
+				padding:11px 25px;
+			}
+			.nextBtn{
+				font-size:17px;
+				width:90%;
+				margin:20px 5%;
+				background-color:#549ff1;
+				border:1px solid #549ff1;
+				border-radius:25px;
+			}
+		</style>
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav" style="color:white;background-color: #549ff1;">
+			<span class="mui-icon mui-icon-back histroyback"></span>
+			<h1 class="mui-title" style="color:white;">申请资料填写(2/3)</h1>
+		</header>
+		<div class="mui-content">
+			<form id="form1">
+			
+			<!--
+			<ul class="mui-table-view">
+				<div class="mui-input-row item">
+					<label>地址</label>
+					<input name="nursedetail.adress" id="adress" type="text" placeholder="请选择您所在小区或大厦">
+				</div>
+			</ul>
+
+			<ul class="mui-table-view">
+				<div class="mui-input-row item">
+					<label style="width:45%;">详细地址</label>
+					<input style="width:55%;" name="nursedetail.adressdetail" id="adressdetail" type="text" placeholder="请填写详细地址">
+				</div>
+			</ul>
+			-->
+			
+			<ul class="mui-table-view">
+				<div class="mui-input-row item">
+					<label style="width:45%;">我的服务区域</label>
+					<input style="width:55%;" name="" validate="0" class="servicearea" id="servicearea" type="button" style="background-color:#fff;" value="请选择服务区域&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;>">		
+				</div>
+			</ul> 
+
+			<ul class="mui-table-view">				
+				<div class="mui-input-row item">
+					<label style="width:45%;">我的服务项目</label>
+					<input style="width:55%;" name=""  validate="0" class="servicecontent" id="servicecontent" type="button" style="background-color:#fff;" value="请选择服务项目&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;>">		
+				</div>
+			</ul>
+
+			<ul class="mui-table-view">
+				<div class="mui-input-row item">
+					<label style="width:45%;">从业经验</label>
+					<select style="width:55%;" name="nursedetail.marriage">
+							<option value="1年">1年</option>
+							<option value="2年">2年</option>
+							<option value="3年及以上">3年及以上</option>
+					</select>
+				</div>
+			</ul>
+			
+			<ul class="mui-table-view" style="height:100px;">
+				<div class="mui-input-row item" style="height:100px;">
+					<label style="width:35%;padding:14px 0px 14px 25px;">工作擅长</label>
+					<textarea style="width:65%;height:100px;padding:5px 25px 0px 0px;" name="nursedetail.begoodat"  id="experience" type="text" placeholder="请填写您擅长什么服务（选填）"></textarea>
+				</div>
+			</ul>
+			
+			<ul class="mui-table-view" style="height:100px;">
+				<div class="mui-input-row item" style="height:100px;">
+					<label style="width:35%;padding:14px 0px 14px 25px;">自我简介</label>
+					<textarea style="width:65%;height:100px;padding:5px 25px 0px 0px;" id="synopsis" name="nursedetail.synopsis"  id="experience" type="text" placeholder="请填写您的简介"></textarea>
+				</div>
+			</ul>
+
+			<button type="button" class="mui-btn mui-btn-primary mui-btn-block nextBtn" style="background-color:#549ff1">下一步</button>
+			
+			</form>
+		</div>
+</body>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/url.js"></script>	
+<script src="../js/mui.min.js"></script>
+<script>
+	initView();
+	function initView(){
+		$.ajax({ 
+			url:SERVER_URL+"/nurse/initUserMess2.action",  
+			type:"post",  
+			//dataType:"json",  
+			data:$("#form1").serialize(),  
+			success:function(response){
+				$("#adress").val(response.nursedetail.adress);
+				$("#adressdetail").val(response.nursedetail.adressdetail);
+				$("#experience").val(response.nursedetail.experience);
+				//服务区域
+				var serviceareaVal=response.areaListString;
+				var serviceareaStr="";		
+				$(serviceareaVal).each(function(index,date){
+					$("#servicearea").attr("validate","1");
+					if(index==0){
+						serviceareaStr=serviceareaStr+date;
+					}else{
+						serviceareaStr=serviceareaStr+";"+date;
+					}
+				});
+				//服务内容
+				var servicecontentVal=response.contentListString;
+				var servicecontentStr="";
+				$(servicecontentVal).each(function(index,date){				
+					$("#servicecontent").attr("validate","1");
+					if(index==0){
+						servicecontentStr=servicecontentStr+date;
+					}else{
+						servicecontentStr=servicecontentStr+";"+date;
+					}
+					
+				});
+				if(serviceareaVal!=""){
+					$("#servicearea").val(serviceareaStr);
+				}
+				if(servicecontentVal!=""){
+					$("#servicecontent").val(servicecontentStr);
+				}
+				
+			},  
+			error:function(){  
+			
+			}
+		});
+	}
+	
+		mui(".mui-content").on('tap', '.nextBtn', function() {
+			//数据校验
+			//服务区域校验
+			var areavalidate=$("#servicearea").attr("validate");
+			if(areavalidate=="0"){
+				mui.toast('请选择您的服务区域!',{duration:'long',type:'div'});
+				return false;
+			}
+			//服务项目校验
+			var contentvalidate=$("#servicecontent").attr("validate");
+			if(contentvalidate=="0"){
+				mui.toast('请选择您的服务项目!',{duration:'long',type:'div'});
+				return false;
+			}
+			//自我简介 synopsis
+			var synopsis=$("#synopsis").val().trim();
+			if(synopsis==""){
+				mui.toast('请填写您的自我简介!',{duration:'long',type:'div'});
+				return false;
+			}			
+			//ajax上传服务器session数据
+			$.ajax({ 
+				url:SERVER_URL+"/nurse/getUserMess2.action",  
+				type:"post",  
+				//dataType:"json",  
+				data:$("#form1").serialize(),  
+				success:function(response){
+					if(response=="1"){
+						location.href = "editInfo_3.html";
+					}
+				},  
+				error:function(){  
+				
+				}
+			});
+		});
+			
+	$(".servicecontent").click(function(){
+		$.ajax({ 
+			url:SERVER_URL+"/nurse/getUserMess2.action",  
+			type:"post",  
+			//dataType:"json",  
+			data:$("#form1").serialize(),  
+			success:function(response){
+				if(response=="1"){
+					location.href = "servicecontent.html";
+				}
+			},  
+			error:function(){  
+			
+			}
+		});
+	});
+	
+	$(".servicearea").click(function(){
+		$.ajax({ 
+			url:SERVER_URL+"/nurse/getUserMess2.action",  
+			type:"post",  
+			//dataType:"json",  
+			data:$("#form1").serialize(),  
+			success:function(response){
+				if(response=="1"){
+					location.href = "servicearea.html";
+				}
+			},  
+			error:function(){  
+			
+			}
+		});
+	});
+</script>
+</html>

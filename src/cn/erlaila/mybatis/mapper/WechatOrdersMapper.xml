@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.erlaila.mybatis.mapper.WechatOrdersMapper" >
+  <resultMap id="BaseResultMap" type="cn.erlaila.mybatis.po.WechatOrders" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="orderId" property="orderid" jdbcType="INTEGER" />
+    <result column="wechat_id" property="wechatId" jdbcType="INTEGER" />
+    <result column="money" property="money" jdbcType="INTEGER" />
+    <result column="moneypay" property="moneypay" jdbcType="INTEGER" />
+    <result column="paystatus" property="paystatus" jdbcType="INTEGER" />
+    <result column="nurseStatus" property="nursestatus" jdbcType="INTEGER" />
+    <result column="servicestatus" property="servicestatus" jdbcType="INTEGER" />
+    <result column="deleStatus" property="delestatus" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, orderId, wechat_id, money, moneypay, paystatus, nurseStatus, servicestatus, deleStatus
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from wechatorders
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from wechatorders
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.erlaila.mybatis.po.WechatOrders" >
+    insert into wechatorders (id, orderId, wechat_id, 
+      money, moneypay, paystatus, 
+      nurseStatus, servicestatus, deleStatus
+      )
+    values (#{id,jdbcType=INTEGER}, #{orderid,jdbcType=INTEGER}, #{wechatId,jdbcType=INTEGER}, 
+      #{money,jdbcType=INTEGER}, #{moneypay,jdbcType=INTEGER}, #{paystatus,jdbcType=INTEGER}, 
+      #{nursestatus,jdbcType=INTEGER}, #{servicestatus,jdbcType=INTEGER}, #{delestatus,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.erlaila.mybatis.po.WechatOrders" >
+    insert into wechatorders
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="orderid != null" >
+        orderId,
+      </if>
+      <if test="wechatId != null" >
+        wechat_id,
+      </if>
+      <if test="money != null" >
+        money,
+      </if>
+      <if test="moneypay != null" >
+        moneypay,
+      </if>
+      <if test="paystatus != null" >
+        paystatus,
+      </if>
+      <if test="nursestatus != null" >
+        nurseStatus,
+      </if>
+      <if test="servicestatus != null" >
+        servicestatus,
+      </if>
+      <if test="delestatus != null" >
+        deleStatus,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="orderid != null" >
+        #{orderid,jdbcType=INTEGER},
+      </if>
+      <if test="wechatId != null" >
+        #{wechatId,jdbcType=INTEGER},
+      </if>
+      <if test="money != null" >
+        #{money,jdbcType=INTEGER},
+      </if>
+      <if test="moneypay != null" >
+        #{moneypay,jdbcType=INTEGER},
+      </if>
+      <if test="paystatus != null" >
+        #{paystatus,jdbcType=INTEGER},
+      </if>
+      <if test="nursestatus != null" >
+        #{nursestatus,jdbcType=INTEGER},
+      </if>
+      <if test="servicestatus != null" >
+        #{servicestatus,jdbcType=INTEGER},
+      </if>
+      <if test="delestatus != null" >
+        #{delestatus,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.erlaila.mybatis.po.WechatOrders" >
+    update wechatorders
+    <set >
+      <if test="orderid != null" >
+        orderId = #{orderid,jdbcType=INTEGER},
+      </if>
+      <if test="wechatId != null" >
+        wechat_id = #{wechatId,jdbcType=INTEGER},
+      </if>
+      <if test="money != null" >
+        money = #{money,jdbcType=INTEGER},
+      </if>
+      <if test="moneypay != null" >
+        moneypay = #{moneypay,jdbcType=INTEGER},
+      </if>
+      <if test="paystatus != null" >
+        paystatus = #{paystatus,jdbcType=INTEGER},
+      </if>
+      <if test="nursestatus != null" >
+        nurseStatus = #{nursestatus,jdbcType=INTEGER},
+      </if>
+      <if test="servicestatus != null" >
+        servicestatus = #{servicestatus,jdbcType=INTEGER},
+      </if>
+      <if test="delestatus != null" >
+        deleStatus = #{delestatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.erlaila.mybatis.po.WechatOrders" >
+    update wechatorders
+    set orderId = #{orderid,jdbcType=INTEGER},
+      wechat_id = #{wechatId,jdbcType=INTEGER},
+      money = #{money,jdbcType=INTEGER},
+      moneypay = #{moneypay,jdbcType=INTEGER},
+      paystatus = #{paystatus,jdbcType=INTEGER},
+      nurseStatus = #{nursestatus,jdbcType=INTEGER},
+      servicestatus = #{servicestatus,jdbcType=INTEGER},
+      deleStatus = #{delestatus,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

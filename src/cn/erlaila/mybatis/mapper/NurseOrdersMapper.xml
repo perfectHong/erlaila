@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.erlaila.mybatis.mapper.NurseOrdersMapper" >
+  <resultMap id="BaseResultMap" type="cn.erlaila.mybatis.po.NurseOrders" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="orderId" property="orderid" jdbcType="INTEGER" />
+    <result column="nurse_id" property="nurseId" jdbcType="INTEGER" />
+    <result column="money" property="money" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="money_status" property="moneyStatus" jdbcType="INTEGER" />
+    <result column="deleStatus" property="delestatus" jdbcType="INTEGER" />
+    <result column="COMMENT" property="comment" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, orderId, nurse_id, money, status, money_status, deleStatus, COMMENT
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from nurseorders
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from nurseorders
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.erlaila.mybatis.po.NurseOrders" >
+    insert into nurseorders (id, orderId, nurse_id, 
+      money, status, money_status, 
+      deleStatus, COMMENT)
+    values (#{id,jdbcType=INTEGER}, #{orderid,jdbcType=INTEGER}, #{nurseId,jdbcType=INTEGER}, 
+      #{money,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{moneyStatus,jdbcType=INTEGER}, 
+      #{delestatus,jdbcType=INTEGER}, #{comment,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.erlaila.mybatis.po.NurseOrders" >
+    insert into nurseorders
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="orderid != null" >
+        orderId,
+      </if>
+      <if test="nurseId != null" >
+        nurse_id,
+      </if>
+      <if test="money != null" >
+        money,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="moneyStatus != null" >
+        money_status,
+      </if>
+      <if test="delestatus != null" >
+        deleStatus,
+      </if>
+      <if test="comment != null" >
+        COMMENT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="orderid != null" >
+        #{orderid,jdbcType=INTEGER},
+      </if>
+      <if test="nurseId != null" >
+        #{nurseId,jdbcType=INTEGER},
+      </if>
+      <if test="money != null" >
+        #{money,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="moneyStatus != null" >
+        #{moneyStatus,jdbcType=INTEGER},
+      </if>
+      <if test="delestatus != null" >
+        #{delestatus,jdbcType=INTEGER},
+      </if>
+      <if test="comment != null" >
+        #{comment,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.erlaila.mybatis.po.NurseOrders" >
+    update nurseorders
+    <set >
+      <if test="orderid != null" >
+        orderId = #{orderid,jdbcType=INTEGER},
+      </if>
+      <if test="nurseId != null" >
+        nurse_id = #{nurseId,jdbcType=INTEGER},
+      </if>
+      <if test="money != null" >
+        money = #{money,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="moneyStatus != null" >
+        money_status = #{moneyStatus,jdbcType=INTEGER},
+      </if>
+      <if test="delestatus != null" >
+        deleStatus = #{delestatus,jdbcType=INTEGER},
+      </if>
+      <if test="comment != null" >
+        COMMENT = #{comment,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.erlaila.mybatis.po.NurseOrders" >
+    update nurseorders
+    set orderId = #{orderid,jdbcType=INTEGER},
+      nurse_id = #{nurseId,jdbcType=INTEGER},
+      money = #{money,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      money_status = #{moneyStatus,jdbcType=INTEGER},
+      deleStatus = #{delestatus,jdbcType=INTEGER},
+      COMMENT = #{comment,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

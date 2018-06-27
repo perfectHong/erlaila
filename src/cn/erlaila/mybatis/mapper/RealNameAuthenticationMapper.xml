@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.erlaila.mybatis.mapper.RealNameAuthenticationMapper" >
+  <resultMap id="BaseResultMap" type="cn.erlaila.mybatis.po.RealNameAuthentication" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="userId" property="userid" jdbcType="INTEGER" />
+    <result column="face" property="face" jdbcType="VARCHAR" />
+    <result column="opposite" property="opposite" jdbcType="VARCHAR" />
+    <result column="papers" property="papers" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, userId, face, opposite, papers
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from realnameauthentication
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from realnameauthentication
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.erlaila.mybatis.po.RealNameAuthentication" >
+    insert into realnameauthentication (id, userId, face, 
+      opposite, papers)
+    values (#{id,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{face,jdbcType=VARCHAR}, 
+      #{opposite,jdbcType=VARCHAR}, #{papers,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.erlaila.mybatis.po.RealNameAuthentication" >
+    insert into realnameauthentication
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userid != null" >
+        userId,
+      </if>
+      <if test="face != null" >
+        face,
+      </if>
+      <if test="opposite != null" >
+        opposite,
+      </if>
+      <if test="papers != null" >
+        papers,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="face != null" >
+        #{face,jdbcType=VARCHAR},
+      </if>
+      <if test="opposite != null" >
+        #{opposite,jdbcType=VARCHAR},
+      </if>
+      <if test="papers != null" >
+        #{papers,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.erlaila.mybatis.po.RealNameAuthentication" >
+    update realnameauthentication
+    <set >
+      <if test="userid != null" >
+        userId = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="face != null" >
+        face = #{face,jdbcType=VARCHAR},
+      </if>
+      <if test="opposite != null" >
+        opposite = #{opposite,jdbcType=VARCHAR},
+      </if>
+      <if test="papers != null" >
+        papers = #{papers,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.erlaila.mybatis.po.RealNameAuthentication" >
+    update realnameauthentication
+    set userId = #{userid,jdbcType=INTEGER},
+      face = #{face,jdbcType=VARCHAR},
+      opposite = #{opposite,jdbcType=VARCHAR},
+      papers = #{papers,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

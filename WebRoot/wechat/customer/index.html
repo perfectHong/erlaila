@@ -1,0 +1,187 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>儿来啦</title>
+    <link href="../css/amazeui.min.css?v=2.4" rel="stylesheet">
+	<link href="../css/global.css?v=2.4" rel="stylesheet">
+	<link href="../css/css.css?v=2.4" rel="stylesheet">
+	<link href="../css/mui.min.css" rel="stylesheet"/> 
+    <style>			
+			.title{
+				margin: 20px 15px 10px;
+				color: #6d6d72;
+				font-size: 15px;
+			}			
+			.oa-contact-cell.mui-table .mui-table-cell {
+				padding: 11px 0;
+				vertical-align: middle;
+			}			
+			.oa-contact-cell {
+				position: relative;
+				margin: -11px 0;
+			}	
+			.oa-contact-avatar {
+				width: 75px;
+			}
+			.oa-contact-avatar img {
+				border-radius: 50%;
+			}
+			.oa-contact-content {
+				width: 100%;
+			}
+			.oa-contact-name {
+				margin-right: 20px;
+			}
+			.oa-contact-name, oa-contact-position {
+				float: left;
+			}
+			.mui-grid-view.mui-grid-9 .mui-table-view-cell{
+				border-bottom:0px solid #fff;
+				border-right:0px solid #fff;
+			}
+		</style>
+</head>
+<body>
+    	<header class="mui-bar mui-bar-nav" style="background-color:#41b296;color:#fff;">			
+			<h1 class="mui-title" style="color:#fff;">儿来啦-让找护工更简单</h1>
+		</header>   
+		<div class="mui-content" style="margin-bottom: 50px;">
+			<nav class="mui-bar mui-bar-tab">
+			<a class="mui-tab-item mui-active" target="_self" href="javascript:void(0);">
+				<span class="mui-icon mui-icon-home"></span>
+				<span class="mui-tab-label">首页</span>
+			</a>
+			<a class="mui-tab-item" target="_self" href="myOrders.html?initUser=0">
+				<span class="mui-icon mui-icon-paperplane"></span>
+				<span class="mui-tab-label">订单</span>
+			</a>					
+			<a class="mui-tab-item" target="_self" href="info.html?initUser=0">
+				<span class="mui-icon mui-icon-person"></span>
+				<span class="mui-tab-label">我的</span>
+			</a>
+		</nav>
+			<!--首页-->
+			<div id="tabbar" class="mui-control-content mui-active">	
+				<!--轮播-->
+				<div class="mui-collapse-content">
+					<div class="mui-slider-item mui-slider-item-duplicate">
+						<a href="#">
+							<img src="../images/banner.jpg">
+						</a>
+					</div>
+						<!--
+							<div id="slider" class="mui-slider">
+								<div class="mui-slider-group mui-slider-loop">
+								
+									<div class="mui-slider-item mui-slider-item-duplicate">
+										<a href="#">
+											<img src="../images/banner.jpg">
+										</a>
+									</div>
+									
+									<div class="mui-slider-item">
+										<a href="#">
+											<img src="../images/banner.jpg">
+										</a>
+									</div>
+									
+									<div class="mui-slider-item">
+										<a href="#">
+											<img src="../images/banner.jpg">
+										</a>
+									</div>
+									
+									<div class="mui-slider-item">
+										<a href="#">
+											<img src="../images/banner.jpg">
+										</a>
+									</div>
+									
+									<div class="mui-slider-item">
+										<a href="#">
+											<img src="../images/banner.jpg">
+										</a>
+									</div>
+								
+									<div class="mui-slider-item mui-slider-item-duplicate">
+										<a href="#">
+											<img src="../images/banner.jpg">
+										</a>
+									</div>
+									
+								</div>
+								<div class="mui-slider-indicator">
+									<div class="mui-indicator mui-active"></div>
+									<div class="mui-indicator"></div>
+									<div class="mui-indicator"></div>
+									<div class="mui-indicator"></div>
+								</div>-->
+							</div>
+				</div>
+
+				<ul class="mui-table-view mui-grid-view mui-grid-9 center-content" style="background-color: white;">
+					<div class="mui-table-view-cell mui-media mui-col-xs-12 mui-col-sm-12" style="padding:0px;">
+						<div class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-6 serviceType" typeId="1" 
+							style="padding:10px 5px 10px 10px;float:left;">		                    
+		                     <img src="../images/yyph.png" style="width:100%;">		               
+						</div>
+						<div class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-6 serviceType"  typeId="2"
+							style="padding:10px 10px 10px 5px;">		          
+		                    <img src="../images/jjhl.png" >		              
+						</div>    
+						<div class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-6 serviceType" typeId="3"
+							style="padding:0px 10px 10px 5px;">		           
+		                    <img style="" src="../images/jppl.png" >		       
+						</div>
+					</div>
+					
+					<div class="mui-table-view-cell mui-media mui-col-xs-12 mui-col-sm-12" style="padding:0px;">
+						<div class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-6 serviceType"  typeId="4"
+							style="padding:0px 5px 10px 10px;float:left;">	          
+		                    <img src="../images/scfw.png" >		       
+						</div>    
+						<div class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-6 serviceType"  typeId="5"
+							style="padding:0px 10px 10px 5px;">		            
+		                    <img src="../images/zyzfw.png" >		            
+						</div>	
+					</div>					
+		        </ul>						
+			</div>
+			<div id="info"></div>
+		</div>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mui.min.js"></script>   
+<script src="../js/url.js"></script>
+<script>
+	mui.init();
+	initUser();	 
+	mui(".mui-bar-tab").on('tap', '.mui-tab-item', function() {
+		var href = this.getAttribute("href");
+		location.href = href;
+	});
+
+	mui(".center-content").on('tap', '.serviceType', function() {
+		var	typeId=$(this).attr("typeId");
+		if(typeId=="4" || typeId=="5"){
+			mui.toast('我们的工程师正在玩命加班中，请您稍后！',{ duration:'long', type:'div'});
+		}else{
+			$.ajax({  
+				url:SERVER_URL+"/nurse/setTypeId.action",  
+				type:"post",   
+				data:"serviceTypeId="+typeId,  
+				success:function(response){
+					if(response=="1"){
+						location.href = "findNurse.html?serviceTypeId="+typeId;
+					}
+				},  
+				error:function() {  
+		
+				}  
+			})
+		}			
+	});
+</script>
+</body>
+</html>

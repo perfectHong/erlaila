@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="../css/mui.min.css">
+		  <style>			
+			.title{
+				margin: 20px 15px 10px;
+				color: #6d6d72;
+				font-size: 15px;
+			}
+			
+			.oa-contact-cell.mui-table .mui-table-cell {
+				padding: 11px 0px 0px 0px;
+				vertical-align: middle;
+			}
+			
+			.oa-contact-cell {
+				position: relative;
+				margin: -11px 0;
+			}
+	
+			.oa-contact-avatar {
+				width: 75px;
+			}
+			.oa-contact-avatar img {
+				border-radius: 50%;
+			}
+			.oa-contact-content {
+				width: 100%;
+			}
+			.oa-contact-name, oa-contact-position {
+				float: left;
+			}
+			.mui-h5, h5{
+				font-size:15px;
+			}
+			.mui-btn{
+				font-size:12px;
+			}
+			.mui-h6, h6{
+				color:#000000;
+				font-size:14px;
+			}
+			.mui-table-view{background-color:#efeff4;}
+			.mui-table-view-cell{margin-bottom:10px;background-color:#fff;padding: 11px 15px 7px 15px;list-style: none;}
+			.mui-table-view-cell:after{background-color:#fff;}
+			/*自定义样式*/			
+			.usericon{width: 60px;height:60px;}
+			.baseinfo{border-bottom:solid 1px #c0c2c5;}
+			.baseinfo img{margin:0px 7px;}
+			.usernameh5{color:#333;font-weight:bold;}
+			.sexh5{float: left;padding:2px 15px 5px 0px;}
+			.ageh5{float: left;padding:2px 15px;border-left: 1px solid #cdc6c6;border-right: 1px solid #cdc6c6;}
+			.cityh5{float: left;padding:2px 15px;}
+			.begoodatp{line-height:23px;font-size:13px;color:#646464;}
+			.servicescope{margin-top: 10px;padding-top: 10px;}
+			.servicescopeh5{color:black;font-size: 15px;}
+			.servicescopeitem{background-color:white;padding:2px;color: #4cd964;border: 1px solid #4cd964;}
+			.servicescopemore{float:right;margin-right:20px;}
+			.servicescopemore a{font-size: 13px;color: black;}
+			.servicescopemore span{color: black;font-size: 13px;}
+			.loader{text-align:center;height:42px;font-size:13px;background-color:#fff;color:#007aff;line-height:42px;}
+			.ortheritems{margin-top:5px;margin-left:72px;display:none;}
+			.goodcomment{color:red;}
+			.nurseStatus{width:60px;height:16px;line-height:16px;background-color:#41b296;color:#fff;text-align:center;font-size:12px;border-radius:15px;}
+		</style>
+	</head>
+
+	<body>
+		<!--下拉刷新容器-->
+		<div id="pullrefresh" class="mui-content mui-scroll-wrapper">
+			<div class="mui-scroll">
+				<!--数据列表-->
+				<ul class="mui-table-view mui-table-view-chevron">
+					<!--
+					<li class="mui-table-view-cell">
+						<div class="mui-slider-cell">
+							<div class="oa-contact-cell mui-table">
+								<div class="oa-contact-avatar mui-table-cell">
+									<input type="hidden" value="10" class="userid">
+									<img src="http://erlaile.nat300.top/pic/user10/1527221758088.jpg" class="usericon">
+									<div class="nurseStatus">可预约</div>
+								</div>
+								<div class="oa-contact-content mui-table-cell baseinfo">
+									<div class="mui-clearfix">
+										<h5 class="oa-contact-name usernameh5">
+											<span class="username">林木</span>
+										</h5>
+										<h5 class="oa-contact-name" style="margin-left:10px;border-radius:5px;;font-size:10px;padding:4px 8px 2px 8px;;background:#55db6c;color:#fff;">已实名</h5>
+										<h5 class="oa-contact-name" style="margin-left:10px;border-radius:5px;;font-size:10px;padding:4px 8px 2px 8px;;background:#41b296;color:#fff;">推荐</h5>
+										
+										<img src="../images/renzheng.png" width="20px" height="20px">
+										<img src="../images/tuijian.png" width="20px" height="20px">
+										
+									</div>
+									<div class="mui-clearfix">
+										<h5 class="oa-contact-position mui-h6 sexh5">
+											<span class="sex">男</span>
+										</h5>
+										<h5 class="oa-contact-position mui-h6 ageh5">
+											<span class="age">20岁</span>
+										</h5>
+										<h5 class="oa-contact-position mui-h6 cityh5">
+											<span class="">株洲</span>
+										</h5>
+									</div>
+									<p class="oa-contact-email mui-h6 begoodatp">
+										<span class="begoodat">特殊服务</span>
+									</p>
+								</div>
+							</div>
+							<div class="servicescope">
+								<h5 class="oa-contact-name servicescopeh5">服务范围：</h5>
+							</div>
+						</div>
+					</li>
+					-->
+				</ul>
+				<div class="mui-pull-bottom-pocket mui-block mui-visibility">
+					<div class="mui-pull"><div class="mui-pull-loading mui-icon mui-spinner mui-hidden">
+					</div>
+						<div class="mui-pull-caption mui-pull-caption-nomore">
+							下拉加载更多
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mui.min.js"></script>  
+<script src="../js/url.js"></script>
+<script>
+	var dateCount = 0;//初始化数据总量
+	var count = 0;
+	var dateCount = 0;//初始化数据总量
+	var pageSize = 4;//初始化页面长度
+	getCount();
+	
+	mui.init({
+		pullRefresh: {
+		container: '#pullrefresh',
+			up: {
+				contentrefresh: '正在加载...',
+				contentnomore:'没有更多数据了',
+				callback: pullupRefresh
+			}
+		}
+	});
+		
+	function pullupRefresh() {
+		var count2 = count+1;
+		var nowNum = count2*pageSize;//当前页面显示条数		
+		var fg= nowNum>=dateCount;
+		setTimeout(function(){
+			mui('#pullrefresh').pullRefresh().endPullupToRefresh(fg); //参数为true代表没有更多数据了。
+			getData(count);	
+		}, 1000);
+	}
+			
+	function getCount(){
+		$.ajax({  
+			url:SERVER_URL+"/nurse/selectCountByServiceId.action",  
+			type:"post",  
+			//dataType:"json",  
+			data:"",  
+			success:function(response){
+				dateCount=response*1;
+				getData(0);
+			},  
+			error:function() {  
+		
+			}  
+		})
+	}
+	
+	function getData(_count){
+		var servicetype="";
+		$.ajax({  
+	 		url:SERVER_URL+"/nurse/getTypeId.action",  
+			type:"post",  
+			//dataType:"json",  
+			data:"",  
+			success:function(response){
+				servicetype=response;
+			},  
+			error:function(){  
+		
+			}  
+		});
+		
+		var result="";
+		$.ajax({  
+	 		url:SERVER_URL+"/nurse/seleteNurseBylimt.action",  
+			type:"post",  
+			//dataType:"json",  
+			data:"count="+_count+"&pageSize="+pageSize,  
+			success:function(data){
+				$(data).each(function (index,response){	
+						//以下为图片模式
+						/*result='<li class=\"mui-table-view-cell\"><div class=\"mui-slider-cell\"><div class=\"oa-contact-cell mui-table\"><div class=\"oa-contact-avatar mui-table-cell\">'+
+			            '<input type=\"hidden\" value=\"'+response.userid+'\" class=\"userid\" /><img src=\"'+response.usericon+'\" class=\"usericon\"/><div class=\"nurseStatus\">\u53EF\u9884\u7EA6\n</div></div><div class=\"oa-contact-content mui-table-cell baseinfo\">'+
+			            '<div class=\"mui-clearfix\"><h5 class=\"oa-contact-name usernameh5\"><span class=\"username\">'+response.nursedetail.nurserealname+'</span></h5><img src=\"../images/renzheng.png\" width=\"20px\" height=\"20px\" />\n<img src=\"../images/tuijian.png\" width=\"20px\" height=\"20px\" /></div>'+
+			            '<div class=\"mui-clearfix\"><h5 class=\"oa-contact-position mui-h6 sexh5\"><span class=\"sex\">  '+response.sexString+'</span></h5>'+
+			            '<h5 class=\"oa-contact-position mui-h6 ageh5\"><span class=\"age\">'+response.userage+'\u5C81</span></h5><h5 class=\"oa-contact-position mui-h6 cityh5\"><span class=\"\">'+response.city+
+			            '</span></h5></div><p class=\"oa-contact-email mui-h6 begoodatp\"><span class=\"begoodat\">'+response.nursedetail.begoodat+'</span>'+
+			            '</p></div></div><div class=\"servicescope\"><h5 class=\"oa-contact-name servicescopeh5\">\u670D\u52A1\u8303\u56F4\uFF1A</h5>';
+						*/
+						result='<li class=\"mui-table-view-cell\"><div class=\"mui-slider-cell\"><div class=\"oa-contact-cell mui-table\"><div class=\"oa-contact-avatar mui-table-cell\">'+
+			            '<input type=\"hidden\" value=\"'+response.userid+'\" class=\"userid\" /><img src=\"'+response.usericon+'\" class=\"usericon\"/><div class=\"nurseStatus\">\u53EF\u9884\u7EA6\n</div></div><div class=\"oa-contact-content mui-table-cell baseinfo\">'+
+			            '<div class=\"mui-clearfix\"><h5 class=\"oa-contact-name usernameh5\"><span class=\"username\">'+response.nursedetail.nurserealname+'</span></h5><h5 class=\"oa-contact-name\" style=\"margin-left:10px;border-radius:5px;;font-size:10px;padding:4px 8px 2px 8px;background:#55db6c;color:#fff;\">\u5DF2\u5B9E\u540D</h5>\n\<h5 class=\"oa-contact-name\" style=\"margin-left:10px;border-radius:5px;;font-size:10px;padding:4px 8px 2px 8px;background:#41b296;color:#fff;\">\u63A8\u8350</h5>\n\t\t\t\t\t\t\t\t\t\t</div>'+
+			            '<div class=\"mui-clearfix\"><h5 class=\"oa-contact-position mui-h6 sexh5\"><span class=\"sex\">  '+response.sexString+'</span></h5>'+
+			            '<h5 class=\"oa-contact-position mui-h6 ageh5\"><span class=\"age\">'+response.userage+'\u5C81</span></h5><h5 class=\"oa-contact-position mui-h6 cityh5\"><span class=\"\">'+response.city+
+			            '</span></h5></div><p class=\"oa-contact-email mui-h6 begoodatp\"><span class=\"begoodat\">'+response.nursedetail.begoodat+'</span>'+
+			            '</p></div></div><div class=\"servicescope\"><h5 class=\"oa-contact-name servicescopeh5\">\u670D\u52A1\u8303\u56F4\uFF1A</h5>';
+						
+						var items=response.contentList;
+						var item="";
+			    		$.each(items, function(i, info){
+			    		    if(info.serviceid==servicetype){
+								item=item+'<div class=\"mui-btn mui-btn-primary servicescopeitem\"  style=\"margin-left: 5px; \">'+info.servicename+'</div>'				
+							}
+						})        
+						result=result+item+'</div></div></li>'; 
+						count = _count+1;
+						$(".mui-table-view").before(result);
+				});						            
+			},  
+			error:function() {  
+		
+			}  
+		});
+	}
+	
+	//跳转到陪护人员详情
+	mui(".mui-scroll").on('tap','.mui-table-view-cell',function(){ 	
+		var userid=$(this).find('.userid').val();//获取用户id
+		var location="nurseInfo.html?userid="+userid;
+		window.parent.location.href=location;
+	});	
+</script>
+</body>
+</html>+

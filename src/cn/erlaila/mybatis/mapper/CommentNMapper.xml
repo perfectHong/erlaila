@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.erlaila.mybatis.mapper.CommentNMapper" >
+  <resultMap id="BaseResultMap" type="cn.erlaila.mybatis.po.CommentN" >
+    <id column="commentId" property="commentid" jdbcType="INTEGER" />
+    <result column="orderId" property="orderid" jdbcType="INTEGER" />
+    <result column="userid" property="userid" jdbcType="INTEGER" />
+    <result column="nurseid" property="nurseid" jdbcType="INTEGER" />
+    <result column="anonymous" property="anonymous" jdbcType="BIT" />
+    <result column="commentDate" property="commentdate" jdbcType="TIMESTAMP" />
+    <result column="score" property="score" jdbcType="INTEGER" />
+    <result column="grade1" property="grade1" jdbcType="INTEGER" />
+    <result column="grade2" property="grade2" jdbcType="INTEGER" />
+    <result column="grade3" property="grade3" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="cn.erlaila.mybatis.po.CommentN" extends="BaseResultMap" >
+    <result column="commentValue" property="commentvalue" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    commentId, orderId, userid, nurseid, anonymous, commentDate, score, grade1, grade2, 
+    grade3, status
+  </sql>
+  <sql id="Blob_Column_List" >
+    commentValue
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from commentn
+    where commentId = #{commentid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from commentn
+    where commentId = #{commentid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.erlaila.mybatis.po.CommentN" >
+    insert into commentn (commentId, orderId, userid, 
+      nurseid, anonymous, commentDate, 
+      score, grade1, grade2, 
+      grade3, status, commentValue
+      )
+    values (#{commentid,jdbcType=INTEGER}, #{orderid,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, 
+      #{nurseid,jdbcType=INTEGER}, #{anonymous,jdbcType=BIT}, #{commentdate,jdbcType=TIMESTAMP}, 
+      #{score,jdbcType=INTEGER}, #{grade1,jdbcType=INTEGER}, #{grade2,jdbcType=INTEGER}, 
+      #{grade3,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{commentvalue,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.erlaila.mybatis.po.CommentN" >
+    insert into commentn
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="commentid != null" >
+        commentId,
+      </if>
+      <if test="orderid != null" >
+        orderId,
+      </if>
+      <if test="userid != null" >
+        userid,
+      </if>
+      <if test="nurseid != null" >
+        nurseid,
+      </if>
+      <if test="anonymous != null" >
+        anonymous,
+      </if>
+      <if test="commentdate != null" >
+        commentDate,
+      </if>
+      <if test="score != null" >
+        score,
+      </if>
+      <if test="grade1 != null" >
+        grade1,
+      </if>
+      <if test="grade2 != null" >
+        grade2,
+      </if>
+      <if test="grade3 != null" >
+        grade3,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="commentvalue != null" >
+        commentValue,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="commentid != null" >
+        #{commentid,jdbcType=INTEGER},
+      </if>
+      <if test="orderid != null" >
+        #{orderid,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="nurseid != null" >
+        #{nurseid,jdbcType=INTEGER},
+      </if>
+      <if test="anonymous != null" >
+        #{anonymous,jdbcType=BIT},
+      </if>
+      <if test="commentdate != null" >
+        #{commentdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="score != null" >
+        #{score,jdbcType=INTEGER},
+      </if>
+      <if test="grade1 != null" >
+        #{grade1,jdbcType=INTEGER},
+      </if>
+      <if test="grade2 != null" >
+        #{grade2,jdbcType=INTEGER},
+      </if>
+      <if test="grade3 != null" >
+        #{grade3,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="commentvalue != null" >
+        #{commentvalue,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.erlaila.mybatis.po.CommentN" >
+    update commentn
+    <set >
+      <if test="orderid != null" >
+        orderId = #{orderid,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        userid = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="nurseid != null" >
+        nurseid = #{nurseid,jdbcType=INTEGER},
+      </if>
+      <if test="anonymous != null" >
+        anonymous = #{anonymous,jdbcType=BIT},
+      </if>
+      <if test="commentdate != null" >
+        commentDate = #{commentdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="score != null" >
+        score = #{score,jdbcType=INTEGER},
+      </if>
+      <if test="grade1 != null" >
+        grade1 = #{grade1,jdbcType=INTEGER},
+      </if>
+      <if test="grade2 != null" >
+        grade2 = #{grade2,jdbcType=INTEGER},
+      </if>
+      <if test="grade3 != null" >
+        grade3 = #{grade3,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="commentvalue != null" >
+        commentValue = #{commentvalue,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where commentId = #{commentid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.erlaila.mybatis.po.CommentN" >
+    update commentn
+    set orderId = #{orderid,jdbcType=INTEGER},
+      userid = #{userid,jdbcType=INTEGER},
+      nurseid = #{nurseid,jdbcType=INTEGER},
+      anonymous = #{anonymous,jdbcType=BIT},
+      commentDate = #{commentdate,jdbcType=TIMESTAMP},
+      score = #{score,jdbcType=INTEGER},
+      grade1 = #{grade1,jdbcType=INTEGER},
+      grade2 = #{grade2,jdbcType=INTEGER},
+      grade3 = #{grade3,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      commentValue = #{commentvalue,jdbcType=LONGVARCHAR}
+    where commentId = #{commentid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.erlaila.mybatis.po.CommentN" >
+    update commentn
+    set orderId = #{orderid,jdbcType=INTEGER},
+      userid = #{userid,jdbcType=INTEGER},
+      nurseid = #{nurseid,jdbcType=INTEGER},
+      anonymous = #{anonymous,jdbcType=BIT},
+      commentDate = #{commentdate,jdbcType=TIMESTAMP},
+      score = #{score,jdbcType=INTEGER},
+      grade1 = #{grade1,jdbcType=INTEGER},
+      grade2 = #{grade2,jdbcType=INTEGER},
+      grade3 = #{grade3,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER}
+    where commentId = #{commentid,jdbcType=INTEGER}
+  </update>
+</mapper>

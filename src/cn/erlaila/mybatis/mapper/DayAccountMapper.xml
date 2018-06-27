@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.erlaila.mybatis.mapper.DayAccountMapper" >
+  <resultMap id="BaseResultMap" type="cn.erlaila.mybatis.po.DayAccount" >
+    <id column="dayaccountId" property="dayaccountid" jdbcType="INTEGER" />
+    <result column="num" property="num" jdbcType="INTEGER" />
+    <result column="money" property="money" jdbcType="INTEGER" />
+    <result column="timehap" property="timehap" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    dayaccountId, num, money, timehap
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from dayaccount
+    where dayaccountId = #{dayaccountid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from dayaccount
+    where dayaccountId = #{dayaccountid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.erlaila.mybatis.po.DayAccount" >
+    insert into dayaccount (dayaccountId, num, money, 
+      timehap)
+    values (#{dayaccountid,jdbcType=INTEGER}, #{num,jdbcType=INTEGER}, #{money,jdbcType=INTEGER}, 
+      #{timehap,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.erlaila.mybatis.po.DayAccount" >
+    insert into dayaccount
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="dayaccountid != null" >
+        dayaccountId,
+      </if>
+      <if test="num != null" >
+        num,
+      </if>
+      <if test="money != null" >
+        money,
+      </if>
+      <if test="timehap != null" >
+        timehap,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="dayaccountid != null" >
+        #{dayaccountid,jdbcType=INTEGER},
+      </if>
+      <if test="num != null" >
+        #{num,jdbcType=INTEGER},
+      </if>
+      <if test="money != null" >
+        #{money,jdbcType=INTEGER},
+      </if>
+      <if test="timehap != null" >
+        #{timehap,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.erlaila.mybatis.po.DayAccount" >
+    update dayaccount
+    <set >
+      <if test="num != null" >
+        num = #{num,jdbcType=INTEGER},
+      </if>
+      <if test="money != null" >
+        money = #{money,jdbcType=INTEGER},
+      </if>
+      <if test="timehap != null" >
+        timehap = #{timehap,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where dayaccountId = #{dayaccountid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.erlaila.mybatis.po.DayAccount" >
+    update dayaccount
+    set num = #{num,jdbcType=INTEGER},
+      money = #{money,jdbcType=INTEGER},
+      timehap = #{timehap,jdbcType=TIMESTAMP}
+    where dayaccountId = #{dayaccountid,jdbcType=INTEGER}
+  </update>
+</mapper>

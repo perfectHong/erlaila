@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.erlaila.mybatis.mapper.custom.AdminsMapperCustom" >
+  <resultMap id="BaseResultMap" type="cn.erlaila.mybatis.po.custom.AdminsCustom" >
+    <id column="adminId" property="adminid" jdbcType="INTEGER" />
+    <result column="adminName" property="adminname" jdbcType="VARCHAR" />
+    <result column="passWord" property="password" jdbcType="VARCHAR" />
+    <result column="realname" property="realname" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="BIT" />
+    <result column="telphon" property="telphon" jdbcType="VARCHAR" />
+    <result column="birthday" property="birthday" jdbcType="TIMESTAMP" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="commentas" property="commentas" jdbcType="VARCHAR" />
+    <result column="icon" property="icon" jdbcType="VARCHAR" />
+    <result column="adminGroup" property="admingroup" jdbcType="INTEGER" />
+  </resultMap>
+  
+    <select id="selectAll" resultMap="BaseResultMap" parameterType="cn.erlaila.mybatis.po.custom.AdminsCustom" >
+		select * from admins
+ 	</select>
+ 	
+ 	<select id="selectByLimit" resultMap="BaseResultMap" parameterType="cn.erlaila.mybatis.po.vo.AdminsVo" >
+		SELECT * FROM admins WHERE adminid > (#{pageNum}*10) LIMIT #{limitcount}
+ 	</select>
+ 	
+ 	<select id="selectCount" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM admins
+ 	</select>
+ 	
+ 	<update id="updateIcon"  parameterType="cn.erlaila.mybatis.po.Admins">
+ 		update admins set icon=#{icon} where adminId=#{adminid}
+ 	</update>
+ 	
+ 	<select id="selectAdminsPsw" resultType="cn.erlaila.mybatis.po.Admins" parameterType="cn.erlaila.mybatis.po.Admins">
+ 		select * from admins where telphon=#{telphon} and password=#{password}
+ 	</select>
+ 	
+ 	<update id="updatePSW"  parameterType="cn.erlaila.mybatis.po.vo.AdminsVo">
+ 		update admins set password=#{newpsw} where adminid=#{adminid}
+ 	</update>
+ 	
+ 	<insert id="insertAdmin" parameterType="cn.erlaila.mybatis.po.Admins">
+ 		insert into admins (adminName, passWord, realname, sex, telphon, birthday, email, commentas) 
+ 		values (#{adminname},#{password},#{realname},#{sex},#{telphon},#{birthday},#{email},#{commentas})
+ 	</insert>
+</mapper>

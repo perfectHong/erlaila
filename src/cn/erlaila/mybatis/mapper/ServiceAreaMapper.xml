@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.erlaila.mybatis.mapper.ServiceAreaMapper" >
+  <resultMap id="BaseResultMap" type="cn.erlaila.mybatis.po.ServiceArea" >
+    <id column="serviceAreaid" property="serviceareaid" jdbcType="INTEGER" />
+    <result column="serviceAreaname" property="serviceareaname" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    serviceAreaid, serviceAreaname
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from servicearea
+    where serviceAreaid = #{serviceareaid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from servicearea
+    where serviceAreaid = #{serviceareaid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.erlaila.mybatis.po.ServiceArea" >
+    insert into servicearea (serviceAreaid, serviceAreaname)
+    values (#{serviceareaid,jdbcType=INTEGER}, #{serviceareaname,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.erlaila.mybatis.po.ServiceArea" >
+    insert into servicearea
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="serviceareaid != null" >
+        serviceAreaid,
+      </if>
+      <if test="serviceareaname != null" >
+        serviceAreaname,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="serviceareaid != null" >
+        #{serviceareaid,jdbcType=INTEGER},
+      </if>
+      <if test="serviceareaname != null" >
+        #{serviceareaname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.erlaila.mybatis.po.ServiceArea" >
+    update servicearea
+    <set >
+      <if test="serviceareaname != null" >
+        serviceAreaname = #{serviceareaname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where serviceAreaid = #{serviceareaid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.erlaila.mybatis.po.ServiceArea" >
+    update servicearea
+    set serviceAreaname = #{serviceareaname,jdbcType=VARCHAR}
+    where serviceAreaid = #{serviceareaid,jdbcType=INTEGER}
+  </update>
+</mapper>

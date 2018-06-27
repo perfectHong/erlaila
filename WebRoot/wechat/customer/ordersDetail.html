@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="format-detection" content="telephone=no">
+	<meta http-equiv="x-rim-auto-match" content="none">
+    <title>订单详情</title>    	  
+    <link href="../css/mui.min.css" rel="stylesheet"/>
+    <style>			
+			.title{
+				margin: 20px 15px 10px;
+				color: #6d6d72;
+				font-size: 15px;
+			}
+			
+			.lispanleft{
+				color:#000000;
+				float:left;
+				line-height:24px;
+			}
+			.lispanright{
+				color:#646666;
+				float:right;
+			}
+			.box5 {
+				width: 100%;
+				background-color:#ffffff;
+				overflow: hidden;
+				text-align:center;
+				position: fixed;	
+				bottom: 0px;
+				z-index: 999;
+				
+			}
+			.noOrder{		
+				background-color:#f10215;
+				border: 1px solid #f10215;
+			}
+			.mui-btn{
+				border-radius:0px;
+				height: 49px;
+    			width: 120px;
+				float:right;
+				padding:10px 20px;
+				font-size:18px;
+			}
+			.noOrder.active{
+				background-color:#f10215;
+				border: 1px solid #f10215;
+			}
+			
+			.mui-content>.mui-table-view:first-child{
+				margin-top:0px;
+			}
+			.mui-icon{
+				width:8%;
+			}
+			.hideitem{
+				display:none;
+			}
+			.ordercreatemoney{
+				color:#ff9d4f;
+			}
+			.quxiaoBtn,.deteOrder{
+				background-color:#f10215;
+				border: 1px solid #f10215;
+			}
+		</style>
+</head>
+<body>
+	<header class="mui-bar mui-bar-nav" style="background-color:#41b296;color:#fff;">
+		<span class="mui-icon mui-icon-back histroyback" style="color:#fff;"></span>									
+		<h1 class="mui-title" style="color:#fff;">订单详细信息</h1>
+	</header>
+	
+	<div class="mui-content" style="margin-bottom: 47px;">
+		<ul class="mui-table-view">
+			<li class="mui-table-view-cell">
+				<span class="mui-icon mui-icon-star lispanleft"></span>
+				<span class="lispanleft">服务项目</span>
+				<span class="lispanright fwlxvalue"></span>
+			</li>
+			
+			<li class="mui-table-view-cell">
+				<span class="mui-icon mui-icon-person lispanleft"></span>
+				<span class="lispanleft">护理员</span>
+				<span class="lispanright hlyvalue"></span>
+			</li>
+			
+			<li class="mui-table-view-cell hideitem">
+				<span class="mui-icon mui-icon-phone lispanleft"></span>
+				<span class="lispanleft">护理员联系电话</span>
+				<a href="" class="lispanright lxdhvalue" style="color:#41b296;"></a>
+			</li>
+			
+			<li class="mui-table-view-cell">
+				<span class="mui-icon mui-icon-paperclip lispanleft"></span>
+				<span class="lispanleft">服务开始时间</span>
+				<span class="lispanright orderStarttime"></span>
+			</li>
+						
+			<li class="mui-table-view-cell">
+				<span class="mui-icon mui-icon-compose lispanleft"></span>
+				<span class="lispanleft">服务时长</span>
+				<span class="lispanright servicelong"></span>
+			</li>
+			
+			<li class="mui-table-view-cell">
+				<span class="mui-icon mui-icon-paperclip lispanleft" style=""></span>
+				<span class="lispanleft">护理员性别</span>
+				<span class="lispanright sex"></span>
+			</li>
+			
+			<li class="mui-table-view-cell">
+				<span class="mui-icon mui-icon-paperclip lispanleft" style="width:8%;"></span>
+				<span class="lispanleft" >护理员年龄</span>
+				<span class="lispanright age"></span>
+			</li>
+			
+			<li class="mui-table-view-cell">
+				<span class="mui-icon mui-icon-location lispanleft" style="width:8%;"></span>
+				<span class="lispanleft" style="width:40%;">被护理人</span>
+				<span class="lispanright beihuliren" style="width:52%;text-align:right;"></span>
+			</li>
+			
+			<li class="mui-table-view-cell">
+				<span class="mui-icon mui-icon-location lispanleft" style="width:8%;"></span>
+				<span class="lispanleft" style="width:40%;">服务详细地点</span>
+				<span class="lispanright adressdetail" style="width:52%;text-align:right;"></span>
+			</li>
+			
+			<li class="mui-table-view-cell">
+				<span class="mui-icon mui-icon-starhalf lispanleft"></span>
+				<span class="lispanleft">本单金额</span>
+				<span class="lispanright ordercreatemoney"></span>
+			</li>
+		</ul>
+		
+		<div class="box5">		
+			<button type="button" class="mui-btn mui-btn-success gopay" style="display:none;">去支付</button>
+			<button type="button" class="mui-btn mui-btn-success finishService" style="display:none;">服务完成</button>
+			<button type="button" class="mui-btn mui-btn-success comment" style="display:none;">马上评价</button>
+			<button type="button" class="mui-btn mui-btn-success quxiaoBtn" style="display:none;">取消订单</button>
+			<button type="button" class="mui-btn mui-btn-success deteOrder" style="display:none;">删除订单</button>
+		</div>
+		<div id="info"></div>
+	</div>
+</body>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mui.min.js"></script>  
+<script src="../js/url.js"></script>
+<script src="../js/wechatPay.js"></script>	
+<script>
+	//获取订单id
+	var orderid=getUrlParam("orderid");
+	getOrderDateById(orderid);
+	
+	var paystatus="";
+	var orderDuring="";
+	var servicemu="";
+	var orderStarttime="";
+	var nurseStatus="";//护理员接单状态
+	
+	function getOrderDateById(_orderid){
+		$.ajax({  
+			url:SERVER_URL+"/wechatOrders/getOrdersByWechat.action",  
+			type:"post",   
+			data:"orderid="+_orderid,
+			success:function(response){
+				$.each(response, function(i, date){//当前只有一个订单详情返回
+					//护理员接单状态
+					nurseStatus=date.wechatOrders.nursestatus;
+					//支付状态
+					paystatus=date.wechatOrders.paystatus;
+					//服务类型
+					$(".fwlxvalue").text(date.serviceType.servicename);
+					//护理员 hlyvalue
+					$(".hlyvalue").text(date.nursedetail.nurserealname);
+					//护理员联系电话 lxdhvalue
+					$(".lxdhvalue").text(date.user.telephone);
+					//订单开始时间  orderStarttime
+					orderStarttime=date.orders.orderStarttime;
+					var orderStarttimeStr=timestampToTime(orderStarttime);
+					$(".orderStarttime").text(orderStarttimeStr);
+					//服务时长 servicelong
+					orderDuring=date.orders.orderDuring;
+					servicemu=date.serviceType.servicemu;	
+					$(".servicelong").text(orderDuring+servicemu);
+					//护理员性别 nursedetail 
+					var sex=date.user.sex;
+					if(sex=="true"){
+						sex="男";
+					}else{
+						sex="女";
+					}
+					$(".sex").text(sex);
+					//护理员年龄 userage
+					$(".age").text(date.user.userage+"岁");
+					//被护理人 beihuliren
+					$(".beihuliren").text(date.linkman.linkmanname);
+					//服务详细地点 adressdetail
+					$(".adressdetail").text(date.linkman.adressdetail);
+					//订单金额 ordercreatemoney
+					var  price=date.serviceType.price;					
+					var money=price*orderDuring;
+					money=intToFloat(money/100);
+					$(".ordercreatemoney").text("￥"+money);					
+					//服务状态
+					var	servicestatus=date.wechatOrders.servicestatus;					
+					initBtn(servicestatus);
+				});
+			},  
+			error:function(){  
+				
+			}
+		});
+	}
+	
+	//初始化按钮
+	function initBtn(showFg){	
+		if(showFg=="0"){//未服务		
+			if(paystatus=="2"){
+				$(".quxiaoBtn").css("display","block");//取消订单
+			}else{
+				$(".quxiaoBtn").css("display","block");//取消订单
+				$(".gopay").css("display","block");//去支付
+			}
+		}
+		else if(showFg=="1"){//正在服务			
+			if(paystatus=="2"){
+				$(".finishService").css("display","block");
+			}else{
+				$(".finishService").css("display","block");
+				$(".gopay").css("display","block");//去支付
+			}
+		}
+		else if(showFg=="2"){//完成
+			if(paystatus=="2"){
+				$(".comment").css("display","block");				
+				$(".deteOrder").css("display","block");
+			}else{
+				$(".comment").css("display","block");
+				$(".gopay").css("display","block");//去支付
+			}
+		}else{//已取消
+			$(".deteOrder").css("display","block");
+		}	
+	}
+	
+	//服务完成
+	mui(".mui-content").on('tap','.finishService',function(){ 
+		var hour=1000*60*60;
+		var timestamp = Date.parse(new Date());
+		//判断是否符合服务完成的条件 时间是否达到要求
+		if(servicemu=="天"){
+			var timelong=orderDuring*24*hour;
+			var timeend=orderStarttime*1+timelong;
+			if(timestamp<timeend){
+				timeend=timestampToTime(timeend);
+				mui.toast('服务预计结束时间'+timeend,{duration:'long',type:'div'});
+				return false;
+			}			
+		}else{
+			var timelong=orderDuring*hour;
+			var timeend=orderStarttime*1+timelong;			
+			if(timestamp<timeend){
+				timeend=timestampToTime(timeend);
+				mui.toast('服务预计结束时间'+timeend,{duration:'long',type:'div'});
+				return false;
+			}		
+		}
+		$.ajax({  
+			url:SERVER_URL+"/wechatOrders/finishWechatOrder.action",  
+			type:"post",   
+			data:"orderid="+orderid+"&servicestatus=2",
+			success:function(response){
+				if(response=="1"){
+					location.reload();
+				}				
+			},  
+			error:function(){  
+				
+			}
+		});
+	})
+	
+	//删除订单
+	mui(".mui-content").on('tap','.deteOrder',function(){
+		var info = document.getElementById("info");
+ 		var btnArray = ['否', '是'];
+   		mui.confirm('您确定要删除该订单吗？','儿来啦',btnArray,function(e){
+			$.ajax({  
+				url:SERVER_URL+"/wechatOrders/deleWechatOrder.action",  
+				type:"post",   
+				data:"orderid="+orderid,
+				success:function(response){
+					if(response=="1"){
+						location="myOrders.html";
+					}				
+				},  
+				error:function(){  
+				
+				}
+			});
+		})
+	})
+	
+	//取消未支付的订单
+	mui(".mui-content").on('tap', '.quxiaoBtn', function(){	
+		var info = document.getElementById("info");
+ 		var btnArray = ['否', '是'];
+   		mui.confirm('订单已生成，您确定要取消该订单吗？','儿来啦',btnArray,function(e){
+       	 	if (e.index == 1){
+				if(nurseStatus=="0"){
+					$.ajax({  
+						url:SERVER_URL+"/wechatOrders/finishWechatOrder.action",  
+						type:"post",   
+						data:"orderid="+orderid+"&servicestatus=3",
+						success:function(response){
+							if(response=="1"){
+								location.reload();
+							}				
+						},  
+						error:function(){  
+				
+						}
+					});
+				}else{
+					mui.toast('陪护人员已接单，请联系客服取消订单',{ duration:'long', type:'div'});
+				}
+       		 } 
+    	})	
+	});
+	
+	
+	//前往评价
+	mui(".mui-content").on('tap','.comment',function(){ 
+		location="comment.html?orderid="+orderid;
+	})
+	
+	//支付为完成的支付
+	mui(".mui-content").on('tap', '.gopay', function(){			
+			getPay(orderid);	
+	});
+	
+	//将时间戳转为String数据类型时间
+	function timestampToTime(timestamp){
+        var date = new Date(timestamp);//时间戳为10位需*1000，时间戳为13位的话不需乘1000
+        Y = date.getFullYear() + '-';
+        M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
+        D = date.getDate() + ' ';
+        h = date.getHours() + ':';
+        m = date.getMinutes() + ':';
+        s = date.getSeconds();
+        return Y+M+D+h+m+s;
+    }
+    
+    //将数字转为带两位小数的数字类型
+	function intToFloat(val){  
+   	 	return new Number(val).toFixed(2); 
+	}
+</script>
+</html>

@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="format-detection" content="telephone=no">
+	<meta http-equiv="x-rim-auto-match" content="none">
+    <title>服务对象</title>    	  
+    <link href="../css/mui.min.css" rel="stylesheet"/>
+    <style>			
+			.title{
+				margin: 20px 15px 10px;
+				color: #6d6d72;
+				font-size: 15px;
+			}
+			
+			.lispanleft{
+				color:#000000;
+				float:left;
+				line-height:24px;
+			}
+			.lispanright{
+				color:#434343;
+				float:right;
+			}
+			.box5 {
+				width: 100%;
+				height:44px;
+				font-size:17px;
+				line-height:44px;
+				color:#fff;
+				background-color:#41b296;
+				overflow: hidden;
+				text-align:center;
+				position: fixed;	
+				bottom: 0px;
+				z-index: 999;
+				
+			}
+			.noOrder{		
+				background-color:#f10215;
+				border: 1px solid #f10215;
+			}
+			.mui-btn{
+				border-radius:0px;
+				float:right;
+				padding:10px 20px;
+				font-size:18px;
+			}
+			.noOrder.active{
+				background-color:#f10215;
+				border: 1px solid #f10215;
+			}
+			
+			.mui-content>.mui-table-view:first-child{
+				margin-top:0px;
+			}
+			.mui-icon{
+				width:8%;
+			}
+			.hideitem{
+				display:block;
+			}
+			input{
+				text-align:right;
+			}
+			.mui-table-view-cell{
+				padding:5px 15px;
+			}
+			.age:after,adressdetailli:after{background-color: #fff;}
+		</style>
+</head>
+<body>
+	<header class="mui-bar mui-bar-nav" style="background-color:#41b296;color:#fff;">
+		<span class="mui-icon mui-icon-back histroyback" style="color:#fff;"></span>									
+		<h1 class="mui-title" style="color:#fff;">创建服务对象</h1>
+	</header>
+	
+	<div class="mui-content" style="margin-bottom: 47px;">
+		<form id="linkManForm">
+		<ul class="mui-table-view">
+			<li class="mui-table-view-cell ">
+				<div class="mui-input-row">
+					<input type="hidden" name="linkmanid" id="linkmanid" value="0" />
+					<label>姓名</label>
+					<input type="text" id="linkmanname" name="linkmanname" style="direction: rtl;" class="" placeholder="请输入姓名" />
+				</div>
+			</li>
+			
+			<li class="mui-table-view-cell ">
+				<div class="mui-input-row">
+					<label>性别</label>
+					
+					<select id="linkmansex" name="linkmansex" style="padding-right:25px;direction: rtl;">	
+         				<option value="true">男</option> 
+						<option value="false">女</option>							
+					</select>
+				</div>
+			</li>
+			
+			
+			<li class="mui-table-view-cell age">
+				<div class="mui-input-row">
+					<label>年龄</label>
+					<input type="text" id="linkmanage" style="direction: rtl;" name="linkmanage" class="" placeholder="请输入年龄" />
+				</div>
+			</li>
+			
+			<div style="width:100%;height:15px;background-color:#efeff4;"></div>
+			
+			<li class="mui-table-view-cell ">
+				<div class="mui-input-row">
+					<label>联系电话</label>
+					<input type="text" id="linkmantelephone" style="direction: rtl;" name="linkmantelephone" class="" placeholder="请输入联系电话" />
+				</div>
+			</li>
+			
+			<li class="mui-table-view-cell ">
+				<div class="mui-input-row">
+					<label>服务地址</label>
+					<input type="text" id="adress" style="direction: rtl;" name="adress" class="" placeholder="请输入服务地址" />
+				</div>
+			</li>
+			
+			<li class="mui-table-view-cell adressdetailli">
+				<div class="mui-input-row">
+					<label>详细地址</label>
+					<input type="text" id="adressdetail" style="direction: rtl;" name="adressdetail" class="" placeholder="请输入详细地址" />
+				</div>
+			</li>
+		</ul>
+		</form>
+		<div class="box5 surelinkMan">
+			保存
+		</div>
+	</div>
+</body>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mui.min.js"></script>  
+<script src="../js/url.js"></script>	
+<script>
+	var status=getUrlParam("status");//status 为订单编辑状态  0为查看详情  1为编辑状态
+	var info=getUrlParam("info");
+	if(status=="0"){
+		var linkmanid=getUrlParam("linkmanid");
+		initForm(linkmanid);
+		dingForm();
+	}
+	if(status=="1"){
+		var linkmanid=getUrlParam("linkmanid");
+		initForm(linkmanid);
+	}
+	
+	//添加联系人
+	$(".surelinkMan").click(function(){
+		var linkmanname=$("#linkmanname").val();
+		if(linkmanname==""){
+			mui.toast('被护理人不能为空',{ duration:'long', type:'div'}); 
+  			$("#linkmanname").focus();
+  			return false;
+		}
+		var linkmanage=$("#linkmanage").val();
+		if(linkmanage==""){
+			mui.toast('请输入年龄',{ duration:'long', type:'div'});
+  			$("#linkmanage").focus();
+  			return false;
+		}
+		if(isNaN(linkmanage)){
+			mui.toast('请在年龄输入框输入数字',{ duration:'long', type:'div'});
+  			$("#linkmanage").focus();
+  			return false;
+		}
+		var linkmantelephone=$("#linkmantelephone").val();	
+		if (!linkmantelephone.match(/^[1][3,4,5,7,8][0-9]{9}$/)) { 
+			mui.toast('手机号码格式不正确！',{ duration:'long', type:'div'});
+			$("#linkmantelephone").focus(); 
+			return false; 
+		}
+		var linkmansex=$("#linkmansex").val();
+		var adress=$("#adress").val();
+		if(adress==""){
+			mui.toast('地址不能为空',{ duration:'long', type:'div'});
+  			$("#adress").focus();
+  			return false;
+		}
+		var adressdetail=$("#adressdetail").val();
+		var url=SERVER_URL+"/linkMan/insertLinkMan.action";
+		if(status=="1"){
+			url=SERVER_URL+"/linkMan/updateLinkManById.action";
+		}
+		$.ajax({  
+			url:url,  
+			type:"post",   
+			data:$("#linkManForm").serialize(), 
+			success:function(response){
+				if(response=="1"){
+					//$("#linkmanli").removeClass("mui-active");
+					//$("#beihuliren").text("被护理人："+linkmanname);
+					if(info==null){
+						location="linkManList.html";
+					}else{
+						location="linkManList.html?info=1";
+					}				
+				}
+			},  
+			error:function(){  
+		
+			}
+		});	
+	});
+	
+	function initForm(_linkmanid){
+		$.ajax({  
+			url:SERVER_URL+"/linkMan/selectLinkManById.action",  
+			type:"post",   
+			data:"linkManID="+_linkmanid, 
+			success:function(response){
+				$("#linkmanid").val(response.linkmanid);
+				$("#linkmanname").val(response.linkmanname);
+				var sexFg=response.linkmansex;
+				//alert("sexFg:"+sexFg);
+				//$("#linkmansex").val(sexFg);//alert("sexFg:"+sexFg);
+				//$("#linkmansex option[value='true']").attr("selected", true); 
+				$("#linkmansex option[value='"+sexFg+"']").attr("selected", "selected"); 
+				//$("#linkmansex option[value='"+sexFg+"']").attr("selected",true)
+				//$("#linkmansex").val(response.linkmansex);
+				$("#linkmanage").val(response.linkmanage);
+				$("#linkmantelephone").val(response.linkmantelephone);
+				$("#adress").val(response.adress);
+				$("#adressdetail").val(response.adressdetail);
+			},  
+			error:function(){  
+		
+			}
+		});
+	}
+	
+	function dingForm(){
+		$("#linkmanname").attr("disabled","true");
+		$("#linkmansex").attr("disabled","true");
+		$("#linkmanage").attr("disabled","true");
+		$("#linkmantelephone").attr("disabled","true");
+		$("#adress").attr("disabled","true");
+		$("#adressdetail").attr("disabled","true");
+		$(".box5").css("display","none");
+	}
+</script>
+</html>

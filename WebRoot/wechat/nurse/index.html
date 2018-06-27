@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>个人中心</title> 
+    <link href="../css/amazeui.min.css?v=2.4" rel="stylesheet">
+	<link href="../css/global.css?v=2.4" rel="stylesheet">
+	<link href="../css/css.css?v=2.4" rel="stylesheet">
+    <link href="../css/mui.min.css" rel="stylesheet"/>
+    <style>			
+			.title{
+				margin: 20px 15px 10px;
+				color: #6d6d72;
+				font-size: 15px;
+			}
+			
+			.oa-contact-cell.mui-table .mui-table-cell {
+				padding: 11px 0;
+				vertical-align: middle;
+			}
+			
+			.oa-contact-cell {
+				position: relative;
+				margin: -11px 0;
+			}
+	
+			.oa-contact-avatar {
+				width: 75px;
+			}
+			.oa-contact-avatar img {
+				border-radius: 50%;
+			}
+			.oa-contact-content {
+				width: 100%;
+			}
+			.oa-contact-name {
+				margin-right: 20px;
+			}
+			.oa-contact-name, oa-contact-position {
+				float: left;
+			}
+			.mui-table-view-cell>a:not(.mui-btn){
+				text-align:left;
+			 	margin: -11px 25px;
+			}
+			.my-choose li a{
+				width:90%;
+				line-height:25px;
+			}
+			.mui-table-view-cell:after{
+				background-color:#fff;
+			}
+			.mui-icon{
+				padding-right:5px;
+				float:left;
+			}
+		</style>
+</head>
+	<body>
+		<div class="mui-content" style="margin-bottom: 50px;">
+			<!--我的-->
+			<div id="tabbar-with-map" class="mui-control-content mui-active">
+				<div class="login-now text-center font14" style="height: 7rem;background-image: url(images/cbd.jpg);">
+					<div class="order-img-border">
+					    <div class="order-img" style="height: 70px;width: 70px;margin:0 -20px;">
+							<img src="" onclick="uploadfile()" id="img" >		
+						</div>
+					</div>
+					<div style="margin-top: 40px;">
+						<a style="padding-top: 50px;color: white;" id="nickname">立即登录</a>    
+					</div>
+				</div>
+			<div class="my-info clearfix  bg-white txt-gray" style="margin-bottom:5%;">
+				<div class="am-g">
+					<span class="am-u-sm-4 orderList" style="height: 5rem;width: 25%;">
+						<a style="margin-top: 1rem;" style="margin-top: -15px;"  href="javascript:void(0);">
+			                <img src="../images/allordersicon.png" style="width: 24px;height: 24px;margin-bottom: 3px;"><br/>
+			                <span class="my-choose-name" style="color: black;font-size: 13px;">全部订单</span>
+			            </a>
+					</span>
+			    	<span class="am-u-sm-4 yuYue" style="height: 5rem;width: 25%;">
+						<a style="margin-top: 1rem;" style="margin-top: -15px;"  href="javascript:void(0);">
+			                <img src="../images/myyuyeicon.png" style="width: 24px;height: 24px;margin-bottom: 3px;"><br/>
+			                <span class="my-choose-name" style="color: black;font-size: 13px;">我的预约</span>
+			            </a>
+					</span>
+			        <span class="am-u-sm-4 myOrders" style="height: 5rem;width: 25%;">
+						<a style="margin-top: 1rem;" style="margin-top: -15px;"  href="javascript:void(0);">
+			                <img src="../images/myordersicon.png" style="width: 24px;height: 24px;margin-bottom: 3px;"><br/>
+			                <span class="my-choose-name" style="color: black;font-size: 13px;">我的排班</span>
+			            </a>
+					</span>
+					<span class="am-u-sm-4 myFinish" style="height: 5rem;width: 25%;">
+						<a style="margin-top: 1rem;" style="margin-top: -15px;"  href="javascript:void(0);">
+			                <img src="../images/myfinishicon.png" style="width: 24px;height: 24px;margin-bottom: 3px;"><br/>
+			                <span class="my-choose-name" style="color: black;font-size: 13px;">已结束</span>
+			            </a>
+					</span>
+				</div>
+			</div>
+			
+			<div class="mt-line bg-white box-shadow my-choose">				
+					<ul class="mui-table-view">
+						<li class="mui-table-view-cell item moneybackpack">							
+							<a class="mui-navigate-right">
+							 	<span class="mui-icon mui-icon-paperclip"></span>
+								我的钱包
+							</a>
+						</li>
+						<li class="mui-table-view-cell baseinfo">
+							<a class="mui-navigate-right">
+								<span class="mui-icon mui-icon-gear"></span>
+								基本信息修改
+							</a>
+						</li>
+						<li class="mui-table-view-cell servicecontent">
+							<a class="mui-navigate-right">
+								<span class="mui-icon mui-icon-compose"></span>
+								服务项目修改
+							</a>
+						</li>
+					</ul>  
+					<div style="width:100%;height:20px;background-color:#efeff4;">
+					</div>
+
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell item servicearea">
+						<a class="mui-navigate-right">						
+							<span class="mui-icon mui-icon-map"></span>
+							服务区域修改
+						</a>
+					</li>					
+					<li class="mui-table-view-cell item telephone">
+						<a class="mui-navigate-right">
+							<span class="mui-icon mui-icon-phone"></span>
+							更换绑定手机
+						</a>
+					</li>
+					<li class="mui-table-view-cell item">
+						<a href="tel:13647096349" class="mui-navigate-right">
+							<span class="mui-icon mui-icon-chatbubble"></span>
+							联系客服
+						</a>
+					</li>
+					
+					</li>
+				</ul> 							
+			</div>
+			</div>
+		</div>
+	<body>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mui.min.js"></script>
+<script src="../js/url.js"></script>	
+<script>
+	mui.init();	
+	getUserMessage();
+	//获取用户信息
+	function getUserMessage(){
+		$.ajax({  
+	 		url:SERVER_URL+"/wechat/getUserMessage.action",  
+			type:"post",  
+			dataType:"",  
+			data:"",  
+			success:function(response){
+				var nickname=response.nickname;
+				var usericon=response.usericon;
+				$("#nickname").text(nickname);
+				$("#img").attr("src",usericon);
+			},  
+			error:function() {  
+				
+			}  
+		});	
+	}
+	
+	//基本信息设置
+	mui(".mui-content").on('tap', '.baseinfo', function() {
+		location="baseInfo.html";
+	});
+	
+	//服务项目
+	mui(".mui-content").on('tap', '.servicecontent', function() {
+		location="servicecontent.html?info=1";
+	});
+	
+	//服务区域
+	mui(".mui-content").on('tap', '.servicearea', function() {
+		location="servicearea.html?info=1";
+	});
+	
+	//更绑手机
+	mui(".mui-content").on('tap', '.telephone', function() {
+		location="../teleBangDing.html";
+	});
+	
+	//钱包
+	mui(".mui-content").on('tap', '.moneybackpack', function() {
+		location="moneybackpack.html";
+	});
+	
+	//全部订单
+	mui(".mui-content").on('tap', '.orderList', function() {
+		location="ordersList.html";
+	});
+	
+	//预约订单
+	mui(".mui-content").on('tap', '.yuYue', function() {
+		location="ordersList.html?initType=0";
+	});
+	
+	//我的订单
+	mui(".mui-content").on('tap', '.myOrders', function() {
+		location="ordersList.html?initType=1";
+	});
+	
+	//完成订单
+	mui(".mui-content").on('tap', '.myFinish', function() {
+		location="ordersList.html?initType=3";
+	});
+</script>
+</body>
+</html>

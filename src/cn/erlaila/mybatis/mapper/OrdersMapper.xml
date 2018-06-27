@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.erlaila.mybatis.mapper.OrdersMapper" >
+  <resultMap id="BaseResultMap" type="cn.erlaila.mybatis.po.Orders" >
+    <id column="orderId" property="orderid" jdbcType="INTEGER" />
+    <result column="linkman_id" property="linkmanId" jdbcType="INTEGER" />
+    <result column="serviceType_id" property="servicetypeId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="nurse_id" property="nurseId" jdbcType="INTEGER" />
+    <result column="order_wechatid" property="orderWechatid" jdbcType="VARCHAR" />
+    <result column="favourableid" property="favourableid" jdbcType="INTEGER" />
+    <result column="createordername" property="createordername" jdbcType="VARCHAR" />
+    <result column="order_wechat" property="orderWechat" jdbcType="VARCHAR" />
+    <result column="order_during" property="orderDuring" jdbcType="VARCHAR" />
+    <result column="order_starttime" property="orderStarttime" jdbcType="TIMESTAMP" />
+    <result column="order_timeend" property="orderTimeend" jdbcType="TIMESTAMP" />
+    <result column="order_time" property="orderTime" jdbcType="TIMESTAMP" />
+    <result column="order_money" property="orderMoney" jdbcType="INTEGER" />
+    <result column="order_moneypay" property="orderMoneypay" jdbcType="INTEGER" />
+    <result column="order_status" property="orderStatus" jdbcType="INTEGER" />
+    <result column="deleStatus" property="delestatus" jdbcType="INTEGER" />
+    <result column="order_COMMENT" property="orderComment" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    orderId, linkman_id, serviceType_id, user_id, nurse_id, order_wechatid, favourableid, 
+    createordername, order_wechat, order_during, order_starttime, order_timeend, order_time, 
+    order_money, order_moneypay, order_status, deleStatus, order_COMMENT
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from orders
+    where orderId = #{orderid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from orders
+    where orderId = #{orderid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.erlaila.mybatis.po.Orders" >
+    insert into orders (orderId, linkman_id, serviceType_id, 
+      user_id, nurse_id, order_wechatid, 
+      favourableid, createordername, order_wechat, 
+      order_during, order_starttime, order_timeend, 
+      order_time, order_money, order_moneypay, 
+      order_status, deleStatus, order_COMMENT
+      )
+    values (#{orderid,jdbcType=INTEGER}, #{linkmanId,jdbcType=INTEGER}, #{servicetypeId,jdbcType=INTEGER}, 
+      #{userId,jdbcType=INTEGER}, #{nurseId,jdbcType=INTEGER}, #{orderWechatid,jdbcType=VARCHAR}, 
+      #{favourableid,jdbcType=INTEGER}, #{createordername,jdbcType=VARCHAR}, #{orderWechat,jdbcType=VARCHAR}, 
+      #{orderDuring,jdbcType=VARCHAR}, #{orderStarttime,jdbcType=TIMESTAMP}, #{orderTimeend,jdbcType=TIMESTAMP}, 
+      #{orderTime,jdbcType=TIMESTAMP}, #{orderMoney,jdbcType=INTEGER}, #{orderMoneypay,jdbcType=INTEGER}, 
+      #{orderStatus,jdbcType=INTEGER}, #{delestatus,jdbcType=INTEGER}, #{orderComment,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.erlaila.mybatis.po.Orders" >
+  		<selectKey keyProperty="orderid" order="AFTER" resultType="java.lang.Integer">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+    insert into orders
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orderid != null" >
+        orderId,
+      </if>
+      <if test="linkmanId != null" >
+        linkman_id,
+      </if>
+      <if test="servicetypeId != null" >
+        serviceType_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="nurseId != null" >
+        nurse_id,
+      </if>
+      <if test="orderWechatid != null" >
+        order_wechatid,
+      </if>
+      <if test="favourableid != null" >
+        favourableid,
+      </if>
+      <if test="createordername != null" >
+        createordername,
+      </if>
+      <if test="orderWechat != null" >
+        order_wechat,
+      </if>
+      <if test="orderDuring != null" >
+        order_during,
+      </if>
+      <if test="orderStarttime != null" >
+        order_starttime,
+      </if>
+      <if test="orderTimeend != null" >
+        order_timeend,
+      </if>
+      <if test="orderTime != null" >
+        order_time,
+      </if>
+      <if test="orderMoney != null" >
+        order_money,
+      </if>
+      <if test="orderMoneypay != null" >
+        order_moneypay,
+      </if>
+      <if test="orderStatus != null" >
+        order_status,
+      </if>
+      <if test="delestatus != null" >
+        deleStatus,
+      </if>
+      <if test="orderComment != null" >
+        order_COMMENT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orderid != null" >
+        #{orderid,jdbcType=INTEGER},
+      </if>
+      <if test="linkmanId != null" >
+        #{linkmanId,jdbcType=INTEGER},
+      </if>
+      <if test="servicetypeId != null" >
+        #{servicetypeId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="nurseId != null" >
+        #{nurseId,jdbcType=INTEGER},
+      </if>
+      <if test="orderWechatid != null" >
+        #{orderWechatid,jdbcType=VARCHAR},
+      </if>
+      <if test="favourableid != null" >
+        #{favourableid,jdbcType=INTEGER},
+      </if>
+      <if test="createordername != null" >
+        #{createordername,jdbcType=VARCHAR},
+      </if>
+      <if test="orderWechat != null" >
+        #{orderWechat,jdbcType=VARCHAR},
+      </if>
+      <if test="orderDuring != null" >
+        #{orderDuring,jdbcType=VARCHAR},
+      </if>
+      <if test="orderStarttime != null" >
+        #{orderStarttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderTimeend != null" >
+        #{orderTimeend,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderTime != null" >
+        #{orderTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderMoney != null" >
+        #{orderMoney,jdbcType=INTEGER},
+      </if>
+      <if test="orderMoneypay != null" >
+        #{orderMoneypay,jdbcType=INTEGER},
+      </if>
+      <if test="orderStatus != null" >
+        #{orderStatus,jdbcType=INTEGER},
+      </if>
+      <if test="delestatus != null" >
+        #{delestatus,jdbcType=INTEGER},
+      </if>
+      <if test="orderComment != null" >
+        #{orderComment,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.erlaila.mybatis.po.Orders" >
+    update orders
+    <set >
+      <if test="linkmanId != null" >
+        linkman_id = #{linkmanId,jdbcType=INTEGER},
+      </if>
+      <if test="servicetypeId != null" >
+        serviceType_id = #{servicetypeId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="nurseId != null" >
+        nurse_id = #{nurseId,jdbcType=INTEGER},
+      </if>
+      <if test="orderWechatid != null" >
+        order_wechatid = #{orderWechatid,jdbcType=VARCHAR},
+      </if>
+      <if test="favourableid != null" >
+        favourableid = #{favourableid,jdbcType=INTEGER},
+      </if>
+      <if test="createordername != null" >
+        createordername = #{createordername,jdbcType=VARCHAR},
+      </if>
+      <if test="orderWechat != null" >
+        order_wechat = #{orderWechat,jdbcType=VARCHAR},
+      </if>
+      <if test="orderDuring != null" >
+        order_during = #{orderDuring,jdbcType=VARCHAR},
+      </if>
+      <if test="orderStarttime != null" >
+        order_starttime = #{orderStarttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderTimeend != null" >
+        order_timeend = #{orderTimeend,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderTime != null" >
+        order_time = #{orderTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderMoney != null" >
+        order_money = #{orderMoney,jdbcType=INTEGER},
+      </if>
+      <if test="orderMoneypay != null" >
+        order_moneypay = #{orderMoneypay,jdbcType=INTEGER},
+      </if>
+      <if test="orderStatus != null" >
+        order_status = #{orderStatus,jdbcType=INTEGER},
+      </if>
+      <if test="delestatus != null" >
+        deleStatus = #{delestatus,jdbcType=INTEGER},
+      </if>
+      <if test="orderComment != null" >
+        order_COMMENT = #{orderComment,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where orderId = #{orderid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.erlaila.mybatis.po.Orders" >
+    update orders
+    set linkman_id = #{linkmanId,jdbcType=INTEGER},
+      serviceType_id = #{servicetypeId,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      nurse_id = #{nurseId,jdbcType=INTEGER},
+      order_wechatid = #{orderWechatid,jdbcType=VARCHAR},
+      favourableid = #{favourableid,jdbcType=INTEGER},
+      createordername = #{createordername,jdbcType=VARCHAR},
+      order_wechat = #{orderWechat,jdbcType=VARCHAR},
+      order_during = #{orderDuring,jdbcType=VARCHAR},
+      order_starttime = #{orderStarttime,jdbcType=TIMESTAMP},
+      order_timeend = #{orderTimeend,jdbcType=TIMESTAMP},
+      order_time = #{orderTime,jdbcType=TIMESTAMP},
+      order_money = #{orderMoney,jdbcType=INTEGER},
+      order_moneypay = #{orderMoneypay,jdbcType=INTEGER},
+      order_status = #{orderStatus,jdbcType=INTEGER},
+      deleStatus = #{delestatus,jdbcType=INTEGER},
+      order_COMMENT = #{orderComment,jdbcType=VARCHAR}
+    where orderId = #{orderid,jdbcType=INTEGER}
+  </update>
+</mapper>

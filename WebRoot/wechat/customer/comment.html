@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>服务评价</title>    
+    <link href="../css/amazeui.min.css?v=2.4" rel="stylesheet">
+	<link href="../css/global.css?v=2.4" rel="stylesheet">
+	<link href="../css/css.css?v=2.4" rel="stylesheet">
+    <link href="../css/mui.min.css" rel="stylesheet"/> 
+    <link href="../css/mui.min.css" rel="stylesheet"/>
+    <style>			
+			.title{
+				margin: 20px 15px 10px;
+				color: #6d6d72;
+				font-size: 15px;
+			}	
+			.oa-contact-cell.mui-table .mui-table-cell {
+				padding: 0;
+				vertical-align: middle;
+			}			
+			.oa-contact-cell {
+				position: relative;
+				margin: -11px 0;
+			}	
+			.oa-contact-avatar {
+				width: 75px;
+			}
+			.oa-contact-avatar img {
+				border-radius: 50%;
+			}
+			.oa-contact-content {
+				width: 100%;
+			}
+			.oa-contact-name {
+				margin-right: 20px;
+				color:#6a6a6a;
+			}
+			.oa-contact-name, oa-contact-position {
+				float: left;
+			}
+			.mui-btn{
+				font-size:12px;
+			}
+			.mui-h6, h6{
+				color: #222222;
+			}
+			.mui-table-view-cell {
+				padding: 0px 0px ;
+			}
+			.mui-table-view-cell:after{
+				background-color:#fff;
+			}
+			.backdiv{
+				width:100%;height:18px;background-color:#efeff4;
+			}
+			.orderTitle{width:100%;height:34px;padding:0px 15px;line-height:34px;font-size:14px;color:#000000b5;}
+			.deleteicon{float:right;font-size:22px;line-height:34px;}
+			.orderstatus{color:#009688c4;float:right;margin-right:10px;}
+			.nametitle  .namevalue{color:#282828;}
+			.topbox{padding:15px 15px 15px 15px;background: #fff;}	
+			.iconbox{border-radius:5px;margin:10px 0px;height:75px;color:#fff;font-size:40px;line-height:75px;text-align:center;}
+			.shhlbox{background-color:#4cd964;}
+			.jjphbox{background-color:#41b296;}
+			.jpplbox{background-color:#007aff;}			  
+			.ordermessage{padding-left:10px !important;}
+			.orderbuttom{padding:0px 15px;width:100%;height:34px;line-height:34px;color:#000000b5;}
+			.ordermoney{float:right;line-height:34px;font-size:17px;font-weight:bold;}
+			.moneystatus{float:right;line-height:34px;font-size:14px;}
+			.serviceday{float:right;margin-right:10px;font-size:14px;}
+			.gopay2{border-radius:15px;border:1px solid #4cd964;width:90px;height:26px;margin-top:7px;float:right;color:#4cd964;font-size:15px;text-align:center;line-height:26px;}			
+			.orderbuttompay{display:none;border-top: 1px solid #cbc8c8;height:40px;padding:0px 15px;width:100%;line-height:34px;color:#000000b5;}
+			.mui-table-view-cell.mui-active{background-color:#fff;}
+			
+			textarea{
+				vertical-align:top;
+				height:105px;	
+				background-color:#f7f7f7;
+				border:1px solid #f7f7f7;
+				margin-bottom:0px;
+			}
+			.submitSpan{
+				color:#fff;
+				float:right;
+				margin-right: -10px;
+				margin-left: -10px;
+				padding-right: 10px;
+				padding-left: 10px;
+				padding-top: 10px;
+				padding-bottom: 10px;
+				font-size:16px;
+			}
+		</style>
+</head>
+	<body>
+		<header class="mui-bar mui-bar-nav" style="background-color:#41b296;">
+    		<span class="mui-icon mui-icon-back histroyback" style="color:#fff;"></span>			
+			<h1 class="mui-title" style="color:#fff;" >服务评价</h1>
+			<span class="submitSpan" style="">提交</span>
+		</header>		
+		<div  class="mui-content" id="refreshContainer" style="height:auto;margin-bottom: 50px;">
+			<div id="tabbar" class="mui-control-content mui-active">				
+				<div id="tabbar-with-contact" class="mui-collapse-content">	
+					<div class="mui-slider-cell topbox">
+						<div class="oa-contact-cell mui-table gopay">
+							<div class="oa-contact-avatar mui-table-cell" >
+								<div class="iconbox shhlbox">
+									护
+								</div>
+							</div>
+							<div class="oa-contact-content mui-table-cell ordermessage">
+								<div class="mui-clearfix">
+									<h5 class="oa-contact-name" style="font-weight:bold;font-size:15px;color:#262626;">服务评分</h5>
+								</div>
+								
+								<div class="mui-clearfix" style="padding-top:7px;">
+									<img src="../images/commentcolor.png" class="total" grade="1" width="21px" height="21px" />
+									<img src="../images/commentnone.png" class="total" grade="0" width="21px" height="21px" />
+									<img src="../images/commentnone.png" class="total" grade="0" width="21px" height="21px" />
+									<img src="../images/commentnone.png" class="total" grade="0" width="21px" height="21px" />
+									<img src="../images/commentnone.png" class="total" grade="0" width="21px" height="21px" />
+								</div>													
+							</div>						
+						</div>								
+					</div>
+					
+					<div style="background-color:#f7f7f7;padding-bottom:15px;">
+						<textarea id="coment"></textarea>
+						<div style="width:100%;height:22px;padding-left:15px;font-size:14px;color:#6a6a6a;line-height:21px;">
+							<img src="../images/anonymity.png" width="21px" height="21px" style="float:left;margin-right:10px;" />
+							<h5 class="oa-contact-name">匿名评价</h5>
+						</div>
+					</div>
+					
+					<div style="background-color:#fff;margin-top:15px;width:100%;padding:15px;">
+						
+						<div class="">								
+							<div class="mui-clearfix">
+								<h5 class="oa-contact-name" style="font-weight: bold;font-size: 15px;color: #262626;">陪护员评价</h5>
+								<h5 class="oa-contact-name" style="float:right;margin-right:0px;">满意请给5星哦</h5>								
+							</div>		
+						</div>
+							
+						<div class="mui-clearfix" style="padding-top:15px;">
+							<h5 class="oa-contact-name">服务态度</h5>		
+							<div style="float:right;">
+								<img src="../images/commentnone.png" class="grade1" grade="0" width="21px" height="21px" />
+								<img src="../images/commentnone.png" class="grade1" grade="0" height="21px" />
+								<img src="../images/commentnone.png" class="grade1" grade="0" width="21px" height="21px" />
+								<img src="../images/commentnone.png" class="grade1" grade="0" width="21px" height="21px" />
+								<img src="../images/commentnone.png" class="grade1" grade="0" width="21px" height="21px" />
+							</div>
+						</div>
+
+						<div class="mui-clearfix" style="padding-top:15px;">
+							<h5 class="oa-contact-name">专业程度</h5>		
+							<div style="float:right;">
+								<img src="../images/commentnone.png" class="grade2" grade="0" width="21px" height="21px" />
+								<img src="../images/commentnone.png" class="grade2" grade="0" width="21px" height="21px" />
+								<img src="../images/commentnone.png" class="grade2" grade="0" width="21px" height="21px" />
+								<img src="../images/commentnone.png" class="grade2" grade="0" width="21px" height="21px" />
+								<img src="../images/commentnone.png" class="grade2" grade="0" width="21px" height="21px" />
+							</div>
+						</div>
+			
+					</div>
+					
+				</div>					
+			</div>
+		</div>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mui.min.js"></script>  
+<script src="../js/url.js"></script>
+<script src="../js/wechatPay.js"></script>
+<script>
+	mui.init();
+	var orderid=getUrlParam("orderid");
+	$(".total").click(function(){
+		var index = $(".total").index(this);
+		$(".total").each(function(i){
+			$(this).attr("src","../images/commentnone.png");
+			$(this).attr("grade","0");
+			if(i<=index){
+				$(this).attr("src","../images/commentcolor.png");
+				$(this).attr("grade","1");
+				
+			}
+		});
+	});
+	
+	$(".grade1").click(function(){
+		var index = $(".grade1").index(this);
+		$(".grade1").each(function(i){
+			$(this).attr("src","../images/commentnone.png");
+			$(this).attr("grade","0");
+			if(i<=index){
+				$(this).attr("src","../images/commentcolor.png");
+				$(this).attr("grade","1");
+				
+			}
+		});
+	});
+	
+	$(".grade2").click(function(){
+		var index = $(".grade2").index(this);
+		$(".grade2").each(function(i){
+			$(this).attr("src","../images/commentnone.png");
+			$(this).attr("grade","0");
+			if(i<=index){
+				$(this).attr("src","../images/commentcolor.png");
+				$(this).attr("grade","1");
+				
+			}
+		});
+	});
+	
+	
+	$(".submitSpan").click(function(){
+		var nurseid=1;
+		var anonymous=0;
+		var total=0;
+		var grade1=0;
+		var grade2=0;
+		$(".total").each(function(){
+			var x=$(this).attr("grade");
+			total=x*1+total;
+		});
+		
+		$(".grade1").each(function(){
+			var x=$(this).attr("grade");
+			grade1=x*1+grade1;
+		});
+		
+		$(".grade2").each(function(){
+			var x=$(this).attr("grade");
+			grade2=x*1+grade2;
+		});
+		
+		var coment=$("#coment").val();
+		var _date="nurseid="+nurseid+"&anonymous="+anonymous+"&score="+total+"&grade1="+grade1+"&grade2="+grade2+"&commentvalue="+coment+"&orderid="+orderid;
+		$.ajax({  
+	 		url:SERVER_URL+"/commentN/insertCommentN.action",  
+			type:"post",  
+			dataType:"",  
+			data:_date,  
+			success:function(response){
+				if(response=="1"){
+					mui.toast('感谢您的评价！！！',{ duration:'long', type:'div' });
+					location="myOrders.html?initUser=0";
+				}
+			},  
+			error:function() {  
+				
+			}  
+		});	
+	});	
+</script>				
+</body>
+</html>

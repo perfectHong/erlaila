@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title></title>
+  
+    <link href="../css/amazeui.min.css?v=2.4" rel="stylesheet">
+	<link href="../css/global.css?v=2.4" rel="stylesheet">
+	<link href="../css/css.css?v=2.4" rel="stylesheet">
+    <link href="../css/mui.min.css" rel="stylesheet"/>  
+
+    <style>			
+			.title{
+				margin: 20px 15px 10px;
+				color: #6d6d72;
+				font-size: 15px;
+			}
+			
+			.oa-contact-cell.mui-table .mui-table-cell {
+				padding: 11px 0;
+				vertical-align: middle;
+			}
+			
+			.oa-contact-cell {
+				position: relative;
+				margin: -11px 0;
+			}
+	
+			.oa-contact-avatar {
+				width: 75px;
+			}
+			.oa-contact-avatar img {
+				border-radius: 50%;
+			}
+			.oa-contact-content {
+				width: 100%;
+			}
+			.oa-contact-name {
+				margin-right: 20px;
+			}
+			.oa-contact-name, oa-contact-position {
+				float: left;
+			}
+		</style>
+</head>
+<body>
+		<div class="mui-content" style="margin-bottom: 50px;">
+			<nav class="mui-bar mui-bar-tab">
+			<a class="mui-tab-item" target="_self" href="index.html">
+				<span class="mui-icon mui-icon-home"></span>
+				<span class="mui-tab-label">首页</span>
+			</a>
+			<a class="mui-tab-item" target="_self" href="myOrders.html">
+				<span class="mui-icon mui-icon-paperplane"></span>
+				<span class="mui-tab-label">订单</span>
+			</a>					
+			<a class="mui-tab-item mui-active" target="_self" href="javascript:void(0);">
+				<span class="mui-icon mui-icon-person"></span>
+				<span class="mui-tab-label">我的</span>
+			</a>
+			</nav>
+			
+			<!--我的-->
+			<div id="tabbar-with-map" class="mui-control-content mui-active">
+				<div class="login-now text-center font14" style="height: 7rem;background-image: url(../images/cbd.jpg);">
+					<div class="order-img-border">
+					    <div class="order-img" style="height: 70px;width: 70px;margin:0 -20px;">
+							<img src="../images/cbd.jpg" onclick="uploadfile()" id="img" >		
+						</div>
+					</div>
+					<div style="margin-top: 40px;">
+						<a style="padding-top: 50px;color: white;">立即登录</a>    
+					</div>
+				</div>
+			<div class="my-info clearfix  bg-white txt-gray" style="margin-bottom: 8%;">
+				<div class="am-g">
+					<span class="am-u-sm-4" style="height: 5rem;width: 25%;">
+						<a style="margin-top: 1rem;" style="margin-top: -15px;" href="allOrder.html">
+			                <img src="../images/order1.png" style="width: 24px;height: 24px;margin-bottom: 3px;"><br/>
+			                <span class="my-choose-name" style="color: black;font-size: 13px;">全部订单</span>
+			            </a>
+					</span>
+			    	<span class="am-u-sm-4" style="height: 5rem;width: 25%;">
+						<a style="margin-top: 1rem;" style="margin-top: -15px;"  href="allOrder.html">
+			                <img src="../images/order2.png" style="width: 24px;height: 24px;margin-bottom: 3px;"><br/>
+			                <span class="my-choose-name" style="color: black;font-size: 13px;">待付款</span>
+			            </a>
+					</span>
+			        <span class="am-u-sm-4" style="height: 5rem;width: 25%;">
+						<a style="margin-top: 1rem;" style="margin-top: -15px;"  href="allOrder.html">
+			                <img src="../images/order3.png" style="width: 24px;height: 24px;margin-bottom: 3px;"><br/>
+			                <span class="my-choose-name" style="color: black;font-size: 13px;">待服务</span>
+			            </a>
+					</span>
+					<span class="am-u-sm-4" style="height: 5rem;width: 25%;">
+						<a style="margin-top: 1rem;" style="margin-top: -15px;"  href="allOrder.html">
+			                <img src="../images/order4.png" style="width: 24px;height: 24px;margin-bottom: 3px;"><br/>
+			                <span class="my-choose-name" style="color: black;font-size: 13px;">待评价</span>
+			            </a>
+					</span>
+				</div>
+			</div>
+			
+			<div class="mt-line bg-white box-shadow my-choose">
+					<ul class="am-avg-sm-3 boxes">
+						<li class="box box-1" style="height: 7rem;padding-top: 2rem;">
+							<a href="favoriteNurse.html" >
+			                <img src="../images/m1.png" style="width: 40px;height: 40px;margin-top: -10px;margin-bottom: 10px;">
+			                <span class="my-choose-name" style="color: #646666;">我的收藏</span>
+			                </a>
+						</li>
+						<li class="box box-2" style="height: 7rem;padding-top: 2rem;">
+							<a href="linkman.html">
+			                <img src="../images/m2.png" style="width: 40px;height: 40px;margin-top: -10px;margin-bottom: 10px;">
+			                <span class="my-choose-name" style="color: #646666;">联系人</span>
+			                </a>
+						</li>
+						<li class="box box-3" style="height: 7rem;padding-top: 2rem;">
+							<a href="message.html">
+			                <img src="../images/m3.png" style="width: 40px;height: 40px;margin-top: -10px;margin-bottom: 10px;">
+			                <span class="my-choose-name" style="color: #646666;">消息中心</span>
+			                </a>
+						</li>
+						<li class="box box-4" style="height: 7rem;padding-top: 2rem;">
+							<!--<a href="/index/wealth-go">-->
+							<a href="/index/wealth-go">
+			                <img src="../images/m4.png" style="width: 40px;height: 40px;margin-top: -10px;margin-bottom: 10px;">
+			                <span class="my-choose-name" style="color: #646666;">客服咨询</span>
+			                </a>
+						</li>
+						<li class="box box-5" style="height: 7rem;padding-top: 2rem;">
+							<a href="/order/other">
+			                <img src="../images/m5.png" style="width: 40px;height: 40px;margin-top: -10px;margin-bottom: 10px;">
+			                <span class="my-choose-name" style="color: #646666;">常见问题</span>
+			                </a>
+						</li>
+						<li class="box box-6" style="height: 7rem;padding-top: 2rem;">
+							<a href="more.html">
+			                <img src="../images/m6.png" style="width: 40px;height: 40px;margin-top: -10px;margin-bottom: 10px;">
+			                <span class="my-choose-name" style="color: #646666;">更多</span>
+			                </a>
+						</li>
+					</ul>
+			</div>
+			</div>
+		</div>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mui.min.js"></script>
+<script src="../js/url.js"></script>
+<script type="text/javascript" charset="utf-8">				
+	mui.init();
+	
+	mui(".mui-bar-tab").on('tap', '.mui-tab-item', function() {
+		var href = this.getAttribute("href");
+		location.href = href;
+	});
+</script>
+</body>
+</html>

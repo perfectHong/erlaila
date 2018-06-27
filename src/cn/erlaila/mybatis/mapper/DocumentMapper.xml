@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.erlaila.mybatis.mapper.DocumentMapper" >
+  <resultMap id="BaseResultMap" type="cn.erlaila.mybatis.po.Document" >
+    <id column="documentId" property="documentid" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="adminId" property="adminid" jdbcType="INTEGER" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="abstracts" property="abstracts" jdbcType="VARCHAR" />
+    <result column="icon" property="icon" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="BIT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="cn.erlaila.mybatis.po.Document" extends="BaseResultMap" >
+    <result column="doccument" property="doccument" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    documentId, title, adminId, createTime, abstracts, icon, status
+  </sql>
+  <sql id="Blob_Column_List" >
+    doccument
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from document
+    where documentId = #{documentid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from document
+    where documentId = #{documentid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.erlaila.mybatis.po.Document" >
+    insert into document (documentId, title, adminId, 
+      createTime, abstracts, icon, 
+      status, doccument)
+    values (#{documentid,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{adminid,jdbcType=INTEGER}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{abstracts,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR}, 
+      #{status,jdbcType=BIT}, #{doccument,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.erlaila.mybatis.po.Document" >
+    insert into document
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="documentid != null" >
+        documentId,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="adminid != null" >
+        adminId,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+      <if test="abstracts != null" >
+        abstracts,
+      </if>
+      <if test="icon != null" >
+        icon,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="doccument != null" >
+        doccument,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="documentid != null" >
+        #{documentid,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="adminid != null" >
+        #{adminid,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="abstracts != null" >
+        #{abstracts,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null" >
+        #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=BIT},
+      </if>
+      <if test="doccument != null" >
+        #{doccument,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.erlaila.mybatis.po.Document" >
+    update document
+    <set >
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="adminid != null" >
+        adminId = #{adminid,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="abstracts != null" >
+        abstracts = #{abstracts,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null" >
+        icon = #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=BIT},
+      </if>
+      <if test="doccument != null" >
+        doccument = #{doccument,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where documentId = #{documentid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.erlaila.mybatis.po.Document" >
+    update document
+    set title = #{title,jdbcType=VARCHAR},
+      adminId = #{adminid,jdbcType=INTEGER},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      abstracts = #{abstracts,jdbcType=VARCHAR},
+      icon = #{icon,jdbcType=VARCHAR},
+      status = #{status,jdbcType=BIT},
+      doccument = #{doccument,jdbcType=LONGVARCHAR}
+    where documentId = #{documentid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.erlaila.mybatis.po.Document" >
+    update document
+    set title = #{title,jdbcType=VARCHAR},
+      adminId = #{adminid,jdbcType=INTEGER},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      abstracts = #{abstracts,jdbcType=VARCHAR},
+      icon = #{icon,jdbcType=VARCHAR},
+      status = #{status,jdbcType=BIT}
+    where documentId = #{documentid,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.erlaila.mybatis.mapper.custom.NurseServiceContentMapperCustom" >
+  <resultMap id="BaseResultMap" type="cn.erlaila.mybatis.po.NurseServiceContent" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="userId" property="userid" jdbcType="INTEGER" />
+    <result column="serviceContent_id" property="servicecontentId" jdbcType="INTEGER" />
+  </resultMap>
+	
+  <sql id="Base_Column_List" >
+    id, userId, serviceContent_id
+  </sql>
+  
+  
+  <select id="selectByServiceIdLimit" resultMap="BaseResultMap" parameterType="cn.erlaila.mybatis.po.vo.NurseDetailVo" >
+    select  distinct
+    <include refid="Base_Column_List" />
+    from nurseservicecontent
+    where serviceContent_id = #{serviceTypeId,jdbcType=INTEGER}
+    limit #{numStart,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER} 
+  </select>
+
+
+ <select id="selectByUserId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select  distinct
+    <include refid="Base_Column_List" />
+    from nurseservicecontent
+    where userId = #{userId,jdbcType=INTEGER}
+  </select>
+
+	<!-- 查询符合要求的陪护人员总数 -->
+	<select id="selectCountByServiceId" resultType="java.lang.Integer" parameterType="java.lang.Integer" >
+   		  select count(1) from nurseservicecontent  where serviceContent_id = #{serviceTypeId,jdbcType=INTEGER}
+  	</select>
+</mapper>

@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="format-detection" content="telephone=no">
+	<meta http-equiv="x-rim-auto-match" content="none">
+    <title></title>    	  
+    <link href="../css/mui.min.css" rel="stylesheet"/>
+    <style>			
+			.title{
+				margin: 20px 15px 10px;
+				color: #6d6d72;
+				font-size: 15px;
+			}
+			
+			.lispanleft{
+				color:#000000;
+				float:left;
+				line-height:24px;
+			}
+			.lispanright{
+				color:#434343;
+				float:right;
+			}
+			.box5 {
+				width: 100%;
+				background-color:#ffffff;
+				overflow: hidden;
+				text-align:center;
+				position: fixed;	
+				bottom: 0px;
+				z-index: 999;
+				
+			}
+			.noOrder{		
+				background-color:#f10215;
+				border: 1px solid #f10215;
+			}
+			.mui-btn{
+				border-radius:0px;
+				display:none;
+				float:right;
+				padding:10px 20px;
+				font-size:18px;
+			}
+			.noOrder.active{
+				background-color:#f10215;
+				border: 1px solid #f10215;
+			}
+			
+			.mui-content>.mui-table-view:first-child{
+				margin-top:0px;
+			}
+			.mui-icon{
+				width:8%;
+			}
+			.hideitem{
+				display:none;
+			}
+			.afterclear:after{
+				background-color: #fff;	
+			}
+		</style>
+</head>
+<body>
+	<header class="mui-bar mui-bar-nav" style="background-color:#41b296;color:#fff;">
+		<span class="mui-icon mui-icon-back histroyback" style="color:#fff;"></span>									
+		<h1 class="mui-title" style="color:#fff;">订单详细信息</h1>
+	</header>
+	
+	<div class="mui-content" style="margin-bottom: 47px;">
+		<ul class="mui-table-view">
+			<li class="mui-table-view-cell">
+				<span class="mui-icon mui-icon-star lispanleft"></span>
+				<span class="lispanleft">服务类型</span>
+				<span class="lispanright fwlxvalue"></span>
+			</li>
+			
+			<li class="mui-table-view-cell">
+				<span class="mui-icon mui-icon-paperclip lispanleft"></span>
+				<span class="lispanleft">服务开始时间</span>
+				<span class="lispanright orderStarttime"></span>
+			</li>
+						
+			<li class="mui-table-view-cell afterclear" style="margin-bottom">
+				<span class="mui-icon mui-icon-compose lispanleft"></span>
+				<span class="lispanleft">服务时长</span>
+				<span class="lispanright servicelong"></span>
+			</li>
+			<div style="width:100%;height:15px;background-color:#efeff4;"></div>
+			
+			<li class="mui-table-view-cell">
+				<span class="mui-icon mui-icon-paperclip lispanleft" style=""></span>
+				<span class="lispanleft">性别</span>
+				<span class="lispanright sex"></span>
+			</li>
+			
+			<li class="mui-table-view-cell">
+				<span class="mui-icon mui-icon-paperclip lispanleft" style="width:8%;"></span>
+				<span class="lispanleft" >年龄</span>
+				<span class="lispanright age"></span>
+			</li>
+			
+			<li class="mui-table-view-cell afterclear">
+				<span class="mui-icon mui-icon-location lispanleft" style="width:8%;"></span>
+				<span class="lispanleft" style="width:40%;">服务地点</span>
+				<span class="lispanright adress" style="width:52%;text-align:right;"></span>
+			</li>
+			
+			<div style="width:100%;height:15px;background-color:#efeff4;"></div>
+			
+			<li class="mui-table-view-cell hideitem">
+				<span class="mui-icon mui-icon-person lispanleft"></span>
+				<span class="lispanleft">服务对象</span>
+				<span class="lispanright fwdxvalue"></span>
+			</li>
+			
+			<li class="mui-table-view-cell hideitem">
+				<span class="mui-icon mui-icon-phone lispanleft"></span>
+				<span class="lispanleft">联系电话</span>
+				<a href="" class="lispanright lxdhvalue" style="color:#41b296;"></a>
+			</li>
+			
+			<li class="mui-table-view-cell hideitem afterclear">
+				<span class="mui-icon mui-icon-location lispanleft" style="width:8%;"></span>
+				<span class="lispanleft" style="width:40%;">服务详细地点</span>
+				<span class="lispanright adressdetail" style="width:52%;text-align:right;"></span>
+			</li>
+			
+			<div style="width:100%;height:15px;background-color:#efeff4;"></div>
+			
+			<li class="mui-table-view-cell hideitem">
+				<span class="mui-icon mui-icon-person lispanleft"></span>
+				<span class="lispanleft">下单人联系姓名</span>
+				<span class="lispanright ordercreatename"></span>
+			</li>
+			
+			<li class="mui-table-view-cell hideitem">
+				<span class="mui-icon mui-icon-phone lispanleft"></span>
+				<span class="lispanleft">下单人联系电话</span>
+				<a href="" class="lispanright ordercreatepho" style="color:#41b296;"></a>
+			</li>
+			
+			<li class="mui-table-view-cell">
+				<span class="mui-icon mui-icon-starhalf lispanleft"></span>
+				<span class="lispanleft">本单金额</span>
+				<span class="lispanright ordercreatemoney"></span>
+			</li>
+			
+		</ul>
+		
+		<div class="box5">
+			<button type="button" class="mui-btn mui-btn-success sureOrder">确认接单</button>
+			<button type="button" class="mui-btn mui-btn-success noOrder">拒接订单</button>	
+			<button type="button" class="mui-btn mui-btn-success onService">正在服务</button>
+			<button type="button" class="mui-btn mui-btn-success finishService">服务完成</button>
+		</div>
+	</div>
+</body>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mui.min.js"></script>  
+<script src="../js/url.js"></script>	
+<script>
+	//获取订单id
+	var orderid=getUrlParam("orderid");
+	getOrderDateById(orderid);
+	
+	
+	//拒接
+	mui(".mui-content").on('tap','.noOrder',function(){ 
+		alert(123);
+		
+	})
+	
+	//接单
+	mui(".mui-content").on('tap','.sureOrder',function(){ 
+		$.ajax({  
+			url:SERVER_URL+"/nurseOrders/updateNurseOrderStatus.action",  
+			type:"post",   
+			data:"orderId="+orderid+"&status=1",
+			success:function(response){
+				location.reload();
+			},  
+			error:function(){  
+				
+			}
+		});
+	})
+	
+	
+	//开始服务
+	mui(".mui-content").on('tap','.onService',function(){ 
+		$.ajax({  
+			url:SERVER_URL+"/nurseOrders/updateNurseOrderStatus.action",  
+			type:"post",   
+			data:"orderId="+orderid+"&status=2",
+			success:function(response){
+				location.reload();
+			},  
+			error:function(){  
+				
+			}
+		});
+	})
+	
+	
+	//服务完成
+	mui(".mui-content").on('tap','.finishService',function(){ 
+		$.ajax({  
+			url:SERVER_URL+"/nurseOrders/updateNurseOrderStatus.action",  
+			type:"post",   
+			data:"orderId="+orderid+"&status=3",
+			success:function(response){
+				
+				location.reload();
+			},  
+			error:function(){  
+				
+			}
+		});
+	})
+	
+	function getOrderDateById(orderid){
+		$.ajax({  
+			url:SERVER_URL+"/nurseOrders/selectOrderDetailById.action",  
+			type:"post",   
+			data:"orderId="+orderid,
+			success:function(response){
+				//服务名称
+				var servicename=response.serviceType.servicename;
+				$(".fwlxvalue").text(servicename);
+				//服务对象
+				var linkmanname=response.linkman.linkmanname;
+				$(".fwdxvalue").text(linkmanname);
+				//联系电话
+				var linkmantelephone=response.linkman.linkmantelephone;
+				$(".lxdhvalue").attr("href","tel:"+linkmantelephone);
+				$(".lxdhvalue").text(linkmantelephone);
+				//服务开始时间
+				var orderStarttime=response.orders.orderStarttime;
+				 orderStarttime=timestampToTime(orderStarttime);
+				$(".orderStarttime").text(orderStarttime);	
+				//性别
+				var linkmansex=response.linkman.linkmansex;
+				if(linkmansex=="true"){
+					linkmansex="男";
+				}else{
+					linkmansex="女";
+				}
+				$(".sex").text(linkmansex);
+				//年龄
+				var linkmanage=response.linkman.linkmanage;
+				$(".age").text(linkmanage);
+				//地址
+				var adress=response.linkman.adress;
+				$(".adress").text(adress);
+				//详细地址
+				var adressdetail=response.linkman.adressdetail;
+				$(".adressdetail").text(adressdetail);
+				//服务时长 servicelong	 servicemu
+				var servicelong=response.orders.orderDuring;
+				var servicemu=response.serviceType.servicemu;//单位
+				$(".servicelong").text(servicelong+servicemu);
+				//下单人  ordercreatename
+				var ordercreatename=response.orders.createordername;
+				$(".ordercreatename").text(ordercreatename);
+				//下单人联系电话 ordercreatepho
+				var ordercreatepho=response.user.telephone;
+				$(".ordercreatepho").attr("href","tel:"+ordercreatepho);
+				$(".ordercreatepho").text(ordercreatepho);
+				var money=(response.serviceType.nursegetmoney)*(response.orders.orderDuring);
+				money=(money*1)/100;
+				money= intToFloat(money);
+				$(".ordercreatemoney").text("￥"+money);
+				var showFg=response.status;
+				
+				showHideItem(showFg);
+				
+			},  
+			error:function(){  
+				
+			}
+		});
+	}
+	
+	function showHideItem(showFg){	
+		if(showFg=="1" || showFg =="2" || showFg =="3"){
+			$(".hideitem").each(function(){
+				$(this).css("display","block");		
+			});
+		}
+		if(showFg=="0"){
+			$(".noOrder").css("display","block");
+			$(".sureOrder").css("display","block");	
+		}
+		if(showFg=="1"){
+			$(".onService").css("display","block");
+		}
+		if(showFg=="2"){
+			$(".finishService").css("display","block");
+		}		
+	}
+	
+	function timestampToTime(timestamp){
+        var date = new Date(timestamp);//时间戳为10位需*1000，时间戳为13位的话不需乘1000
+        Y = date.getFullYear() + '-';
+        M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
+        D = date.getDate() + ' ';
+        h = date.getHours() + ':';
+        m = date.getMinutes() + ':';
+        s = date.getSeconds();
+        return Y+M+D+h+m+s;
+    }
+    
+    //将数字转为带两位小数的数字类型
+	function intToFloat(val){  
+   	 	return new Number(val).toFixed(2); 
+	}
+</script>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title></title>
+    <link href="../css/amazeui.min.css?v=2.4" rel="stylesheet">
+	<link href="../css/global.css?v=2.4" rel="stylesheet">
+	<link href="../css/css.css?v=2.4" rel="stylesheet">
+	<link href="../css/mui.min.css" rel="stylesheet"/> 
+    <style>			
+			.title{
+				margin: 20px 15px 10px;
+				color: #6d6d72;
+				font-size: 15px;
+			}
+			
+			.oa-contact-cell.mui-table .mui-table-cell {
+				padding: 11px 0;
+				vertical-align: middle;
+			}
+			
+			.oa-contact-cell {
+				position: relative;
+				margin: -11px 0;
+			}
+	
+			.oa-contact-avatar {
+				width: 75px;
+			}
+			.oa-contact-avatar img {
+				border-radius: 50%;
+			}
+			.oa-contact-content {
+				width: 100%;
+			}
+			.oa-contact-name {
+				margin-right: 20px;
+			}
+			.oa-contact-name, oa-contact-position {
+				float: left;
+			}
+			.mui-grid-view.mui-grid-9 .mui-table-view-cell{
+				border-bottom:0px solid #fff;
+				border-right:0px solid #fff;
+			}
+			h5{
+				color:#000000;
+			}
+		</style>
+</head>
+<body>
+	
+    	<header class="mui-bar mui-bar-nav" style="background-color:#41b296;color:#fff;">			
+			<h1 class="mui-title" style="color:#fff;">儿来啦--让找护工更简单</h1>
+		</header>
+    
+		<div class="mui-content" style="margin-bottom: 50px;">
+			<!--首页-->
+			<div id="tabbar" class="mui-control-content mui-active">	
+				<div class="mui-collapse-content">
+					<div class="mui-slider-item">
+						<a href="#">
+							<img src="../images/banner.jpg">
+						</a>
+					</div>	
+				</div>
+				<div style="height:300px;background-color:#fff;">
+					<div style="text-align:center;padding:0 40px;">
+						<h5 style="line-height:30px;">您的验证信息已经提交至系统，我们将会采用科学的方式以及专人进行审核。</h5>
+					</div>
+					
+					<div style="text-align:center;padding:7px 40px;">
+						<h5 style="line-height:30px;">经过审核后，我们将会以<span style="color:red;">电话</span>的形式将审核结果通知您通知您。</h5>
+					</div>
+					
+					<div style="text-align:center;">
+					<h5 style="line-height:30px;" >感谢您的谅解</h5>
+					</div>
+					
+					<div style="text-align:center;">
+						<button type="button" class="mui-btn mui-btn-success returnindex">返回首页</button>
+					</div>
+				</div>
+			</div>
+		</div>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mui.min.js"></script>   
+<script src="../js/url.js"></script>
+</body>
+<script>
+	mui(".mui-content").on('tap', '.returnindex', function() {
+  		location="../customer/index.html";
+  	});
+</script>
+</html>

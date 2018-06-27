@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.erlaila.mybatis.mapper.custom.OrdersMapperCustom" >
+   <resultMap id="BaseResultMap" type="cn.erlaila.mybatis.po.Orders" >
+    <id column="orderId" property="orderid" jdbcType="INTEGER" />
+    <result column="linkman_id" property="linkmanId" jdbcType="INTEGER" />
+    <result column="serviceType_id" property="servicetypeId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="nurse_id" property="nurseId" jdbcType="INTEGER" />
+    <result column="order_wechatid" property="orderWechatid" jdbcType="VARCHAR" />
+    <result column="favourableid" property="favourableid" jdbcType="INTEGER" />
+    <result column="createordername" property="createordername" jdbcType="VARCHAR" />
+    <result column="order_wechat" property="orderWechat" jdbcType="VARCHAR" />
+    <result column="order_during" property="orderDuring" jdbcType="VARCHAR" />
+    <result column="order_starttime" property="orderStarttime" jdbcType="TIMESTAMP" />
+    <result column="order_timeend" property="orderTimeend" jdbcType="TIMESTAMP" />
+    <result column="order_time" property="orderTime" jdbcType="TIMESTAMP" />
+    <result column="order_money" property="orderMoney" jdbcType="INTEGER" />
+    <result column="order_moneypay" property="orderMoneypay" jdbcType="INTEGER" />
+    <result column="order_status" property="orderStatus" jdbcType="INTEGER" />
+    <result column="deleStatus" property="delestatus" jdbcType="INTEGER" />
+    <result column="order_COMMENT" property="orderComment" jdbcType="VARCHAR" />
+  </resultMap>
+  
+   <sql id="Base_Column_List" >
+    orderId, linkman_id, serviceType_id, user_id, nurse_id, order_wechatid, favourableid, 
+    createordername, order_wechat, order_during, order_starttime, order_timeend, order_time, 
+    order_money, order_moneypay, order_status, deleStatus, order_COMMENT
+  </sql>
+  
+   <select id="selectOrderBytradeNo" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    	select 
+ <include refid="Base_Column_List" />
+	 from orders where order_wechat = #{orderWechat}
+   </select>
+   
+   
+   <select id="selectByLinkmanId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    	select 
+ 	<include refid="Base_Column_List" />
+	 from orders where linkman_id = #{linkmanId} and  deleStatus=0
+   </select>
+   
+</mapper>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.erlaila.mybatis.mapper.OpinionMapper" >
+  <resultMap id="BaseResultMap" type="cn.erlaila.mybatis.po.Opinion" >
+    <id column="opinionId" property="opinionid" jdbcType="INTEGER" />
+    <result column="userId" property="userid" jdbcType="INTEGER" />
+    <result column="opinionTime" property="opiniontime" jdbcType="DATE" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="cn.erlaila.mybatis.po.Opinion" extends="BaseResultMap" >
+    <result column="coment" property="coment" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    opinionId, userId, opinionTime
+  </sql>
+  <sql id="Blob_Column_List" >
+    coment
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from opinion
+    where opinionId = #{opinionid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from opinion
+    where opinionId = #{opinionid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.erlaila.mybatis.po.Opinion" >
+    insert into opinion (opinionId, userId, opinionTime, 
+      coment)
+    values (#{opinionid,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{opiniontime,jdbcType=DATE}, 
+      #{coment,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.erlaila.mybatis.po.Opinion" >
+    insert into opinion
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="opinionid != null" >
+        opinionId,
+      </if>
+      <if test="userid != null" >
+        userId,
+      </if>
+      <if test="opiniontime != null" >
+        opinionTime,
+      </if>
+      <if test="coment != null" >
+        coment,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="opinionid != null" >
+        #{opinionid,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="opiniontime != null" >
+        #{opiniontime,jdbcType=DATE},
+      </if>
+      <if test="coment != null" >
+        #{coment,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.erlaila.mybatis.po.Opinion" >
+    update opinion
+    <set >
+      <if test="userid != null" >
+        userId = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="opiniontime != null" >
+        opinionTime = #{opiniontime,jdbcType=DATE},
+      </if>
+      <if test="coment != null" >
+        coment = #{coment,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where opinionId = #{opinionid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.erlaila.mybatis.po.Opinion" >
+    update opinion
+    set userId = #{userid,jdbcType=INTEGER},
+      opinionTime = #{opiniontime,jdbcType=DATE},
+      coment = #{coment,jdbcType=LONGVARCHAR}
+    where opinionId = #{opinionid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.erlaila.mybatis.po.Opinion" >
+    update opinion
+    set userId = #{userid,jdbcType=INTEGER},
+      opinionTime = #{opiniontime,jdbcType=DATE}
+    where opinionId = #{opinionid,jdbcType=INTEGER}
+  </update>
+</mapper>

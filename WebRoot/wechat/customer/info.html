@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>个人中心</title>
+    <link href="../css/amazeui.min.css?v=2.4" rel="stylesheet">
+	<link href="../css/global.css?v=2.4" rel="stylesheet">
+	<link href="../css/css.css?v=2.4" rel="stylesheet">
+    <link href="../css/mui.min.css" rel="stylesheet"/>  
+    <style>			
+			.title{
+				margin: 20px 15px 10px;
+				color: #6d6d72;
+				font-size: 15px;
+			}
+			
+			.oa-contact-cell.mui-table .mui-table-cell {
+				padding: 11px 0;
+				vertical-align: middle;
+			}
+			
+			.oa-contact-cell {
+				position: relative;
+				margin: -11px 0;
+			}
+	
+			.oa-contact-avatar {
+				width: 75px;
+			}
+			.oa-contact-avatar img {
+				border-radius: 50%;
+			}
+			.oa-contact-content {
+				width: 100%;
+			}
+			.oa-contact-name {
+				margin-right: 20px;
+			}
+			.oa-contact-name, oa-contact-position {
+				float: left;
+			}
+		</style>
+</head>
+<body>
+		<div class="mui-content" style="margin-bottom:66px;">
+			<nav class="mui-bar mui-bar-tab">
+			<a class="mui-tab-item" target="_self" href="index.html">
+				<span class="mui-icon mui-icon-home"></span>
+				<span class="mui-tab-label">首页</span>
+			</a>
+			<a class="mui-tab-item" target="_self" href="myOrders.html?initUser=0">
+				<span class="mui-icon mui-icon-paperplane"></span>
+				<span class="mui-tab-label">订单</span>
+			</a>					
+			<a class="mui-tab-item mui-active" target="_self" href="javascript:void(0);">
+				<span class="mui-icon mui-icon-person"></span>
+				<span class="mui-tab-label">我的</span>
+			</a>
+			</nav>
+			
+			<!--我的-->
+			<div id="tabbar-with-map" class="mui-control-content mui-active">
+				<div class="login-now text-center font14" style="height: 7rem;background-image: url(../images/cbd.jpg);">
+					<div class="order-img-border">
+					    <div class="order-img" style="height: 70px;width: 70px;margin:0 -20px;">
+							<img src="../images/cbd.jpg" onclick="uploadfile()" id="img" >		
+						</div>
+					</div>
+					<div style="margin-top: 40px;">
+						<a class="nickname" style="padding-top: 50px;color: white;" href="javascript:void(0);" ></a>    
+					</div>
+				</div>
+				
+				<div class="my-info clearfix  bg-white txt-gray" style="margin-bottom: 4%;margin-top: 4%;">
+					<ul class="mui-table-view">
+						<li class="mui-table-view-cell proposal">							
+							<a class="mui-navigate-right" style="text-align:left;">
+								<span class="mui-icon mui-icon-star"></span>
+								建议与反馈
+							</a>
+						</li>
+						<li class="mui-table-view-cell linkMan">
+							<a class="mui-navigate-right" style="text-align:left;">
+								<span class="mui-icon mui-icon-person"></span>
+								我的联系人
+							</a>
+						</li>
+						<li class="mui-table-view-cell">
+							<a class="mui-navigate-right" style="text-align:left;">
+								<span class="mui-icon mui-icon-chatboxes"></span>
+								消息中心
+							</a>
+						</li>
+					</ul>
+				</div>
+				
+				<div class="my-info clearfix  bg-white txt-gray" style="margin-bottom: 4%;margin-top: 4%;">
+					<ul class="mui-table-view">
+						<li class="mui-table-view-cell user-service">
+							<a class="mui-navigate-right" style="text-align:left;">
+								<span class="mui-icon mui-icon-compose"></span>
+								协议条款
+							</a>
+						</li>
+						<li class="mui-table-view-cell joinUs">
+							<a class="mui-navigate-right" style="text-align:left;">
+								<span class="mui-icon mui-icon-paperclip"></span>
+								加入我们
+							</a>
+						</li>
+						<li class="mui-table-view-cell">
+							<a href="tel:13647096349" class="mui-navigate-right" style="text-align:left;">
+								<span class="mui-icon mui-icon-chatbubble"></span>
+								客服咨询
+							</a>
+						</li>									
+						
+					</ul>
+				</div>
+				
+				<div class="my-info clearfix  bg-white txt-gray" style="margin-bottom: 4%;margin-top: 4%;">
+					<ul class="mui-table-view">
+						<li class="mui-table-view-cell aboutUs">
+							<a class="mui-navigate-right" style="text-align:left;">
+								<span class="mui-icon mui-icon-info"></span>
+								关于我们
+							</a>
+						</li>
+						<li class="mui-table-view-cell problem">
+							<a class="mui-navigate-right" style="text-align:left;">
+								<span class="mui-icon mui-icon-help"></span>
+								常见问题
+							</a>
+						</li>
+						<li class="mui-table-view-cell  telephone">
+							<a class="mui-navigate-right" style="text-align:left;">
+								<span class="mui-icon mui-icon-phone"></span>
+								绑定手机
+							</a>
+						</li>
+					</ul>
+				</div>				
+			</div>
+		</div>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mui.min.js"></script>
+<script src="../js/url.js"></script>
+<script type="text/javascript" charset="utf-8">				
+	mui.init();	
+	var initUser=getUrlParam("initUser");
+	if(initUser!="0"){
+		initUser2();	
+	}else{
+		getUserMessage();
+	}
+	
+	mui(".mui-bar-tab").on('tap', '.mui-tab-item', function() {
+		var href = this.getAttribute("href");
+		location.href = href;
+	});
+	
+	//获取用户信息
+	function getUserMessage(){
+		$.ajax({  
+	 		url:SERVER_URL+"/wechat/getUserMessage.action",  
+			type:"post",  
+			dataType:"",  
+			data:"",  
+			success:function(response){
+				var nickname=response.nickname;
+				var usericon=response.usericon;
+				$(".nickname").text(nickname);
+				$("#img").attr("src",usericon);
+			},  
+			error:function() {  
+				
+			}  
+		});	
+	}
+	
+	//建议与反馈 
+	mui(".mui-control-content").on('tap', '.proposal', function(){		
+		location="proposal.html";	
+	});
+	
+	//联系人 
+	mui(".mui-control-content").on('tap', '.linkMan', function(){		
+		location="linkManList.html?info=1";	
+	});
+	
+	//关于我们 
+	mui(".mui-control-content").on('tap', '.aboutUs', function(){		
+		location="aboutUs.html";	
+	});
+	
+	//常见问题
+	mui(".mui-control-content").on('tap', '.problem', function(){		
+		location="problem.html";	
+	});
+	
+	//解绑手机
+	mui(".mui-control-content").on('tap', '.telephone', function(){		
+		location="teleBangDing.html";	
+	});
+	
+	//用户协议
+	mui(".mui-control-content").on('tap', '.user-service', function(){		
+		location="user_server_item.html";		
+	});
+	
+	
+	
+	function  aa(){
+		//首先判断用户是否通过电话验证
+		$.ajax({  
+	 		url:SERVER_URL+"/wechatuser/validateTel.action",  
+			type:"post",  
+			//dataType:"json",  
+			data:"",  
+			success:function(response){
+				if(response=="false"){
+					mui.toast('您未通过短信验证!',{duration:'long',type:'div'});
+					setTimeout(function(){
+						location="teleBangDing.html?returnType=2";	
+					}, 500);
+					
+				}else{
+					validateUserType();													
+				}
+			},  
+			error:function(){  
+		
+			}  
+		});	
+	}
+	
+	
+	//加入我们
+	mui(".mui-control-content").on('tap', '.joinUs', function(){
+		validateUserType();			
+	});
+	
+	//查看用户的类型
+	function validateUserType(){
+		$.ajax({  
+	 		url:SERVER_URL+"/wechatuser/validateUserType.action",  
+			type:"get",  
+			dataType:"",  
+			data:"",  
+			success:function(response){
+				if(response=="1"){//已经是工作人员
+					location="../nurse/index.html";
+				}else if(response=="2"){	//提交验证材料，但还未通过审核		
+					mui.toast('您已提交申请材料，我们正在审核您的材料，请您稍后!',{duration:'long',type:'div'});			
+				}else{
+					location="../nurse/editInfo_1.html";
+				}
+			},  
+			error:function() {  
+				
+			}  
+		});		
+	}
+	
+	//初始化用户
+function initUser2(){
+	$.ajax({  
+	 	url:SERVER_URL+"/wechat/userinit.action",  
+		type:"get",  
+		dataType:"",  
+		data:"",  
+		success:function(response){//alert("response"+response);
+			if(response=="1"){
+				 location="../nurse/index.html";		
+			}else{
+				getUserMessage();
+			}
+		},  
+		error:function() {  
+			//mui.toast('登陆失败',{ duration:'long', type:'div'}); 
+		}  
+	});	
+}
+</script>
+</body>
+</html>

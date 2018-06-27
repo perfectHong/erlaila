@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.erlaila.mybatis.mapper.custom.NurseOrdersMapperCustom" >
+
+	<resultMap id="BaseResultMap" type="cn.erlaila.mybatis.po.custom.NurseOrdersCustom" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="orderId" property="orderid" jdbcType="INTEGER" />
+    <result column="nurse_id" property="nurseId" jdbcType="INTEGER" />
+    <result column="money" property="money" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="money_status" property="moneyStatus" jdbcType="INTEGER" />
+    <result column="deleStatus" property="delestatus" jdbcType="INTEGER" />
+    <result column="COMMENT" property="comment" jdbcType="VARCHAR" />
+  </resultMap>
+	
+	
+	<sql id="query_order_where">
+		<if test="nurseId!=null">
+			and nurse_id = #{nurseId}
+		</if>	
+		
+		<if test="orderId!=null">
+			and orderId = #{orderId}
+		</if>	
+		<!-- 支付状态    护工接单状态  -->	
+		<if test="nurseOrdersStatusList !=null">
+			<foreach collection="nurseOrdersStatusList" item="status" open="AND (" close=")" separator="or">
+				<!-- 每个遍历需要拼接的串 -->
+				status=#{status}
+			</foreach>		
+		</if>
+	</sql>
+	
+ 	<select id="selectOrderByNurseId" resultType="cn.erlaila.mybatis.po.custom.NurseOrdersCustom" parameterType="java.lang.Integer" >
+   	 	select 
+    		*
+    			from nurseorders
+    			where nurse_id = #{nurseid,jdbcType=INTEGER} 
+  	</select>
+	
+	
+	<select id="selectOrderByNurseAndStatus" resultMap="BaseResultMap" parameterType="cn.erlaila.mybatis.po.vo.NurseOrdersVo" >
+   	 	select 
+    		*
+    		from nurseorders
+    		<where>
+				<include refid="query_order_where"></include>
+				 order by id desc
+			</where>
+  	</select>
+  	
+  	<update id="updateNurseOrdersByOrderId" parameterType="cn.erlaila.mybatis.po.vo.NurseOrdersVo" >
+    	update nurseorders
+    	<set>
+    		<if test="status != null" >
+        		status = #{status,jdbcType=INTEGER},
+      		</if>      
+     		<if test="comment != null" >
+       		 	COMMENT = #{comment,jdbcType=VARCHAR},
+     		 </if>
+     	 </set>
+    	where orderId = #{orderId,jdbcType=INTEGER}
+  	</update>
+  	
+</mapper>

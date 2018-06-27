@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.erlaila.mybatis.mapper.custom.UserMapperCustom" >
+ 
+ <resultMap type="cn.erlaila.mybatis.po.custom.UserCustom" id="UserAndDetailResultMap">
+		<!-- 用户信息 -->	
+	<id column="userId" property="userid" jdbcType="INTEGER" />
+    <result column="openId" property="openid" jdbcType="VARCHAR" />
+    <result column="nickname" property="nickname" jdbcType="VARCHAR" />
+    <result column="userIcon" property="usericon" jdbcType="VARCHAR" />
+    <result column="telephone" property="telephone" jdbcType="VARCHAR" />
+    <result column="country" property="country" jdbcType="VARCHAR" />
+    <result column="province" property="province" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="BIT" />
+    <result column="birthday" property="birthday" jdbcType="DATE" />
+    <result column="userage" property="userage" jdbcType="INTEGER" />
+    <result column="userType" property="usertype" jdbcType="BIT" />
+    <result column="userVerify" property="userverify" jdbcType="BIT" />
+    	
+    	<association property="nursedetail"  javaType="cn.erlaila.mybatis.po.Nursedetail">
+    	<!-- 一对一  护工详情-->	
+    	<id column="nursedetailid" property="nursedetailid" jdbcType="BIT" />
+    	<result column="userid" property="userid" jdbcType="BIT" />   	
+    	<result column="nurserealname" property="nurserealname" jdbcType="VARCHAR" />
+    	<result column="idcardno" property="idcardno" jdbcType="VARCHAR" />
+   		<result column="adress" property="adress" jdbcType="VARCHAR" />
+    	<result column="adressdetail" property="adressdetail" jdbcType="VARCHAR" />
+    	<result column="height" property="height" jdbcType="VARCHAR" />
+    	<result column="weight" property="weight" jdbcType="VARCHAR" />
+    	<result column="blood" property="blood" jdbcType="VARCHAR" />
+    	<result column="nation" property="nation" jdbcType="VARCHAR" />   	
+    	<result column="marriage" property="marriage" jdbcType="VARCHAR" />
+    	<result column="education" property="education" jdbcType="VARCHAR" />
+   		<result column="begoodat" property="begoodat" jdbcType="VARCHAR" />
+    	<result column="experience" property="experience" jdbcType="VARCHAR" />
+    	<result column="synopsis" property="synopsis" jdbcType="VARCHAR" />
+    	</association>
+		<!--  服务范围 一个用户对应多个服务范围，使用collection映射   -->
+		<collection property="contentList" ofType="cn.erlaila.mybatis.po.ServiceType">
+		 	<id column="serviceid" property="serviceid"/>
+		 	<result column="servicename" property="servicename"/>
+		 	<result column="servicemu" property="servicemu"/>
+		 	<result column="price" property="price"/>
+		 	<result column="nursegetmoney" property="nursegetmoney"/>
+			 <!-- 订单明细
+		 	一个订单包括 多个明细
+		 	 -->	
+		 	 <!--
+		  	<collection property="orderdetails" ofType="cn.itcast.mybatis.po.Orderdetail">
+		  			<id column="orderdetail_id" property="id"/>
+				 	<result column="items_id" property="itemsId"/>
+				 	<result column="items_num" property="itemsNum"/>
+				 	<result column="orders_id" property="ordersId"/>
+				 	
+		 	商品信息  一个订单明细对应一个商品		  	
+		  	 	<association property="items" javaType="cn.itcast.mybatis.po.Items">
+		  	 		<id column="items_id" property="id"/>
+		  	 		<result column="items_name" property="name"/>
+		  	 		<result column="items_detail" property="detail"/>
+		  	 		<result column="items_price" property="price"/>
+		  	 	</association>			
+		  	</collection>
+		  	 -->	
+		 </collection>
+	</resultMap>
+ 	<sql id="Base_Column_List" >
+    user.userId, user.openId, user.nickname, user.userIcon, user.telephone, user.country, user.province, 
+    user.city, user.sex, user.userType, user.userVerify
+ 	 </sql>
+   <sql id="query_user_where">
+ 			user.userId=nursedetail.userid 
+  			and user.userId=nurseservicecontent.userId
+  			and nurseservicecontent.serviceContent_id=servicetype.serviceid  
+			<if test="userids!=null">
+			  		<!-- 实现  “and id IN(1,10,16)”拼接 -->
+			 	<foreach collection="userids" item="user_id" open="and user.userId IN(" close=")" separator=",">	
+					#{user_id}
+				</foreach> 	
+			</if>			
+	</sql>
+ 
+ 
+	<select id="selectByOpenId" resultType="cn.erlaila.mybatis.po.User" parameterType="java.lang.String" >
+		select * from user where openid=#{openid}
+	</select>
+		
+	<select id="selectByLimit" parameterType="cn.erlaila.mybatis.po.vo.NurseDetailVo" resultMap="UserAndDetailResultMap"  >
+		select  
+  		   user.*,nursedetail.*,nurseservicecontent.*,servicetype.*
+  		from user,nursedetail,nurseservicecontent,servicetype 
+ 		<where>		
+			<include refid="query_user_where"></include>
+		</where>	
+	</select>
+	
+	<select id="seleteuserByUserid" parameterType="java.lang.Integer" resultMap="UserAndDetailResultMap"  >
+		select  
+  		user.*,nursedetail.*,nurseservicecontent.*,servicetype.*
+  		from user,nursedetail,nurseservicecontent,servicetype 
+  		where
+			user.userId=nursedetail.userid 
+  			and user.userId=nurseservicecontent.userId
+  			and nurseservicecontent.serviceContent_id=servicetype.serviceid 
+  			and user.userId=#{userid}
+	</select>
+	
+	<select id="selectCount" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM user where usertype = 1
+ 	</select>
+ 	
+ 	<select id="selectNurseCount" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM user where usertype = 0
+ 	</select>
+ 	
+ 	<select id="selectUserByLimit" resultType="cn.erlaila.mybatis.po.custom.UserCustom" parameterType="cn.erlaila.mybatis.po.vo.AdminsVo" >
+		SELECT * FROM user WHERE usertype =1 and userid > (#{pageNum}* #{limitcount}) LIMIT #{limitcount}
+ 	</select>
+ 	
+ 	<select id="selectNurseByLimit" resultType="cn.erlaila.mybatis.po.custom.UserCustom" parameterType="cn.erlaila.mybatis.po.vo.AdminsVo" >
+		SELECT * FROM user WHERE usertype =0 and userid > (#{pageNum}* #{limitcount}) LIMIT #{limitcount}
+ 	</select>
+</mapper>
